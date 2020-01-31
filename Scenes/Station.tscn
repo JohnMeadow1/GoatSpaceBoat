@@ -60,6 +60,13 @@ sides = 64
 material = SubResource( 1 )
 
 [node name="PanelDisplay" parent="Station" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 11.504, -6.541, 82.6572 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 13.049, -6.541, 82.6572 )
 
 [node name="Panel" parent="Station/PanelDisplay" instance=ExtResource( 4 )]
+
+[node name="PanelDisplay2" parent="Station" instance=ExtResource( 5 )]
+transform = Transform( -0.977298, -0.211871, 0, -3.45182e-08, 1.59222e-07, 1, -0.211871, 0.977298, -1.62921e-07, 21.3043, -6.541, 71.4861 )
+size = Vector2( 20, 10 )
+camera_distance = 10.0
+
+[node name="Panel" parent="Station/PanelDisplay2" instance=ExtResource( 4 )]

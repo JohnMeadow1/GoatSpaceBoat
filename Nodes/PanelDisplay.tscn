@@ -11,8 +11,8 @@ resource_local_to_scene = true
 material = SubResource( 2 )
 size = Vector2( 10, 5 )
 
-[sub_resource type="ConvexPolygonShape" id=4]
-points = PoolVector3Array( -5.02193, -2.52193, 0.0219298, -5.02193, 2.52193, 0.0219298, 5.02186, -2.52193, 0.0219298, 5.02186, 2.52193, 0.0219298 )
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 10, 5, 0.1 )
 
 [node name="PanelDisplay" type="StaticBody"]
 script = ExtResource( 2 )
