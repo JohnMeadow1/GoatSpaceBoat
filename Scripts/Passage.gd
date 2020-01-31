@@ -22,8 +22,10 @@ func _input(event: InputEvent) -> void:
 
 func _on_Passage_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
+		body.get_node("CanGo").visible = true
 		player_in = body
 
 func _on_Passage_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):
+		body.get_node("CanGo").visible = false
 		player_in = null
