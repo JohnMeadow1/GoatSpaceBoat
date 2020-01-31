@@ -19,6 +19,10 @@ config/name="Goat Spaceboat"
 run/main_scene="res://Scenes/GameSelector.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Singleton="*res://Scripts/Singleton.gd"
+
 [debug]
 
 gdscript/warnings/enable=false

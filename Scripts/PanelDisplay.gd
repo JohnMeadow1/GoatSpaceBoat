@@ -27,7 +27,7 @@ func _ready() -> void:
 	$MeshInstance.mesh.surface_get_material(0).albedo_texture = viewport.get_texture()
 
 func _input_event(camera: Object, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
-	if not focused:
+	if not focused and not Singleton.player_locked:
 		if event is InputEventMouseButton and event.is_pressed():
 			cam = camera
 			camera_origin = cam.global_transform
@@ -36,6 +36,7 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			tween.interpolate_property(cam, "global_transform:basis", cam.global_transform.basis, camera_target.global_transform.basis, 1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()
 			focused = true
+			Singleton.player_locked = true
 
 func _input(event: InputEvent) -> void:
 	if focused and not tween.is_active():
@@ -45,6 +46,7 @@ func _input(event: InputEvent) -> void:
 				tween.interpolate_property(cam, "global_transform:basis", camera_target.global_transform.basis, camera_origin.basis, 1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				tween.start()
 				focused = false
+				Singleton.player_locked = false
 
 func set_size(s: Vector2):
 	size = s
