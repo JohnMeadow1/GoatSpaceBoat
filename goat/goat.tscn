@@ -1,0 +1,129 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://goat/goat.gd" type="Script" id=1]
+[ext_resource path="res://goat/exclamation.png" type="Texture" id=2]
+[ext_resource path="res://goat/goat.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://goat/goat.material" type="Material" id=4]
+[ext_resource path="res://goat/eye/eye.tscn" type="PackedScene" id=5]
+[ext_resource path="res://goat/audio/goat_meeeh_-001.wav" type="AudioStream" id=6]
+[ext_resource path="res://goat/audio/goat_meeeh_-002.wav" type="AudioStream" id=7]
+[ext_resource path="res://goat/audio/goat_meeeh_-003.wav" type="AudioStream" id=8]
+[ext_resource path="res://goat/audio/goat_meeeh_-004.wav" type="AudioStream" id=9]
+[ext_resource path="res://goat/audio/goat_meeeh_-005.wav" type="AudioStream" id=10]
+[ext_resource path="res://goat/audio/goat_meeeh_-006.wav" type="AudioStream" id=11]
+[ext_resource path="res://goat/audio/goat_meeeh_-007.wav" type="AudioStream" id=12]
+[ext_resource path="res://goat/audio/goat_meeeh_-008.wav" type="AudioStream" id=13]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.521103
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+flags_unshaded = true
+params_billboard_mode = 1
+albedo_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="SphereMesh" id=5]
+radius = 0.11
+height = 0.22
+
+[sub_resource type="SpatialMaterial" id=6]
+resource_name = "Material #29"
+flags_transparent = true
+params_cull_mode = 2
+albedo_color = Color( 1, 1, 1, 0.34902 )
+metallic = 0.71
+metallic_specular = 1.0
+metallic_texture_channel = 3
+roughness = 0.0
+rim_enabled = true
+rim = 1.0
+rim_tint = 1.0
+clearcoat_enabled = true
+clearcoat = 0.43
+clearcoat_gloss = 1.0
+
+[sub_resource type="SphereShape" id=3]
+radius = 15.0
+
+[sub_resource type="AudioStreamRandomPitch" id=4]
+random_pitch = 2.02
+
+[node name="Goat" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00280571, 0.861605, -0.00446987 )
+shape = SubResource( 1 )
+
+[node name="warnig" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55997, -1.45334 )
+material_override = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="helmet" type="MeshInstance" parent="Spatial"]
+transform = Transform( -7, 0, -1.05697e-06, 0, 7, 0, 1.05697e-06, 0, -7, 0, 1.50429, -1.41796 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+transform = Transform( -7, 0, -1.05697e-06, 0, 7, 0, 1.05697e-06, 0, -7, 0, 0, -0.422902 )
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 4 )
+
+[node name="eye_node" parent="Spatial/MeshInstance" instance=ExtResource( 5 )]
+transform = Transform( 0.0286267, -0.00473863, 0.00761967, 0.000648986, 0.0265022, 0.0140433, -0.00894946, -0.0132356, 0.0253915, 0.0126185, 0.23042, 0.148468 )
+
+[node name="eye_node2" parent="Spatial/MeshInstance" instance=ExtResource( 5 )]
+transform = Transform( 0.0345523, 0.0019286, -0.00523636, 0.000757151, 0.0309192, 0.0163839, 0.00552863, -0.0162876, 0.030482, -0.00943676, 0.227131, 0.148743 )
+
+[node name="SenseArea" type="Area" parent="."]
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="SenseArea"]
+shape = SubResource( 3 )
+
+[node name="meeeh" type="Node" parent="."]
+
+[node name="Meeeh_1" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 6 )
+volume_db = -20.0
+
+[node name="Meeeh_2" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 7 )
+volume_db = -20.0
+
+[node name="Meeeh_3" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 8 )
+volume_db = -20.0
+
+[node name="Meeeh_4" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 9 )
+volume_db = -20.0
+
+[node name="Meeeh_5" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 10 )
+volume_db = -20.0
+
+[node name="Meeeh_6" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 11 )
+volume_db = -20.0
+
+[node name="Meeeh_7" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 12 )
+volume_db = -20.0
+
+[node name="Meeeh_8" type="AudioStreamPlayer" parent="meeeh"]
+stream = ExtResource( 13 )
+volume_db = -20.0
+
+[node name="bump" type="Node" parent="."]
+
+[node name="Bump_1" type="AudioStreamPlayer" parent="bump"]
+stream = SubResource( 4 )
+volume_db = -10.0
+[connection signal="body_entered" from="SenseArea" to="." method="_on_SenseArea_body_entered"]
+[connection signal="body_exited" from="SenseArea" to="." method="_on_SenseArea_body_exited"]
