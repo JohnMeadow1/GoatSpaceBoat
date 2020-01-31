@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/goat.obj-1dcac321889bee286a453a93dd68e78e.mesh"
+
+[deps]
+
+files=[ "res://.import/goat.obj-1dcac321889bee286a453a93dd68e78e.mesh" ]
+
+source_file="res://goat/goat.obj"
+dest_files=[ "res://.import/goat.obj-1dcac321889bee286a453a93dd68e78e.mesh", "res://.import/goat.obj-1dcac321889bee286a453a93dd68e78e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
