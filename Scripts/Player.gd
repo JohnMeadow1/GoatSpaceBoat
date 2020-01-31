@@ -15,10 +15,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("backward"):
 		velocity -= z_vector() * 100 * delta
 	
-	velocity = move_and_slide(velocity, up)
+	velocity = move_and_slide(velocity, up, false, 4, 1.06465)
 	
 	if is_on_floor() and get_slide_count() == 1:
 		var floo := get_slide_collision(0)
+		print(floo.normal)
 		up = floo.normal
 		rotation.z = -up.x
 
