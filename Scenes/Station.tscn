@@ -13,9 +13,6 @@ script = ExtResource( 2 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381767, -61.2436, 125.558 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.999993, 0.00217591, -0.00293883, 0, 0.803687, 0.595052, 0.00365668, -0.595048, 0.803682, -0.421478, -51.2743, 136.18 )
-
 [node name="StaticBody" type="StaticBody" parent="."]
 
 [node name="Space_station_V_0_1" type="MeshInstance" parent="StaticBody"]
@@ -71,3 +68,6 @@ material/45 = null
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.999993, 0.00217591, -0.00293883, 0, 0.803687, 0.595052, 0.00365668, -0.595048, 0.803682, -0.426571, -51.7918, 137.573 )
