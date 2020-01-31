@@ -38,9 +38,7 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			focused = true
 			Singleton.player_locked = true
 	elif focused:
-		for node in panel.get_children():
-			if node is Control:
-				node.call("_gui_input", event)
+		panel.propagate_call("_gui_input", [event])
 
 func _input(event: InputEvent) -> void:
 	if focused and not tween.is_active():
