@@ -1,9 +1,13 @@
 extends Spatial
 
+const ROTATION_SPEED := 1.0
+
 onready var player := $Player as KinematicBody
 onready var camera := $Camera as Camera
+onready var station := $Station as Spatial
 
-func _process(delta: float) -> void:
-	camera.translation = player.translation - player.z_vector() * 5 + player.up * 1
-	camera.look_at(player.translation, player.up)
-#	camera.rotation.z = player.rotation.z
+func _physics_process(delta: float) -> void:
+	if Input.is_action_pressed("right"):
+		station.rotate_z(-ROTATION_SPEED * delta)
+	if Input.is_action_pressed("left"):
+		station.rotate_z(ROTATION_SPEED * delta)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lampka.png-32fb5e889f97ca0f33e0a6d6ed77318a.stex"
+path="res://.import/lampka.png-2bc8e0861c783ecbd38a23f5fdb2b16e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/Generic/lampka.png"
-dest_files=[ "res://.import/lampka.png-32fb5e889f97ca0f33e0a6d6ed77318a.stex" ]
+source_file="res://panels/generic/lampka.png"
+dest_files=[ "res://.import/lampka.png-2bc8e0861c783ecbd38a23f5fdb2b16e.stex" ]
 
 [params]
 
