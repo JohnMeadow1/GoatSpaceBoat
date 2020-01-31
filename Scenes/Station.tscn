@@ -1,29 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Nodes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://panels/Panel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/PanelDisplay.gd" type="Script" id=5]
+[ext_resource path="res://Nodes/PanelDisplay.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
 uv1_scale = Vector3( 10, 10, 10 )
-
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("Station/PanelDisplay/MeshInstance/Viewport")
-
-[sub_resource type="SpatialMaterial" id=3]
-resource_local_to_scene = true
-albedo_texture = SubResource( 2 )
-
-[sub_resource type="QuadMesh" id=4]
-resource_local_to_scene = true
-material = SubResource( 3 )
-size = Vector2( 10, 5 )
-
-[sub_resource type="ConvexPolygonShape" id=5]
-points = PoolVector3Array( -5.02193, -2.52193, 0.0219298, -5.02193, 2.52193, 0.0219298, 5.02186, -2.52193, 0.0219298, 5.02186, 2.52193, 0.0219298 )
 
 [node name="Station" type="Spatial"]
 script = ExtResource( 2 )
@@ -74,25 +59,7 @@ height = 19.0
 sides = 64
 material = SubResource( 1 )
 
-[node name="PanelDisplay" type="StaticBody" parent="Station"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 11.8389, -7.94322, 83.0317 )
-script = ExtResource( 5 )
+[node name="PanelDisplay" parent="Station" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 11.504, -6.541, 82.6572 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Station/PanelDisplay"]
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Viewport" type="Viewport" parent="Station/PanelDisplay/MeshInstance"]
-size = Vector2( 1280, 720 )
-usage = 0
-render_target_v_flip = true
-
-[node name="Panel" parent="Station/PanelDisplay/MeshInstance/Viewport" instance=ExtResource( 4 )]
-
-[node name="CollisionShape" type="CollisionShape" parent="Station/PanelDisplay"]
-shape = SubResource( 5 )
-
-[node name="Position3D" type="Position3D" parent="Station/PanelDisplay"]
-transform = Transform( 0.999892, 0.000744982, -0.0146831, 0, 0.998715, 0.0506721, 0.014702, -0.0506667, 0.998607, 0.0675049, 0.376564, 4.27627 )
-
-[node name="Tween" type="Tween" parent="Station/PanelDisplay"]
+[node name="Panel" parent="Station/PanelDisplay" instance=ExtResource( 4 )]
