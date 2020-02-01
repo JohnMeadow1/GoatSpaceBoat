@@ -64,13 +64,13 @@ centered = false
 script = SubResource( 1 )
 
 [node name="lamp2" parent="." instance=ExtResource( 1 )]
-modulate = Color( 0.7, 1, 0.7, 1 )
+modulate = Color( 1, 0.109804, 0, 1 )
 position = Vector2( 105.5, 561.5 )
 frequency = 2.0
 color = 2
 
 [node name="lamp3" parent="." instance=ExtResource( 1 )]
-modulate = Color( 0.7, 0.7, 1, 1 )
+modulate = Color( 0.819608, 0.376471, 0.282353, 1 )
 position = Vector2( 233.5, 561.5 )
 color = 3
 
