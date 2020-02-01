@@ -39,7 +39,7 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			Singleton.player_locked = true
 	elif focused:
 		if event is InputEventMouse:
-			var norm_click := click_position - translation
+			var norm_click := to_local(click_position)
 			var real_click := Vector2(norm_click.x, norm_click.y) + size / 2
 			real_click.y = size.y - real_click.y
 			event.position = real_click / size * viewport.size
