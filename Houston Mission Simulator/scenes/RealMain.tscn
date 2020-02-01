@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Houston Mission Simulator/images/gui/ConsolePeaceful.PNG" type="Texture" id=1]
-[ext_resource path="res://Houston Mission Simulator/images/gui/GreenLED.PNG" type="Texture" id=2]
+[ext_resource path="res://panels/Elements/Switch/switch.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Houston Mission Simulator/images/gui/TrissRight.PNG" type="Texture" id=4]
 [ext_resource path="res://Houston Mission Simulator/images/gui/TrissWrong.PNG" type="Texture" id=5]
 [ext_resource path="res://Houston Mission Simulator/images/gui/ChooseWisely.PNG" type="Texture" id=6]
@@ -107,7 +107,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Leds" type="Control" parent="."]
+[node name="Switches" type="Control" parent="."]
+modulate = Color( 0, 4, 2, 1 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -116,56 +117,39 @@ margin_left = -5.0
 margin_top = -5.0
 margin_right = 5.0
 margin_bottom = 5.0
-
-[node name="LED" type="TextureRect" parent="Leds"]
-margin_left = 91.1342
-margin_top = 76.2846
-margin_right = 191.134
-margin_bottom = 176.285
-texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LED2" type="TextureRect" parent="Leds"]
-margin_left = 160.841
-margin_top = 76.2846
-margin_right = 260.841
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 129.632
+margin_top = 107.687
+margin_right = 192.632
+margin_bottom = 217.687
 
-[node name="LED3" type="TextureRect" parent="Leds"]
-margin_left = 227.305
-margin_top = 76.2846
-margin_right = 327.305
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch2" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 200.486
+margin_top = 107.687
+margin_right = 263.486
+margin_bottom = 217.687
 
-[node name="LED4" type="TextureRect" parent="Leds"]
-margin_left = 295.931
-margin_top = 76.2846
-margin_right = 395.931
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch3" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 267.458
+margin_top = 107.687
+margin_right = 330.458
+margin_bottom = 217.687
 
-[node name="LED5" type="TextureRect" parent="Leds"]
-margin_left = 356.452
-margin_top = 76.2846
-margin_right = 456.452
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch4" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 335.076
+margin_top = 107.687
+margin_right = 398.076
+margin_bottom = 217.687
+
+[node name="switch5" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 395.577
+margin_top = 107.687
+margin_right = 458.577
+margin_bottom = 217.687
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 margin_left = 77.0
