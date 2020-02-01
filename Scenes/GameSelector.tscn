@@ -4,7 +4,10 @@
 script/source = "extends Node
 
 func _ready() -> void:
-	get_tree().change_scene(\"res://Scenes/Station.tscn\")
+	if OS.has_feature(\"houston\"):
+		get_tree().change_scene(\"res://Houston Mission Simulator/scenes/RealMain.tscn\")
+	else:
+		get_tree().change_scene(\"res://Scenes/Title.tscn\")
 "
 
 [node name="GameSelector" type="Node"]

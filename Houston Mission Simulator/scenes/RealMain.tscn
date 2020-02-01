@@ -1,19 +1,97 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Houston Mission Simulator/images/gui/ConsolePeaceful.PNG" type="Texture" id=1]
 [ext_resource path="res://Houston Mission Simulator/images/gui/GreenLED.PNG" type="Texture" id=2]
 [ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Houston Mission Simulator/images/gui/TrissRight.PNG" type="Texture" id=4]
+[ext_resource path="res://Houston Mission Simulator/images/gui/TrissWrong.PNG" type="Texture" id=5]
+[ext_resource path="res://Houston Mission Simulator/images/gui/ChooseWisely.PNG" type="Texture" id=6]
+[ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Houston Mission Simulator/scenes/book.tscn" type="PackedScene" id=8]
 
-[sub_resource type="ButtonGroup" id=3]
+[sub_resource type="GDScript" id=7]
+script/source = "extends TextureRect
 
-[sub_resource type="SpatialMaterial" id=6]
+func dupotris() -> void:
+	get_tree().change_scene(\"res://Houston Mission Simulator/scenes/BSOD.tscn\")
+
+func show_quiz() -> void:
+	$Quiz2.hide()
+	$Quiz.show()
+
+func triss_good() -> void:
+	$Quiz.hide()
+	$Quiz2.show()
+
+func sponsor() -> void:
+	$Quiz.hide()
+	$Quiz2.hide()
+	$Sponsor.show()
+	$Sponsor.play()
+
+func show_doc() -> void:
+	$Book.show()
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed:
+			$Book.hide()
+"
+
+[sub_resource type="GDScript" id=9]
+script/source = "extends VBoxContainer
+
+const QUESTIONS = [
+	[\"Do you feel potato?\", \"Yes\", \"No\", \"Perhabs\"],
+	[\"How to potato?\", \"Yes\", \"Absolutely\", \"Just do it\"],
+	[\"Fries?\", \"Potatoes\", \"Chips\", \"Perhabs\"]
+]
+
+var current_question: int
+var clicks: Array
+
+func _ready() -> void:
+	for i in 3:
+		$VBoxContainer.get_child(2 + i).connect(\"pressed\", self, \"inc\", [i])
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_VISIBILITY_CHANGED:
+		if is_visible_in_tree():
+			start()
+
+func start():
+	current_question = 0
+	clicks = [0, 0, 0]
+	update_text()
+
+func update_text():
+	if current_question == QUESTIONS.size():
+		hide()
+		return
+	
+	$VBoxContainer/Label.text = str(\"Question \", current_question + 1, \"\\n\", QUESTIONS[current_question][0])
+	$VBoxContainer/Button1.text = QUESTIONS[current_question][1]
+	$VBoxContainer/Button2.text = QUESTIONS[current_question][2]
+	$VBoxContainer/Button3.text = QUESTIONS[current_question][3]
+
+func inc(i: int):
+	clicks[i] += 1
+	current_question += 1
+	update_text()
+"
+
+[sub_resource type="DynamicFont" id=8]
+size = 30
+font_data = ExtResource( 7 )
 
 [sub_resource type="GDScript" id=5]
-script/source = "extends MeshInstance
+script/source = "extends Spatial
 
 func _physics_process(delta: float) -> void:
 	rotate_y(PI/2 * delta)
 "
+
+[sub_resource type="SpatialMaterial" id=6]
 
 [sub_resource type="Environment" id=4]
 background_mode = 1
@@ -22,8 +100,11 @@ ambient_light_color = Color( 0.47, 0.47, 0.47, 1 )
 [node name="Console" type="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -1.05261
+margin_bottom = -1.05261
 texture = ExtResource( 1 )
 expand = true
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -100,26 +181,132 @@ __meta__ = {
 [node name="Button" type="Button" parent="Buttons"]
 margin_right = 111.0
 margin_bottom = 40.0
-toggle_mode = true
-pressed = true
-group = SubResource( 3 )
 text = "Documentation"
 
 [node name="Button2" type="Button" parent="Buttons"]
 margin_left = 115.0
 margin_right = 178.0
 margin_bottom = 40.0
-toggle_mode = true
-group = SubResource( 3 )
 text = "Sponsor"
 
 [node name="Button3" type="Button" parent="Buttons"]
 margin_left = 182.0
 margin_right = 224.0
 margin_bottom = 40.0
-toggle_mode = true
-group = SubResource( 3 )
 text = "Quiz"
+
+[node name="Sponsor" type="VideoPlayer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quiz" type="Control" parent="."]
+visible = false
+margin_left = 87.0
+margin_top = 102.0
+margin_right = 529.0
+margin_bottom = 474.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="Quiz"]
+margin_left = 26.3158
+margin_top = 75.7896
+margin_right = 203.316
+margin_bottom = 252.79
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton2" type="TextureButton" parent="Quiz"]
+margin_left = 253.685
+margin_top = 75.7896
+margin_right = 430.685
+margin_bottom = 252.79
+texture_normal = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChooseWisely" type="TextureRect" parent="Quiz"]
+margin_left = 7.31577
+margin_top = 275.285
+margin_right = 420.316
+margin_bottom = 365.285
+texture = ExtResource( 6 )
+
+[node name="Quiz2" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 87.0
+margin_top = 102.0
+margin_right = 532.0
+margin_bottom = 477.0
+custom_constants/separation = 100
+script = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Quiz2"]
+margin_right = 445.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 8 )
+text = "What type of potate are you?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Quiz2"]
+margin_top = 157.0
+margin_right = 445.0
+margin_bottom = 375.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Quiz2/VBoxContainer"]
+margin_right = 445.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 8 )
+text = "Question 1
+Do you feel potato?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Quiz2/VBoxContainer"]
+margin_top = 61.0
+margin_right = 445.0
+margin_bottom = 107.0
+size_flags_vertical = 3
+
+[node name="Button1" type="Button" parent="Quiz2/VBoxContainer"]
+margin_top = 111.0
+margin_right = 445.0
+margin_bottom = 144.0
+custom_fonts/font = SubResource( 8 )
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="Quiz2/VBoxContainer"]
+margin_top = 148.0
+margin_right = 445.0
+margin_bottom = 181.0
+custom_fonts/font = SubResource( 8 )
+text = "No"
+flat = true
+
+[node name="Button3" type="Button" parent="Quiz2/VBoxContainer"]
+margin_top = 185.0
+margin_right = 445.0
+margin_bottom = 218.0
+custom_fonts/font = SubResource( 8 )
+text = "Perhabs"
+flat = true
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 margin_left = 626.0
@@ -133,14 +320,16 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1920, 1080 )
-transparent_bg = true
 handle_input_locally = false
-debug_draw = 3
+debug_draw = 2
 render_target_update_mode = 3
 
 [node name="Spatial" type="Spatial" parent="ViewportContainer/Viewport"]
 
-[node name="Station" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial"]
+[node name="Spatial" type="Spatial" parent="ViewportContainer/Viewport/Spatial"]
+script = SubResource( 5 )
+
+[node name="Station" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 material_override = SubResource( 6 )
 mesh = ExtResource( 3 )
@@ -150,7 +339,28 @@ material/2 = null
 material/3 = null
 material/4 = null
 material/5 = null
-script = SubResource( 5 )
+
+[node name="Station2" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.72223e-06, -39.4 )
+material_override = SubResource( 6 )
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+
+[node name="Station3" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.33381e-06, -76.2687 )
+material_override = SubResource( 6 )
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
 
 [node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Spatial"]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 82, 161 )
@@ -160,3 +370,16 @@ far = 300.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="ViewportContainer/Viewport/Spatial"]
 environment = SubResource( 4 )
+
+[node name="Book" parent="." instance=ExtResource( 8 )]
+visible = false
+margin_left = 130.527
+margin_top = 25.2632
+margin_right = 534.527
+margin_bottom = 25.2632
+rect_scale = Vector2( 0.9, 0.9 )
+[connection signal="pressed" from="Buttons/Button" to="." method="show_doc"]
+[connection signal="pressed" from="Buttons/Button2" to="." method="sponsor"]
+[connection signal="pressed" from="Buttons/Button3" to="." method="show_quiz"]
+[connection signal="pressed" from="Quiz/TextureButton" to="." method="triss_good"]
+[connection signal="pressed" from="Quiz/TextureButton2" to="." method="dupotris"]
