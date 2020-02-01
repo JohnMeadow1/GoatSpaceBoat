@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=1]
+[ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=2]
+
+[node name="BulbPanel" type="Sprite"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="lamp" parent="." instance=ExtResource( 2 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 217.223, 485.305 )
+frequency = 1.0
+color = 1
+
+[node name="lamp2" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.7, 1, 0.7, 1 )
+position = Vector2( 762.34, 485.305 )
+frequency = 1.0
+color = 2

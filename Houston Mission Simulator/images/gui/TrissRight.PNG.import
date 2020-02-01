@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/watermark.png-ba6902e2b71c5e350b33e9047b58bb81.stex"
+path="res://.import/TrissRight.PNG-3bf7d093c317d892d89b94f8f951bed4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Houston Mission Simulator/images/watermark.png"
-dest_files=[ "res://.import/watermark.png-ba6902e2b71c5e350b33e9047b58bb81.stex" ]
+source_file="res://Houston Mission Simulator/images/gui/TrissRight.PNG"
+dest_files=[ "res://.import/TrissRight.PNG-3bf7d093c317d892d89b94f8f951bed4.stex" ]
 
 [params]
 
