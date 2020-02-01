@@ -116,7 +116,4 @@ texture_under = ExtResource( 9 )
 stream = ExtResource( 10 )
 
 [node name="Gauge" parent="." instance=ExtResource( 11 )]
-position = Vector2( 626, 428 )
-value = 0.0
-min_value = -50.0
-max_value = 50.0
+position = Vector2( 856, 424 )
