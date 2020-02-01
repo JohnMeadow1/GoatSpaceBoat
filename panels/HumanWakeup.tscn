@@ -1,0 +1,190 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://panels/Elements/Progress/OxygenProgressBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://panels/Elements/Lamp/MovableLamp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=6]
+[ext_resource path="res://Panels/Elements/HealthScreen/health_screen.png" type="Texture" id=7]
+[ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=8]
+[ext_resource path="res://panels/Elements/HealthScreen/human.png" type="Texture" id=9]
+[ext_resource path="res://Resources/coolfx.tres" type="Material" id=11]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+var coolant: bool
+
+func _ready():
+	$Knob.connect(\"value_changed\", self, \"knob1_changed\")
+	$Knob2.connect(\"value_changed\", self, \"knob2_changed\")
+	$Knob3.connect(\"value_changed\", self, \"knob3_changed\")
+
+func knob1_changed(): ##->20
+	$Temperature.target_value = $Knob.value
+
+func knob2_changed(): ##->1400
+	$Oxygen.target_value = $Knob2.value
+
+func knob3_changed():
+	if not coolant:
+		if $Coolant/Timer.is_stopped():
+			$Coolant/Timer.start()
+		return
+	$Coolant.target_value = $Knob3.value
+
+func coolant_run() -> void:
+	coolant = true
+	$Coolant.target_value = $Knob3.value
+"
+
+[node name="Panel" type="Sprite"]
+position = Vector2( -8, 1 )
+texture = ExtResource( 8 )
+centered = false
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 317, 177 )
+texture = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource( 11 )
+margin_left = 256.0
+margin_top = 76.0
+margin_right = 561.0
+margin_bottom = 278.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="human" type="Sprite" parent="."]
+position = Vector2( 160, 176 )
+texture = ExtResource( 9 )
+
+[node name="Knob" parent="." instance=ExtResource( 5 )]
+position = Vector2( 688, 584 )
+value = -100.0
+
+[node name="Knob2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 904, 584 )
+value = 600.0
+
+[node name="Knob3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1088, 584 )
+value = 100.0
+
+[node name="Temperature" parent="." instance=ExtResource( 1 )]
+margin_left = 664.0
+margin_top = 112.0
+margin_right = 686.0
+margin_bottom = 269.0
+min_value = -150.0
+max_value = 50.0
+value = -100.0
+
+[node name="Label4" parent="Temperature" index="7"]
+text = "Temperature
+Celsius"
+
+[node name="Oxygen" parent="." instance=ExtResource( 1 )]
+margin_left = 872.0
+margin_top = 112.0
+margin_right = 894.0
+margin_bottom = 269.0
+min_value = 500.0
+max_value = 1500.0
+value = 600.0
+
+[node name="Label" parent="Oxygen" index="2"]
+text = "1500"
+
+[node name="Label5" parent="Oxygen" index="3"]
+text = "1250"
+
+[node name="Label2" parent="Oxygen" index="4"]
+text = "1000"
+
+[node name="Label6" parent="Oxygen" index="5"]
+text = "750"
+
+[node name="Label3" parent="Oxygen" index="6"]
+text = "500
+"
+
+[node name="Label4" parent="Oxygen" index="7"]
+text = "Oxygen
+hPa"
+
+[node name="Coolant" parent="." instance=ExtResource( 1 )]
+margin_left = 1056.0
+margin_top = 112.0
+margin_right = 1078.0
+margin_bottom = 269.0
+value = 100.0
+
+[node name="Label" parent="Coolant" index="2"]
+text = "100"
+
+[node name="Label5" parent="Coolant" index="3"]
+text = "75"
+
+[node name="Label2" parent="Coolant" index="4"]
+text = "50"
+
+[node name="Label6" parent="Coolant" index="5"]
+text = "25"
+
+[node name="Label3" parent="Coolant" index="6"]
+margin_left = 37.3507
+margin_right = 77.3507
+text = "0"
+
+[node name="Label4" parent="Coolant" index="7"]
+text = "Coolant"
+
+[node name="Timer" type="Timer" parent="Coolant"]
+wait_time = 30.0
+one_shot = true
+
+[node name="MovableLamp" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.223529, 0.564706, 0.113725, 1 )
+margin_left = 664.0
+margin_top = 40.0
+margin_right = 715.0
+margin_bottom = 91.0
+
+[node name="lamp" parent="MovableLamp" index="1"]
+enabled = false
+
+[node name="MovableLamp2" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.94902, 0.141176, 0.141176, 1 )
+margin_left = 872.0
+margin_top = 40.0
+margin_right = 923.0
+margin_bottom = 91.0
+
+[node name="lamp" parent="MovableLamp2" index="1"]
+modulate = Color( 1, 0.7, 0.7, 1 )
+color = 1
+enabled = false
+
+[node name="MovableLamp3" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.141176, 0.466667, 0.972549, 1 )
+margin_left = 1056.0
+margin_top = 40.0
+margin_right = 1107.0
+margin_bottom = 91.0
+
+[node name="Bwaaa" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="timeout" from="Coolant/Timer" to="." method="coolant_run"]
+
+[editable path="Temperature"]
+
+[editable path="Oxygen"]
+
+[editable path="Coolant"]
+
+[editable path="MovableLamp"]
+
+[editable path="MovableLamp2"]

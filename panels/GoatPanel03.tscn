@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Resources/coolfx.tres" type="Material" id=2]
+[ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=3]
+[ext_resource path="res://Panels/Elements/HealthScreen/goat.png" type="Texture" id=4]
+[ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=5]
+[ext_resource path="res://panels/Elements/Progress/FireProgressBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Panels/Elements/HealthScreen/health_screen.png" type="Texture" id=7]
+[ext_resource path="res://Resources/scroll.shader" type="Shader" id=8]
+[ext_resource path="res://panels/Elements/Progress/BloodProgressBar.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=10]
+[ext_resource path="res://Panels/Elements/Gauge/Gauge.tscn" type="PackedScene" id=11]
+[ext_resource path="res://panels/Elements/Progress/SulfurProgressBar.tscn" type="PackedScene" id=12]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+var progress_setting = 0.0
+var progress_value = 50
+export var delay_setting = 2.0
+var delay = 0.0
+var previous_knob = 0.0
+var modified_value = 0.0
+
+var sound_played = 0
+
+func _process(delta: float) -> void:
+	$Knob.value = clamp ($Knob.value, $TextureProgress.min_value , $TextureProgress.max_value)
+	if $Knob.value != previous_knob:
+		previous_knob = $Knob.value
+		delay = delay_setting
+	else:
+		delay -= delta
+		if delay <= 0:
+			progress_value = lerp(progress_value, $Knob.value, 0.01)
+			$TextureProgress.value = progress_value
+			$TextureProgress.tint_progress = Color(progress_value/$TextureProgress.max_value,0,1-progress_value/$TextureProgress.max_value)
+			delay = 0
+	progress_setting = lerp(progress_setting, $Knob.value, 0.1)
+	$TextureProgress/overlay.value = progress_setting
+	
+	if progress_value/$TextureProgress.max_value > 0.75:
+		modified_value = lerp(modified_value, rand_range(0, max(progress_value/$TextureProgress.max_value - 0.75, 0) * 5) , 0.1)
+		
+	if !sound_played && progress_value/$TextureProgress.max_value > 0.80:
+		sound_played = 1
+		$Bwaaa.play()
+		
+	$ColorRect.material.set(\"shader_param/magnitude\", progress_value/$TextureProgress.max_value + modified_value)
+	$Gauge.value = progress_value/$TextureProgress.max_value * $Gauge.value_range
+	$Gauge.random_offset_range = lerp($Gauge.random_offset_range, rand_range(0, max(progress_value/$TextureProgress.max_value - 0.65, 0) * 200) , 0.1)
+func _ready():
+	$TextureProgress.tint_progress = Color(progress_value/$TextureProgress.max_value,0,1-progress_value/$TextureProgress.max_value)
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 8 )
+
+[node name="Panel" type="Sprite"]
+self_modulate = Color( 1, 0.4, 0.4, 1 )
+light_mask = 3073
+texture = ExtResource( 3 )
+centered = false
+script = SubResource( 1 )
+
+[node name="lamp2" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.109804, 0, 1 )
+position = Vector2( 105.5, 561.5 )
+frequency = 2.0
+color = 2
+
+[node name="lamp3" parent="." instance=ExtResource( 1 )]
+modulate = Color( 0.819608, 0.376471, 0.282353, 1 )
+position = Vector2( 233.5, 561.5 )
+color = 3
+
+[node name="Knob" parent="." instance=ExtResource( 5 )]
+position = Vector2( 664, 512 )
+value = 50.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 317, 177 )
+texture = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource( 2 )
+margin_left = 256.0
+margin_top = 76.0
+margin_right = 561.0
+margin_bottom = 278.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="goat" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 165, 179 )
+texture = ExtResource( 4 )
+
+[node name="Bwaaa" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="Gauge" parent="." instance=ExtResource( 11 )]
+self_modulate = Color( 0.568627, 0.819608, 1, 1 )
+position = Vector2( 165.72, 424 )
+
+[node name="lamp4" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 169.5, 561.5 )
+frequency = 2.0
+color = 1
+
+[node name="TextureProgress" parent="." instance=ExtResource( 9 )]
+margin_left = 832.0
+margin_top = 64.0
+margin_right = 854.0
+margin_bottom = 221.0
+
+[node name="TextureProgress2" parent="." instance=ExtResource( 6 )]
+margin_left = 640.0
+margin_top = 64.0
+margin_right = 662.0
+margin_bottom = 221.0
+
+[node name="TextureProgress3" parent="." instance=ExtResource( 12 )]
+margin_left = 1024.0
+margin_top = 64.0
+margin_right = 1046.0
+margin_bottom = 221.0
+
+[node name="Knob2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 856, 512 )
+
+[node name="Knob3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1048, 512 )

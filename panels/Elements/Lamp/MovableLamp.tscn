@@ -55,7 +55,7 @@ func _input(event: InputEvent) -> void:
 			rect_position = dziura.position - Vector2(25.5, 25.5)
 "
 
-[node name="ToolButton" type="ToolButton"]
+[node name="MovableLamp" type="ToolButton"]
 margin_right = 51.0
 margin_bottom = 51.0
 custom_styles/focus = SubResource( 2 )
@@ -71,7 +71,5 @@ texture = ExtResource( 2 )
 [node name="lamp" parent="." instance=ExtResource( 1 )]
 position = Vector2( 25.5, 25.5 )
 z_index = 1
-frequency = 1.0
-color = 0
 [connection signal="button_down" from="." to="." method="drag_start"]
 [connection signal="button_up" from="." to="." method="drag_unstart"]

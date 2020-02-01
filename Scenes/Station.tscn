@@ -1,29 +1,60 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
-[ext_resource path="res://panels/TestPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Models/Floor-C_content-1.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://panels/CoveredPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Nodes/PanelDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Nodes/Passage.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Models/Pregi.obj" type="ArrayMesh" id=7]
 [ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=8]
 [ext_resource path="res://Sprites/Connecting.png" type="Texture" id=9]
-[ext_resource path="res://panels/CablePanel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Nodes/Capsule.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Station/Walls_and_floor.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/Station/Pregi.jpg" type="Texture" id=12]
-[ext_resource path="res://panels/SymbolPanel.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Models/InżynierNaKiju.PNG" type="Texture" id=13]
 [ext_resource path="res://Resources/infopanel_font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://panels/GeneralSprites/panel_base.png" type="Texture" id=15]
 [ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://panels/HumanWakeup.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Models/CapsuleTexture.JPG" type="Texture" id=18]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 11 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Wywal"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 88.5005, 2.75197e-05, 2.75292e-05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 4.76837e-06, 4.82922, 0 ), Vector3( 1.26362e-05, 1.03014, 4.84322 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 18 )
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 11 )
 
-[sub_resource type="SpatialMaterial" id=20]
-albedo_texture = ExtResource( 12 )
-
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=6]
 script/source = "extends Sprite
 
 onready var label := $MarginContainer/Label as Label
@@ -42,7 +73,7 @@ func _process(delta: float) -> void:
 		label.visible_characters += 1
 "
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Sprite
 
 const TEXT1 = \"Checking subsystems...\"
@@ -52,8 +83,11 @@ const TEXT4 = \"\\\"Houston we have a problem\\\" sent successfully.\"
 const TEXT5 = \"Displaying list of problems. Consult Houston to fix them.\"
 
 const PROBLEMS = [
-	\"This is a problem.\",
-	\"This is a new problem.\"
+	\"Oxygen - correct \\n Temperature - correct \\n !!! MONEY - DANGEROUS LEAK\",
+	\"Main Engineer is gone. \\n !!! MONEY LEAK !!! \\n Reduce expenses\",
+	\"Engine power too low \\n Course deviation 0,3%/h\",
+	\"!!! HEAVY RADIATION !!! \\n Find the source\",
+	\"Engine power - correct \\n !!! MONEY LEAK !!! \\n Reduce expenses\"
 ]
 
 onready var label := $MarginContainer/Label as Label
@@ -116,40 +150,40 @@ func panel_focus():
 		next_problem()
 "
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 200, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 400, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 600, 0, 200, 200 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 9 )
 region = Rect2( 800, 0, 200, 200 )
 
-[sub_resource type="SpriteFrames" id=10]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="GDScript" id=11]
+[sub_resource type="GDScript" id=14]
 script/source = "extends Carryable
 
 func _physics_process(delta: float) -> void:
@@ -160,7 +194,7 @@ func on_carry():
 	can_carry = false
 "
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=15]
 albedo_color = Color( 0.968627, 1, 0, 1 )
 emission_enabled = true
 emission = Color( 0.992157, 1, 0, 1 )
@@ -168,13 +202,13 @@ emission_energy = 0.5
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=13]
-material = SubResource( 12 )
+[sub_resource type="CubeMesh" id=16]
+material = SubResource( 15 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="BoxShape" id=14]
+[sub_resource type="BoxShape" id=17]
 
-[sub_resource type="GDScript" id=15]
+[sub_resource type="GDScript" id=18]
 script/source = "extends StaticBody
 
 signal connected()
@@ -188,28 +222,18 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			emit_signal(\"connected\")
 "
 
-[sub_resource type="SpatialMaterial" id=16]
+[sub_resource type="SpatialMaterial" id=19]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=17]
-material = SubResource( 16 )
+[sub_resource type="CubeMesh" id=20]
+material = SubResource( 19 )
 
-[sub_resource type="ConvexPolygonShape" id=18]
+[sub_resource type="ConvexPolygonShape" id=21]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=21]
+[sub_resource type="DynamicFont" id=22]
 size = 100
 font_data = ExtResource( 16 )
-
-[sub_resource type="GIProbeData" id=19]
-bounds = AABB( -100, -100, -100, 200, 200, 200 )
-cell_size = 1.5625
-to_cell_xform = Transform( 0.64, 0, 0, 0, 0.64, 0, 0, 0, 0.64, 64, 64, 64 )
-dynamic_data = PoolIntArray( 0, 8, 128, 128, 128, 8, 1, 2, 66, 2, 67, 66, 2, 3, 67, 3, -1, -1, -1, -1, 1, -1, -1, -1, 0, 0, 8355711, 0, -1, 2, -1, -1, -1, -1, -1, -1, 0, 0, 8355711, 65536, -1, -1, 3, -1, -1, -1, -1, -1, 0, 0, 8355711, 131073, -1, -1, -1, -1, -1, 4, -1, -1, 0, 0, 8355711, 196623, -1, 5, -1, -1, -1, -1, -1, -1, 0, 0, 8355711, 262271, -1, -1, -1, 6, -1, -1, -1, -1, 0, 0, 8355711, 328703, -1, -1, -1, -1, -1, 7, -1, -1, 0, 0, 8355711, 401407, -1, -1, -1, -1, -1, -1, -1, -1, 6441557, 0, 8021244, 524287 )
-dynamic_range = 4
-bias = 1.5
-normal_bias = 0.0
-propagation = 0.7
 
 [node name="Station" type="Spatial"]
 script = ExtResource( 2 )
@@ -226,7 +250,7 @@ transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.02
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 2 )
+material_override = SubResource( 3 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -237,6 +261,7 @@ material/5 = null
 
 [node name="Station2" type="MeshInstance" parent="StationPivot"]
 transform = Transform( -4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, -42.5 )
+material_override = SubResource( 3 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -245,8 +270,262 @@ material/3 = null
 material/4 = null
 material/5 = null
 
+[node name="Spatial" type="Spatial" parent="StationPivot/Station2"]
+transform = Transform( -0.660185, -0.743456, -0.106912, -0.0763489, -0.0751784, 0.994243, -0.747215, 0.664545, -0.00713041, 57.6534, 2.4234, -51.629 )
+
+[node name="Sprite3D" type="Sprite3D" parent="StationPivot/Station2/Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-06, 4.82922, 0 )
+pixel_size = 0.02
+texture = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StationPivot/Station2/Spatial/Sprite3D"]
+anims/Wywal = SubResource( 4 )
+
+[node name="Capsule" parent="StationPivot/Station2" instance=ExtResource( 10 )]
+transform = Transform( 0.0518112, -0.721683, 0.690282, 0.996248, 0.0853344, 0.0144399, -0.0693259, 0.686944, 0.723396, 57.1344, 0.94434, -51.268 )
+
+[node name="Floor-C_content-1" type="MeshInstance" parent="StationPivot/Station2"]
+transform = Transform( 1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, 0, 38.406, 0 )
+material_override = SubResource( 5 )
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
+material/22 = null
+material/23 = null
+material/24 = null
+material/25 = null
+material/26 = null
+material/27 = null
+material/28 = null
+material/29 = null
+material/30 = null
+material/31 = null
+material/32 = null
+material/33 = null
+material/34 = null
+material/35 = null
+material/36 = null
+material/37 = null
+material/38 = null
+material/39 = null
+material/40 = null
+material/41 = null
+material/42 = null
+material/43 = null
+material/44 = null
+material/45 = null
+material/46 = null
+material/47 = null
+material/48 = null
+material/49 = null
+material/50 = null
+material/51 = null
+material/52 = null
+material/53 = null
+material/54 = null
+material/55 = null
+material/56 = null
+material/57 = null
+material/58 = null
+material/59 = null
+material/60 = null
+material/61 = null
+material/62 = null
+material/63 = null
+material/64 = null
+material/65 = null
+material/66 = null
+material/67 = null
+material/68 = null
+material/69 = null
+material/70 = null
+material/71 = null
+material/72 = null
+material/73 = null
+material/74 = null
+material/75 = null
+material/76 = null
+material/77 = null
+material/78 = null
+material/79 = null
+material/80 = null
+material/81 = null
+material/82 = null
+material/83 = null
+material/84 = null
+material/85 = null
+material/86 = null
+material/87 = null
+material/88 = null
+material/89 = null
+material/90 = null
+material/91 = null
+material/92 = null
+material/93 = null
+material/94 = null
+material/95 = null
+material/96 = null
+material/97 = null
+material/98 = null
+material/99 = null
+material/100 = null
+material/101 = null
+material/102 = null
+material/103 = null
+material/104 = null
+material/105 = null
+material/106 = null
+material/107 = null
+material/108 = null
+material/109 = null
+material/110 = null
+material/111 = null
+material/112 = null
+material/113 = null
+material/114 = null
+material/115 = null
+material/116 = null
+material/117 = null
+material/118 = null
+material/119 = null
+material/120 = null
+material/121 = null
+material/122 = null
+material/123 = null
+material/124 = null
+material/125 = null
+material/126 = null
+material/127 = null
+material/128 = null
+material/129 = null
+material/130 = null
+material/131 = null
+material/132 = null
+material/133 = null
+material/134 = null
+material/135 = null
+material/136 = null
+material/137 = null
+material/138 = null
+material/139 = null
+material/140 = null
+material/141 = null
+material/142 = null
+material/143 = null
+material/144 = null
+material/145 = null
+material/146 = null
+material/147 = null
+material/148 = null
+material/149 = null
+material/150 = null
+material/151 = null
+material/152 = null
+material/153 = null
+material/154 = null
+material/155 = null
+material/156 = null
+material/157 = null
+material/158 = null
+material/159 = null
+material/160 = null
+material/161 = null
+material/162 = null
+material/163 = null
+material/164 = null
+material/165 = null
+material/166 = null
+material/167 = null
+material/168 = null
+material/169 = null
+material/170 = null
+material/171 = null
+material/172 = null
+material/173 = null
+material/174 = null
+material/175 = null
+material/176 = null
+material/177 = null
+material/178 = null
+material/179 = null
+material/180 = null
+material/181 = null
+material/182 = null
+material/183 = null
+material/184 = null
+material/185 = null
+material/186 = null
+material/187 = null
+material/188 = null
+material/189 = null
+material/190 = null
+material/191 = null
+material/192 = null
+material/193 = null
+material/194 = null
+material/195 = null
+material/196 = null
+material/197 = null
+material/198 = null
+material/199 = null
+material/200 = null
+material/201 = null
+material/202 = null
+material/203 = null
+material/204 = null
+material/205 = null
+material/206 = null
+material/207 = null
+material/208 = null
+material/209 = null
+material/210 = null
+material/211 = null
+material/212 = null
+material/213 = null
+material/214 = null
+material/215 = null
+material/216 = null
+material/217 = null
+material/218 = null
+material/219 = null
+material/220 = null
+material/221 = null
+material/222 = null
+material/223 = null
+material/224 = null
+material/225 = null
+material/226 = null
+material/227 = null
+
+[node name="PanelDisplay" parent="StationPivot/Station2" instance=ExtResource( 5 )]
+transform = Transform( -0.666627, -0.744698, -0.0321593, -0.0469246, -0.00113154, 0.998898, -0.743913, 0.667401, -0.0341904, 46.9173, 1.01403, -42.1821 )
+
+[node name="CoveredPanel" parent="StationPivot/Station2/PanelDisplay" instance=ExtResource( 4 )]
+underpanel = ExtResource( 17 )
+
 [node name="Station3" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -85 )
+material_override = SubResource( 3 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -257,7 +536,7 @@ material/5 = null
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 20 )
+material_override = SubResource( 2 )
 mesh = ExtResource( 7 )
 material/0 = null
 material/1 = null
@@ -288,7 +567,7 @@ transform = Transform( 0.936164, 0.351564, 0, -0.351564, 0.936164, 0, 0, 0, 1, -
 [node name="Panel" type="Sprite" parent="StationPivot/Intro"]
 texture = ExtResource( 15 )
 centered = false
-script = SubResource( 3 )
+script = SubResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="StationPivot/Intro/Panel"]
 anchor_right = 1.0
@@ -329,7 +608,7 @@ transform = Transform( 0.412596, 0.910914, 0, -0.910914, 0.412596, 0, 0, 0, 1, -
 [node name="Panel" type="Sprite" parent="StationPivot/ControlRoom"]
 texture = ExtResource( 15 )
 centered = false
-script = SubResource( 4 )
+script = SubResource( 7 )
 
 [node name="MarginContainer" type="MarginContainer" parent="StationPivot/ControlRoom/Panel"]
 anchor_right = 1.0
@@ -368,26 +647,8 @@ margin_bottom = 672.0
 visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
-frames = SubResource( 10 )
-frame = 2
+frames = SubResource( 13 )
 playing = true
-
-[node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
-transform = Transform( 0.97415, 0.225903, 0, -0.225903, 0.97415, 0, 0, 0, 1, 7.7097, -59.1625, 5.19206 )
-
-[node name="SymbolPanel" parent="StationPivot/PanelDisplay" instance=ExtResource( 13 )]
-
-[node name="PanelDisplay3" parent="StationPivot" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6286, -67.178, 5.19206 )
-
-[node name="CoveredPanel" parent="StationPivot/PanelDisplay3" instance=ExtResource( 4 )]
-underpanel = ExtResource( 3 )
-
-[node name="PanelDisplay2" parent="StationPivot" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0728, -58.1683, 5.19206 )
-
-[node name="CoveredPanel" parent="StationPivot/PanelDisplay2" instance=ExtResource( 4 )]
-underpanel = ExtResource( 10 )
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308463, -76.2884, 1.22882 )
@@ -403,16 +664,16 @@ transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 77.7107
 
 [node name="ComCube" type="StaticBody" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2416, -76.0216, 9.41644 )
-script = SubResource( 11 )
+script = SubResource( 14 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-mesh = SubResource( 13 )
+mesh = SubResource( 16 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-shape = SubResource( 14 )
+shape = SubResource( 17 )
 
 [node name="OmniLight" type="OmniLight" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
@@ -420,14 +681,14 @@ light_color = Color( 1, 0.913725, 0, 1 )
 
 [node name="ControlCube" type="StaticBody" parent="StationPivot"]
 transform = Transform( 0.309863, 0.950781, 0, -0.950781, 0.309863, 0, 0, 0, 1, -70.0118, -29.3606, 7.61171 )
-script = SubResource( 15 )
+script = SubResource( 18 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/ControlCube"]
-mesh = SubResource( 17 )
+mesh = SubResource( 20 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/ControlCube"]
-shape = SubResource( 18 )
+shape = SubResource( 21 )
 
 [node name="TargetPivot" type="Position3D" parent="StationPivot/ControlCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
@@ -449,7 +710,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StationPivot/Signs/PanelDisplay/ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 21 )
+custom_fonts/font = SubResource( 22 )
 text = "Control Room"
 align = 1
 valign = 1
@@ -460,5 +721,3 @@ __meta__ = {
 [node name="GIProbe" type="GIProbe" parent="."]
 visible = false
 extents = Vector3( 100, 100, 100 )
-data = SubResource( 19 )
-[connection signal="connected" from="StationPivot/ControlCube" to="StationPivot/ControlRoom/Panel" method="_on_ControlCube_connected"]
