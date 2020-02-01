@@ -15,6 +15,8 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if Input.is_action_pressed("right"):
+		player.mc.rotation.y = 0
 		pivot.rotate_z(-ROTATION_SPEED * delta)
 	if Input.is_action_pressed("left"):
+		player.mc.rotation.y = PI
 		pivot.rotate_z(ROTATION_SPEED * delta)

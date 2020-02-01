@@ -6,21 +6,24 @@ onready var tween := $Tween as Tween
 
 var player_in: Spatial
 
-func _ready() -> void:
-	tween.connect("tween_all_completed", Singleton, "set", ["player_locked", false])
-
 func _input(event: InputEvent) -> void:
 	if not player_in or Singleton.player_locked or not event.is_action_type():
 		return
 	
 	if Input.is_action_just_pressed("forward") and player_in.global_transform.origin.z > global_transform.origin.z:
 		Singleton.player_locked = true
-		tween.interpolate_property(get_parent(), "translation:z", get_parent().translation.z, get_parent().translation.z + MOVE, 3, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-		tween.start()
+		var seq := TweenSequence.new(get_tree())
+		seq.append(player_in.mc, "rotation:y", PI/2, 0.5)
+		seq.append(get_parent(), "translation:z", get_parent().translation.z + MOVE, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append(player_in.mc, "rotation:y", player_in.mc.rotation.y, 0.5)
+		seq.append_callback(Singleton, "set", ["player_locked", false])
 	elif Input.is_action_just_pressed("backward") and player_in.global_transform.origin.z < global_transform.origin.z:
 		Singleton.player_locked = true
-		tween.interpolate_property(get_parent(), "translation:z", get_parent().translation.z, get_parent().translation.z - MOVE, 3, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-		tween.start()
+		var seq := TweenSequence.new(get_tree())
+		seq.append(player_in.mc, "rotation:y", -PI/2, 0.5)
+		seq.append(get_parent(), "translation:z", get_parent().translation.z - MOVE, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append(player_in.mc, "rotation:y", player_in.mc.rotation.y, 0.5)
+		seq.append_callback(Singleton, "set", ["player_locked", false])
 
 func _on_Passage_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
