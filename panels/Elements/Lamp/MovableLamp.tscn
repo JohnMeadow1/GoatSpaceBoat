@@ -13,9 +13,12 @@ var real_mouse: Vector2
 
 var drag_offset: Vector2
 
+var dziura: Node2D
+
 func _ready() -> void:
+	set_meta(\"bulb\", true)
 	yield(get_tree(), \"idle_frame\")
-	var dziura := $Dziura
+	dziura = $Dziura
 	var glb = dziura.global_transform
 	remove_child(dziura)
 	get_parent().add_child(dziura)
@@ -23,6 +26,7 @@ func _ready() -> void:
 
 func drag_start() -> void:
 	dragged = true
+	raise()
 	drag_offset = rect_position - real_mouse
 
 func drag_unstart() -> void:
@@ -34,6 +38,21 @@ func _input(event: InputEvent) -> void:
 		
 		if dragged:
 			rect_position = real_mouse + drag_offset
+	elif event is InputEventMouseButton:
+		if not event.pressed and dragged:
+			dragged = false
+			
+			for node in get_parent().get_children():
+				if node.has_meta(\"bulb\") and node != self:
+					if node.get_rect().intersects(get_rect()):
+						var d = dziura
+						rect_position = node.rect_position
+						node.rect_position = dziura.position - Vector2(25.5, 25.5)
+						dziura = node.dziura
+						node.dziura = d
+						return
+			
+			rect_position = dziura.position - Vector2(25.5, 25.5)
 "
 
 [node name="ToolButton" type="ToolButton"]
