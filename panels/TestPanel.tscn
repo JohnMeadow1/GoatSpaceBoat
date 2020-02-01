@@ -1,13 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/coolfx.tres" type="Material" id=2]
 [ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=3]
 [ext_resource path="res://panels/GeneralSprites/panel_base.png" type="Texture" id=4]
+[ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=5]
+[ext_resource path="res://panels/Elements/Progress/progress.tscn" type="PackedScene" id=6]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+func _process(delta: float) -> void:
+	$TextureProgress.value = 50 + $Knob.value
+"
 
 [node name="Panel" type="Sprite"]
 texture = ExtResource( 3 )
 centered = false
+script = SubResource( 1 )
 
 [node name="lamp" parent="." instance=ExtResource( 1 )]
 modulate = Color( 1, 0.7, 0.7, 1 )
@@ -24,7 +34,6 @@ color = 2
 [node name="lamp3" parent="." instance=ExtResource( 1 )]
 modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 1156.46, 583.078 )
-frequency = 1.0
 color = 3
 
 [node name="cover" type="Sprite" parent="."]
@@ -41,3 +50,12 @@ margin_bottom = 334.711
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Knob" parent="." instance=ExtResource( 5 )]
+position = Vector2( 333.707, 497.789 )
+
+[node name="TextureProgress" parent="." instance=ExtResource( 6 )]
+margin_left = 435.803
+margin_top = 430.587
+margin_right = 453.803
+margin_bottom = 587.587

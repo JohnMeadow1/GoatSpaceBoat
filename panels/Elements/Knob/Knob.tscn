@@ -31,7 +31,6 @@ func _input(event: InputEvent) -> void:
 			grabbed = false
 "
 
-[node name="Wheel" type="Sprite"]
-position = Vector2( 157.2, 113.216 )
+[node name="Knob" type="Sprite"]
 texture = ExtResource( 1 )
 script = SubResource( 1 )
