@@ -1,8 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Panels/Elements/Temperature/over.png" type="Texture" id=1]
 [ext_resource path="res://Panels/Elements/Temperature/progress.png" type="Texture" id=2]
 [ext_resource path="res://Panels/Elements/Temperature/under.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TextureProgress
+
+var target_value: float setget set_target_value
+
+func _ready() -> void:
+	$overlay.min_value = min_value
+	$overlay.max_value = max_value
+	set_target_value(value)
+
+func _process(delta: float) -> void:
+	value = lerp(value, target_value, 0.01)
+
+func set_target_value(v: float):
+	target_value = v
+	
+	if not is_inside_tree():
+		return
+	
+	$overlay.value = v
+"
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
@@ -37,6 +59,7 @@ texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 2 )
 fill_mode = 3
 tint_progress = Color( 1, 0, 0, 1 )
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,9 +69,8 @@ margin_top = 0.513336
 margin_right = 22.0
 margin_bottom = 157.513
 rect_rotation = 0.102932
-max_value = 157.0
-step = 0.01
-value = 100.0
+step = 0.001
+value = 50.0
 rounded = true
 texture_over = ExtResource( 1 )
 texture_progress = ExtResource( 2 )

@@ -12,10 +12,15 @@ var prev_rotation: Vector2
 
 export var value: float
 
+signal value_changed()
+
 func _process(delta: float) -> void:
 	if grabbed:
 		rotation = (real_mouse - position).angle() + grab_offset
+		var old_value := value
 		value -= (real_mouse - position).angle_to(prev_rotation)
+		if value != old_value:
+			emit_signal(\"value_changed\")
 
 		prev_rotation = real_mouse - position
 

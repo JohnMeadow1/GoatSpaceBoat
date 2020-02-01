@@ -1,9 +1,9 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
 [ext_resource path="res://Models/Floor-C_content-1.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://Models/CapsuleTexture.JPG" type="Texture" id=4]
+[ext_resource path="res://panels/CoveredPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Nodes/PanelDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Nodes/Passage.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Models/Pregi.obj" type="ArrayMesh" id=7]
@@ -16,12 +16,41 @@
 [ext_resource path="res://Resources/infopanel_font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://panels/GeneralSprites/panel_base.png" type="Texture" id=15]
 [ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://panels/HumanWakeup.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Models/CapsuleTexture.JPG" type="Texture" id=18]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 11 )
 
+[sub_resource type="Animation" id=23]
+resource_name = "Wywal"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 88.5005, 2.75197e-05, 2.75292e-05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 4.76837e-06, 4.82922, 0 ), Vector3( 1.26362e-05, 1.03014, 4.84322 ) ]
+}
+
 [sub_resource type="SpatialMaterial" id=22]
-albedo_texture = ExtResource( 4 )
+albedo_texture = ExtResource( 18 )
 
 [sub_resource type="SpatialMaterial" id=20]
 albedo_texture = ExtResource( 12 )
@@ -249,10 +278,16 @@ material/3 = null
 material/4 = null
 material/5 = null
 
-[node name="Sprite3D" type="Sprite3D" parent="StationPivot/Station2"]
-transform = Transform( -0.660184, -0.743456, -0.106912, -0.0763488, -0.0751784, 0.994243, -0.747214, 0.664546, -0.00713041, 54.3285, 2.08718, -48.6569 )
+[node name="Spatial" type="Spatial" parent="StationPivot/Station2"]
+transform = Transform( -0.660185, -0.743456, -0.106912, -0.0763489, -0.0751784, 0.994243, -0.747215, 0.664545, -0.00713041, 57.6534, 2.4234, -51.629 )
+
+[node name="Sprite3D" type="Sprite3D" parent="StationPivot/Station2/Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-06, 4.82922, 0 )
 pixel_size = 0.02
 texture = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StationPivot/Station2/Spatial/Sprite3D"]
+anims/Wywal = SubResource( 23 )
 
 [node name="Capsule" parent="StationPivot/Station2" instance=ExtResource( 10 )]
 transform = Transform( -0.0566002, -0.743456, 0.666385, 0.99717, -0.0751796, 0.000821151, 0.0494881, 0.664546, 0.745607, 57.1424, 2.51725, -51.187 )
@@ -490,6 +525,12 @@ material/225 = null
 material/226 = null
 material/227 = null
 
+[node name="PanelDisplay" parent="StationPivot/Station2" instance=ExtResource( 5 )]
+transform = Transform( -0.666627, -0.744698, -0.0321593, -0.0469246, -0.00113154, 0.998898, -0.743913, 0.667401, -0.0341904, 46.9173, 1.01403, -42.1821 )
+
+[node name="CoveredPanel" parent="StationPivot/Station2/PanelDisplay" instance=ExtResource( 4 )]
+underpanel = ExtResource( 17 )
+
 [node name="Station3" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -80 )
 material_override = SubResource( 2 )
@@ -615,7 +656,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 10 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
