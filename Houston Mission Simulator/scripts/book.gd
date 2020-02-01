@@ -8,7 +8,7 @@ export(int) var maxPage:int = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	VariableMaster.Book = self
+	Singleton.Book = self
 	loadPage(currentPage)
 	pass # Replace with function body.
 
@@ -32,7 +32,7 @@ func prevPage() -> void:
 
 
 func loadPage(page:int) -> void:
-	var pagePath:String = "res://pages/page_" + str(page).pad_zeros(2) + ".tscn"
+	var pagePath:String = "res://Houston Mission Simulator/pages/page_" + str(page).pad_zeros(2) + ".tscn"
 	var new_node:PackedScene = load(pagePath) as PackedScene
 	PageInstance.queue_free()
 	PageInstance = new_node.instance()
