@@ -33,7 +33,6 @@ func knob3_changed():
 	$Coolant.target_value = $Knob3.value
 
 func coolant_run() -> void:
-	print(\"dupa\")
 	coolant = true
 	$Coolant.target_value = $Knob3.value
 "
