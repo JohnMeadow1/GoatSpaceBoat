@@ -6,10 +6,11 @@
 [ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=4]
 [ext_resource path="res://Panels/Elements/HealthScreen/health_screen.png" type="Texture" id=5]
 [ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=6]
-[ext_resource path="res://panels/Elements/Progress/oxygen_progress_bar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://panels/Elements/Progress/OxygenProgressBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=8]
 [ext_resource path="res://panels/Elements/Progress/CoolantLevelProgressBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://panels/Elements/Progress/progress.tscn" type="PackedScene" id=10]
+
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
