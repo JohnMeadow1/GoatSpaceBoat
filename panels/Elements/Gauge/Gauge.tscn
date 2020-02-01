@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://panels/Elements/Gauge/Gauge.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Panels/Elements/Gauge/clock2.png" type="Texture" id=2]
+[ext_resource path="res://Panels/Elements/Gauge/wskazowka.png" type="Texture" id=3]
 
 [node name="Gauge" type="Sprite"]
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
-value = 50.0
+min_value = -50.0
+max_value = 50.0
 
 [node name="Pointer" type="Sprite" parent="."]
-scale = Vector2( 1, 0.1 )
-texture = ExtResource( 2 )
-offset = Vector2( -20, 0 )
+position = Vector2( 0, 24 )
+texture = ExtResource( 3 )
+offset = Vector2( -2, -30 )

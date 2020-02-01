@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/coolfx.tres" type="Material" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Resources/scroll.shader" type="Shader" id=8]
 [ext_resource path="res://Panels/Elements/Progress/progress_bg.png" type="Texture" id=9]
 [ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=10]
+[ext_resource path="res://Panels/Elements/Gauge/Gauge.tscn" type="PackedScene" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
@@ -36,14 +37,17 @@ func _process(delta: float) -> void:
 			delay = 0
 	progress_setting = lerp(progress_setting, $Knob.value, 0.1)
 	$TextureProgress/overlay.value = progress_setting
+	
 	if progress_value/$TextureProgress.max_value > 0.75:
 		modified_value = lerp(modified_value, rand_range(0, max(progress_value/$TextureProgress.max_value - 0.75, 0) * 5) , 0.1)
+		
 	if !sound_played && progress_value/$TextureProgress.max_value > 0.80:
 		sound_played = 1
 		$Bwaaa.play()
 		
 	$ColorRect.material.set(\"shader_param/magnitude\", progress_value/$TextureProgress.max_value + modified_value)
-
+	$Gauge.value = progress_value/$TextureProgress.max_value * $Gauge.value_range
+	$Gauge.random_offset_range = lerp($Gauge.random_offset_range, rand_range(0, max(progress_value/$TextureProgress.max_value - 0.65, 0) * 200) , 0.1)
 func _ready():
 	$TextureProgress.tint_progress = Color(progress_value/$TextureProgress.max_value,0,1-progress_value/$TextureProgress.max_value)
 "
@@ -110,3 +114,9 @@ texture_under = ExtResource( 9 )
 
 [node name="Bwaaa" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+
+[node name="Gauge" parent="." instance=ExtResource( 11 )]
+position = Vector2( 626, 428 )
+value = 0.0
+min_value = -50.0
+max_value = 50.0
