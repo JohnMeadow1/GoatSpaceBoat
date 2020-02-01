@@ -20,6 +20,7 @@ func _ready() -> void:
 	
 	panel = get_child(get_child_count() - 1)
 	remove_child(panel)
+	panel.set_meta("display", self)
 	camera_target.translation.z = camera_distance
 	
 	viewport.add_child(panel)

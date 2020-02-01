@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://panels/Elements/Progress/OxygenProgressBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://panels/Elements/Lamp/MovableLamp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/DebugButton.gd" type="Script" id=3]
 [ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=6]
 [ext_resource path="res://Panels/Elements/HealthScreen/health_screen.png" type="Texture" id=7]
@@ -25,15 +26,15 @@ func _ready():
 	$Knob3.connect(\"value_changed\", self, \"knob3_changed\")
 
 func _process(delta: float) -> void:
+	if not done and ok.find(false) == -1:
+		done = true
+		get_meta(\"display\").focused = false
+		Singleton.emit_signal(\"global_event\", \"wake_up\")
+	
 	ok[0] = $Temperature.value > 19 and $Temperature.value < 28
 	ok[1] = $Oxygen.value >= 1350 and $Oxygen.value <= 1450 and $MovableLamp.rect_position.x == 872
 	ok[2] = $Coolant.value == 0
 	$MovableLamp/lamp.enabled = $Oxygen.value >= 1400
-	
-	if not done and ok.find(false) == -1:
-		done = true
-		get_parent().get_parent().focused = false
-		Singleton.emit_signal(\"global_event\", \"wake_up\")
 
 func knob1_changed(): ##->20
 	$Temperature.target_value = $Knob.value
@@ -51,6 +52,9 @@ func knob3_changed():
 func coolant_run() -> void:
 	coolant = true
 	$Coolant.target_value = $Knob3.value
+
+func _on_Button_pressed() -> void:
+	ok = [true, true, true]
 "
 
 [node name="Panel" type="Sprite"]
@@ -193,7 +197,19 @@ margin_bottom = 91.0
 
 [node name="Bwaaa" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 239.427
+margin_top = 533.269
+margin_right = 292.427
+margin_bottom = 553.269
+text = "Debug"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="Coolant/Timer" to="." method="coolant_run"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 
 [editable path="Temperature"]
 

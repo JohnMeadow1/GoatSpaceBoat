@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -17,6 +17,15 @@
 [ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://panels/HumanWakeup.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Models/CapsuleTexture.JPG" type="Texture" id=18]
+
+[sub_resource type="GDScript" id=23]
+script/source = "extends Camera
+
+onready var initialt: Transform
+
+func _ready() -> void:
+	initialt = global_transform
+"
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 11 )
@@ -72,10 +81,16 @@ func _ready() -> void:
 
 func on_event(event: String):
 	if event == \"wake_up\":
+		var camera := $\"../../../Camera\" as Camera
+		
 		var seq := TweenSequence.new(get_tree())
-		seq.append($\"../../../Camera\", \"global_transform:origin\", $\"../Spatial/CameraPoint\".global_transform.origin, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		seq.parallel().append($\"../../../Camera\", \"global_transform:basis\", $\"../Spatial/CameraPoint\".global_transform.basis, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		$\"../Spatial/Sprite3D/AnimationPlayer\".play(\"Wywal\")
+		seq.append(camera, \"global_transform:origin\", $\"../Spatial/CameraPoint\".global_transform.origin, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.parallel().append(camera, \"global_transform:basis\", $\"../Spatial/CameraPoint\".global_transform.basis, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append_callback($\"../Spatial/Sprite3D/AnimationPlayer\", \"play\", [\"Wywal\"])
+		seq.append_interval(3)
+		seq.append(camera, \"global_transform:origin\", camera.initialt.origin, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.parallel().append(camera, \"global_transform:basis\", camera.initialt.basis, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append_callback(Singleton, \"set\", [\"player_locked\", false])
 "
 
 [sub_resource type="SpatialMaterial" id=5]
@@ -121,6 +136,9 @@ onready var label := $MarginContainer/Label as Label
 
 var current_problem := -1
 var resolved: bool setget set_resolved
+
+func _ready() -> void:
+	Singleton.connect(\"global_event\", self, \"on_event\")
 
 func _on_ControlCube_connected() -> void:
 	label.text = \"Cube inserted\"
@@ -175,6 +193,10 @@ func set_resolved(r: bool):
 func panel_focus():
 	if resolved:
 		next_problem()
+
+func on_event(event: String):
+	if event == \"wake_up\":
+		self.resolved = true
 "
 
 [sub_resource type="AtlasTexture" id=8]
@@ -272,6 +294,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -75.8038, 19.8004 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.0272088, -0.352597, 0.93538, -0.902785, -65.246, 36.7471 )
+script = SubResource( 23 )
 
 [node name="StationPivot" type="Spatial" parent="."]
 
@@ -681,7 +704,6 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 13 )
-frame = 1
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
@@ -755,3 +777,4 @@ __meta__ = {
 [node name="GIProbe" type="GIProbe" parent="."]
 visible = false
 extents = Vector3( 100, 100, 100 )
+[connection signal="connected" from="StationPivot/ControlCube" to="StationPivot/ControlRoom/Panel" method="_on_ControlCube_connected"]

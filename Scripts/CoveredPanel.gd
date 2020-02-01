@@ -19,5 +19,13 @@ func _physics_process(delta: float) -> void:
 func screw_end():
 	screws -= 1
 	if screws == 0:
-		get_parent().add_child(underpanel.instance())
-		fall = 1
+		fall()
+
+func _on_DebugButton_pressed() -> void:
+	fall()
+
+func fall():
+	var underiinstance = underpanel.instance()
+	get_parent().add_child(underiinstance)
+	underiinstance.set_meta("display", get_meta("display"))
+	fall = 1
