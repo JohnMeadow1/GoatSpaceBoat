@@ -58,6 +58,6 @@ material/20 = null
 material/21 = null
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8874, -67.178, 5.19206 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6286, -67.178, 5.19206 )
 
 [node name="Panel" parent="StationPivot/PanelDisplay" instance=ExtResource( 4 )]
