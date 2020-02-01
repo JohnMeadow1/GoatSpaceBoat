@@ -16,20 +16,21 @@ func dupotris() -> void:
 	get_tree().change_scene(\"res://Houston Mission Simulator/scenes/BSOD.tscn\")
 
 func show_quiz() -> void:
+	$Quiz2.hide()
 	$Quiz.show()
 
 func triss_good() -> void:
 	$Quiz.hide()
 	$Quiz2.show()
 
-
 func sponsor() -> void:
+	$Quiz.hide()
+	$Quiz2.hide()
 	$Sponsor.show()
 	$Sponsor.play()
 
 func show_doc() -> void:
 	$Book.show()
-	$Book.grab_focus()
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
