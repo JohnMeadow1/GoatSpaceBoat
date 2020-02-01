@@ -6,14 +6,14 @@
 
 [sub_resource type="ButtonGroup" id=3]
 
-[sub_resource type="SpatialMaterial" id=6]
-
 [sub_resource type="GDScript" id=5]
-script/source = "extends MeshInstance
+script/source = "extends Spatial
 
 func _physics_process(delta: float) -> void:
 	rotate_y(PI/2 * delta)
 "
+
+[sub_resource type="SpatialMaterial" id=6]
 
 [sub_resource type="Environment" id=4]
 background_mode = 1
@@ -133,14 +133,16 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1920, 1080 )
-transparent_bg = true
 handle_input_locally = false
-debug_draw = 3
+debug_draw = 2
 render_target_update_mode = 3
 
 [node name="Spatial" type="Spatial" parent="ViewportContainer/Viewport"]
 
-[node name="Station" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial"]
+[node name="Spatial" type="Spatial" parent="ViewportContainer/Viewport/Spatial"]
+script = SubResource( 5 )
+
+[node name="Station" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 material_override = SubResource( 6 )
 mesh = ExtResource( 3 )
@@ -150,7 +152,28 @@ material/2 = null
 material/3 = null
 material/4 = null
 material/5 = null
-script = SubResource( 5 )
+
+[node name="Station2" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.72223e-06, -39.4 )
+material_override = SubResource( 6 )
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+
+[node name="Station3" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.33381e-06, -76.2687 )
+material_override = SubResource( 6 )
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
 
 [node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Spatial"]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 82, 161 )

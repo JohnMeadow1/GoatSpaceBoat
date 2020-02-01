@@ -1,20 +1,32 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=1]
-[ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://panels/Elements/Lamp/MovableLamp.tscn" type="PackedScene" id=2]
 
 [node name="BulbPanel" type="Sprite"]
 texture = ExtResource( 1 )
 centered = false
 
-[node name="lamp" parent="." instance=ExtResource( 2 )]
+[node name="ToolButton" parent="." instance=ExtResource( 2 )]
+margin_left = 357.599
+margin_top = 293.092
+margin_right = 408.599
+margin_bottom = 344.092
+
+[node name="lamp" parent="ToolButton" index="1"]
 modulate = Color( 1, 0.7, 0.7, 1 )
-position = Vector2( 217.223, 485.305 )
-frequency = 1.0
 color = 1
 
-[node name="lamp2" parent="." instance=ExtResource( 2 )]
+[node name="ToolButton2" parent="." instance=ExtResource( 2 )]
+margin_left = 866.033
+margin_top = 398.286
+margin_right = 917.033
+margin_bottom = 449.286
+
+[node name="lamp" parent="ToolButton2" index="1"]
 modulate = Color( 0.7, 1, 0.7, 1 )
-position = Vector2( 762.34, 485.305 )
-frequency = 1.0
 color = 2
+
+[editable path="ToolButton"]
+
+[editable path="ToolButton2"]

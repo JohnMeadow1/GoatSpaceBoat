@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=1]
+[ext_resource path="res://panels/Elements/Lamp/dziurampka.png" type="Texture" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ToolButton
+
+var dragged: bool
+var real_mouse: Vector2
+
+var drag_offset: Vector2
+
+func _ready() -> void:
+	yield(get_tree(), \"idle_frame\")
+	var dziura := $Dziura
+	var glb = dziura.global_transform
+	remove_child(dziura)
+	get_parent().add_child(dziura)
+	dziura.global_transform = glb
+
+func drag_start() -> void:
+	dragged = true
+	drag_offset = rect_position - real_mouse
+
+func drag_unstart() -> void:
+	dragged = false
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		real_mouse = event.position
+		
+		if dragged:
+			rect_position = real_mouse + drag_offset
+"
+
+[node name="ToolButton" type="ToolButton"]
+margin_right = 51.0
+margin_bottom = 51.0
+custom_styles/focus = SubResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dziura" type="Sprite" parent="."]
+position = Vector2( 25.5, 25.5 )
+texture = ExtResource( 2 )
+
+[node name="lamp" parent="." instance=ExtResource( 1 )]
+position = Vector2( 25.5, 25.5 )
+z_index = 1
+frequency = 1.0
+color = 0
+[connection signal="button_down" from="." to="." method="drag_start"]
+[connection signal="button_up" from="." to="." method="drag_unstart"]
