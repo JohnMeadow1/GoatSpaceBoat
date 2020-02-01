@@ -12,12 +12,28 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
 
+var ok := [false, false, false]
+
 var coolant: bool
+var done: bool
+
+signal finished()
 
 func _ready():
 	$Knob.connect(\"value_changed\", self, \"knob1_changed\")
 	$Knob2.connect(\"value_changed\", self, \"knob2_changed\")
 	$Knob3.connect(\"value_changed\", self, \"knob3_changed\")
+
+func _process(delta: float) -> void:
+	ok[0] = $Temperature.value > 19 and $Temperature.value < 28
+	ok[1] = $Oxygen.value >= 1350 and $Oxygen.value <= 1450 and $MovableLamp.rect_position.x == 872
+	ok[2] = $Coolant.value == 0
+	$MovableLamp/lamp.enabled = $Oxygen.value >= 1400
+	
+	if not done and ok.find(false) == -1:
+		done = true
+		get_parent().get_parent().focused = false
+		Singleton.emit_signal(\"global_event\", \"wake_up\")
 
 func knob1_changed(): ##->20
 	$Temperature.target_value = $Knob.value
