@@ -17,10 +17,10 @@
 [ext_resource path="res://panels/GeneralSprites/panel_base.png" type="Texture" id=15]
 [ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=16]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 11 )
 
-[sub_resource type="SpatialMaterial" id=20]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 12 )
 
 [sub_resource type="GDScript" id=3]
@@ -52,8 +52,10 @@ const TEXT4 = \"\\\"Houston we have a problem\\\" sent successfully.\"
 const TEXT5 = \"Displaying list of problems. Consult Houston to fix them.\"
 
 const PROBLEMS = [
-	\"This is a problem.\",
-	\"This is a new problem.\"
+	\"Oxygen - correct \\n Temperature - correct \\n !!! MONEY - DANGEROUS LEAK\",
+	\"Main Engineer is gone. \\n !!! MONEY LEAK !!! \\n Reduce expenses\",
+	\"Engine power too low \\n Course deviation 0,3%/h\",
+	\"!!! HEAVY RADIATION !!! \\n Find the source\"
 ]
 
 onready var label := $MarginContainer/Label as Label
@@ -197,11 +199,11 @@ material = SubResource( 16 )
 [sub_resource type="ConvexPolygonShape" id=18]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=21]
+[sub_resource type="DynamicFont" id=19]
 size = 100
 font_data = ExtResource( 16 )
 
-[sub_resource type="GIProbeData" id=19]
+[sub_resource type="GIProbeData" id=20]
 bounds = AABB( -100, -100, -100, 200, 200, 200 )
 cell_size = 1.5625
 to_cell_xform = Transform( 0.64, 0, 0, 0, 0.64, 0, 0, 0, 0.64, 64, 64, 64 )
@@ -226,7 +228,7 @@ transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.02
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 2 )
+material_override = SubResource( 1 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -257,7 +259,7 @@ material/5 = null
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 20 )
+material_override = SubResource( 2 )
 mesh = ExtResource( 7 )
 material/0 = null
 material/1 = null
@@ -369,7 +371,6 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 10 )
-frame = 2
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
@@ -449,7 +450,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StationPivot/Signs/PanelDisplay/ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 21 )
+custom_fonts/font = SubResource( 19 )
 text = "Control Room"
 align = 1
 valign = 1
@@ -460,5 +461,5 @@ __meta__ = {
 [node name="GIProbe" type="GIProbe" parent="."]
 visible = false
 extents = Vector3( 100, 100, 100 )
-data = SubResource( 19 )
+data = SubResource( 20 )
 [connection signal="connected" from="StationPivot/ControlCube" to="StationPivot/ControlRoom/Panel" method="_on_ControlCube_connected"]
