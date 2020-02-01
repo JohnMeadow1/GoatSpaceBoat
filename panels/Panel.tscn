@@ -10,16 +10,19 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="lamp" parent="." instance=ExtResource( 2 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
 position = Vector2( 1156.46, 439.078 )
 frequency = 10.0
 color = 1
 
 [node name="lamp2" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 1156.46, 511.078 )
 frequency = 2.0
 color = 2
 
 [node name="lamp3" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 1156.46, 583.078 )
 color = 3
 

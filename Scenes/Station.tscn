@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Nodes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -12,14 +12,15 @@
 [ext_resource path="res://panels/CablePanel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Station/Walls_and_floor.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Station/Pregi.jpg" type="Texture" id=12]
+[ext_resource path="res://panels/SymbolPanel.tscn" type="PackedScene" id=13]
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 11 )
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 12 )
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=3]
 script/source = "extends StaticBody
 
 func _input_event(camera: Object, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
@@ -30,13 +31,13 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			add_child(carry)
 "
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=3]
-material = SubResource( 2 )
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 4 )
 
-[sub_resource type="ConvexPolygonShape" id=4]
+[sub_resource type="ConvexPolygonShape" id=6]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
 [sub_resource type="GIProbeData" id=7]
@@ -64,7 +65,7 @@ transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.02
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 5 )
+material_override = SubResource( 1 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -95,7 +96,7 @@ material/5 = null
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 6 )
+material_override = SubResource( 2 )
 mesh = ExtResource( 7 )
 material/0 = null
 material/1 = null
@@ -121,17 +122,18 @@ material/20 = null
 material/21 = null
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6286, -67.178, 5.19206 )
-size = Vector2( 10, 5 )
-camera_distance = 5.0
+transform = Transform( 0.97415, 0.225903, 0, -0.225903, 0.97415, 0, 0, 0, 1, 7.7097, -59.1625, 5.19206 )
 
-[node name="CoveredPanel" parent="StationPivot/PanelDisplay" instance=ExtResource( 4 )]
+[node name="SymbolPanel" parent="StationPivot/PanelDisplay" instance=ExtResource( 13 )]
+
+[node name="PanelDisplay3" parent="StationPivot" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6286, -67.178, 5.19206 )
+
+[node name="CoveredPanel" parent="StationPivot/PanelDisplay3" instance=ExtResource( 4 )]
 underpanel = ExtResource( 3 )
 
 [node name="PanelDisplay2" parent="StationPivot" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0728, -58.1683, 5.19206 )
-size = Vector2( 10, 5 )
-camera_distance = 5.0
 
 [node name="CoveredPanel" parent="StationPivot/PanelDisplay2" instance=ExtResource( 4 )]
 underpanel = ExtResource( 10 )
@@ -153,16 +155,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2553, -72.3886, 15.6379 )
 
 [node name="StaticBody" type="StaticBody" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -66.8853, -33.4728, 0 )
-script = SubResource( 1 )
+script = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000434875, 0.0453987, 9.29036 )
-mesh = SubResource( 3 )
+mesh = SubResource( 5 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000434875, 0.0453987, 9.29036 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="GIProbe" type="GIProbe" parent="."]
 visible = false

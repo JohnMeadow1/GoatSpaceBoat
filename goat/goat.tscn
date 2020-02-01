@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://goat/goat.gd" type="Script" id=1]
 [ext_resource path="res://goat/exclamation.png" type="Texture" id=2]
@@ -23,11 +23,11 @@ flags_unshaded = true
 params_billboard_mode = 1
 albedo_color = Color( 1, 1, 1, 0 )
 
-[sub_resource type="SphereMesh" id=5]
+[sub_resource type="SphereMesh" id=3]
 radius = 0.11
 height = 0.22
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=4]
 resource_name = "Material #29"
 flags_transparent = true
 params_cull_mode = 2
@@ -42,9 +42,6 @@ rim_tint = 1.0
 clearcoat_enabled = true
 clearcoat = 0.43
 clearcoat_gloss = 1.0
-
-[sub_resource type="SphereShape" id=3]
-radius = 15.0
 
 [node name="Goat" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -62,8 +59,8 @@ texture = ExtResource( 2 )
 
 [node name="helmet" type="MeshInstance" parent="Spatial"]
 transform = Transform( -7, 0, -1.05697e-06, 0, 7, 0, 1.05697e-06, 0, -7, 0, 1.50429, -1.41796 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Spatial"]
 transform = Transform( -7, 0, -1.05697e-06, 0, 7, 0, 1.05697e-06, 0, -7, 0, 0, -0.422902 )
@@ -75,13 +72,6 @@ transform = Transform( 0.0286267, -0.00473863, 0.00761967, 0.000648986, 0.026502
 
 [node name="eye_node2" parent="Spatial/MeshInstance" instance=ExtResource( 5 )]
 transform = Transform( 0.0345523, 0.0019286, -0.00523636, 0.000757151, 0.0309192, 0.0163839, 0.00552863, -0.0162876, 0.030482, -0.00943676, 0.227131, 0.148743 )
-
-[node name="SenseArea" type="Area" parent="."]
-input_ray_pickable = false
-angular_damp = 1.0
-
-[node name="CollisionShape" type="CollisionShape" parent="SenseArea"]
-shape = SubResource( 3 )
 
 [node name="meeeh" type="Node" parent="."]
 
@@ -116,5 +106,3 @@ volume_db = -20.0
 [node name="Meeeh_8" type="AudioStreamPlayer" parent="meeeh"]
 stream = ExtResource( 13 )
 volume_db = -20.0
-[connection signal="body_entered" from="SenseArea" to="." method="_on_SenseArea_body_entered"]
-[connection signal="body_exited" from="SenseArea" to="." method="_on_SenseArea_body_exited"]
