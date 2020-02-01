@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Pregi.obj-a1e3b9662d0f1b60f72c1e69265e2569.mesh"
+
+[deps]
+
+files=[ "res://.import/Pregi.obj-a1e3b9662d0f1b60f72c1e69265e2569.mesh" ]
+
+source_file="res://Models/Pregi.obj"
+dest_files=[ "res://.import/Pregi.obj-a1e3b9662d0f1b60f72c1e69265e2569.mesh", "res://.import/Pregi.obj-a1e3b9662d0f1b60f72c1e69265e2569.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 0.1, 0.1, 0.1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

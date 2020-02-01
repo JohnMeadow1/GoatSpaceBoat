@@ -1,15 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Nodes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://panels/Panel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Nodes/PanelDisplay.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Nodes/Passage.tscn" type="PackedScene" id=6]
-
-[sub_resource type="SpatialMaterial" id=1]
-albedo_texture = ExtResource( 3 )
-uv1_scale = Vector3( 10, 10, 10 )
+[ext_resource path="res://Models/Pregi.obj" type="ArrayMesh" id=6]
 
 [node name="Station" type="Spatial"]
 script = ExtResource( 2 )
@@ -17,63 +13,51 @@ script = ExtResource( 2 )
 [node name="Player" parent="." groups=[
 "player",
 ] instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -88.6004, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -75.8038, 19.8004 )
 script = null
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.999899, 0.00337158, -0.0138199, 0, 0.971506, 0.237014, 0.0142252, -0.23699, 0.971408, -1.06381, -82.4086, 19.46 )
+transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.0272088, -0.352597, 0.93538, -0.902785, -65.246, 36.7471 )
 
 [node name="StationPivot" type="Spatial" parent="."]
 
-[node name="Station" type="CSGCombiner" parent="StationPivot"]
+[node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-use_collision = true
+mesh = ExtResource( 3 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
 
-[node name="CSGCylinder" type="CSGCylinder" parent="StationPivot/Station"]
-radius = 100.0
-height = 20.0
-sides = 64
-material = SubResource( 1 )
-
-[node name="CSGCylinder2" type="CSGCylinder" parent="StationPivot/Station/CSGCylinder"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-operation = 2
-radius = 90.0
-height = 19.0
-sides = 64
-material = SubResource( 1 )
-
-[node name="CSGCylinder" type="CSGCylinder" parent="StationPivot/Station/CSGCylinder"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 84.922 )
-operation = 2
-radius = 5.0
-height = 50.0
-
-[node name="CSGCylinder2" type="CSGCylinder" parent="StationPivot/Station"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0 )
-radius = 100.0
-height = 20.0
-sides = 64
-material = SubResource( 1 )
-
-[node name="CSGCylinder2" type="CSGCylinder" parent="StationPivot/Station/CSGCylinder2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-operation = 2
-radius = 90.0
-height = 19.0
-sides = 64
-material = SubResource( 1 )
+[node name="Pregi" type="MeshInstance" parent="StationPivot"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = ExtResource( 6 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.049, -82.6572, -6.54101 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8874, -67.178, 5.19206 )
 
 [node name="Panel" parent="StationPivot/PanelDisplay" instance=ExtResource( 4 )]
-
-[node name="PanelDisplay2" parent="StationPivot" instance=ExtResource( 5 )]
-transform = Transform( -0.977298, -0.211871, 0, 0.211871, -0.977298, 0, 3.19744e-14, -3.69482e-13, 1, 21.3043, -75.2288, -6.54101 )
-size = Vector2( 20, 10 )
-camera_distance = 10.0
-
-[node name="Panel" parent="StationPivot/PanelDisplay2" instance=ExtResource( 4 )]
-
-[node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
