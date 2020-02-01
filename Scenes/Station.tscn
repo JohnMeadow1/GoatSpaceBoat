@@ -74,7 +74,7 @@ func _on_ControlCube_connected() -> void:
 	loading(seq)
 	seq.append_callback($AnimatedSprite, \"hide\")
 	set_text(seq, TEXT4)
-	seq.append_interval(0.5)
+	seq.append_interval(1)
 	set_text(seq, TEXT5)
 	seq.append_interval(2)
 	seq.append_callback(self, \"next_problem\")
@@ -360,7 +360,6 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 18 )
-frame = 2
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
