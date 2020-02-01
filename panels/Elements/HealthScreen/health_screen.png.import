@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/progress_overlay.png-d461c69568e931c35cad4ae7eb7102f6.stex"
+path="res://.import/health_screen.png-f117516ddcc56a41ec2189160fc4031f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/generic/progress_overlay.png"
-dest_files=[ "res://.import/progress_overlay.png-d461c69568e931c35cad4ae7eb7102f6.stex" ]
+source_file="res://panels/Elements/HealthScreen/health_screen.png"
+dest_files=[ "res://.import/health_screen.png-f117516ddcc56a41ec2189160fc4031f.stex" ]
 
 [params]
 
