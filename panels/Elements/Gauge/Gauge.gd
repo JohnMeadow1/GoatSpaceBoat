@@ -1,12 +1,14 @@
 extends Sprite
 
 export var value := 0.0
-export var min_value = -40.0
-export var max_value = 90.0
-export var random_offset_range = 0.0
-var random_offset = 0.0
+export var min_value := -40.0
+export var max_value := 90.0
+export var random_offset_range := 0.0
+var random_offset := 0.0
+var value_range := 0.0
 
 func _ready():
+	value_range = max_value - min_value
 	pass
 
 func _process(delta):
