@@ -6,6 +6,9 @@ onready var player := $Player as KinematicBody
 onready var camera := $Camera as Camera
 onready var pivot := $StationPivot as Spatial
 
+func _ready() -> void:
+	Singleton.player_node = player
+
 func _physics_process(delta: float) -> void:
 	if Singleton.player_locked:
 		return
