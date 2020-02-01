@@ -16,10 +16,10 @@
 [ext_resource path="res://Resources/infopanel_font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://panels/GeneralSprites/panel_base.png" type="Texture" id=15]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 11 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=20]
 albedo_texture = ExtResource( 12 )
 
 [sub_resource type="GDScript" id=3]
@@ -221,7 +221,7 @@ transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.02
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 1 )
+material_override = SubResource( 2 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -252,7 +252,7 @@ material/5 = null
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 2 )
+material_override = SubResource( 20 )
 mesh = ExtResource( 7 )
 material/0 = null
 material/1 = null
@@ -364,7 +364,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 10 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
