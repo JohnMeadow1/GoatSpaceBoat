@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+var real_mouse: Vector2
+var grabbed: bool
+var grab_offset: float
+var prev_rotation: Vector2
+
+var value: float
+
+func _process(delta: float) -> void:
+	if grabbed:
+		rotation = (real_mouse - position).angle() + grab_offset
+		value -= (real_mouse - position).angle_to(prev_rotation)
+	
+		prev_rotation = real_mouse - position
+	$Label.text = str(value) ##debug
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		real_mouse = event.position
+	
+	if event is InputEventMouseButton:
+		if event.pressed and get_rect().has_point(to_local(event.position)):
+			grabbed = true
+			grab_offset = rotation - (real_mouse - position).angle()
+		else:
+			grabbed = false
+"
+
+[node name="Wheel" type="Sprite"]
+position = Vector2( 157.2, 113.216 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -17.9621
+margin_top = -52.6889
+margin_right = 22.0379
+margin_bottom = -38.6889
+__meta__ = {
+"_edit_use_anchors_": false
+}
