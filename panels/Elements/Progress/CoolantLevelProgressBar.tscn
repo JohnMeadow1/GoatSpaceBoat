@@ -105,6 +105,9 @@ margin_right = 77.0
 margin_bottom = 176.0
 text = "-150
 "
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label4" type="Label" parent="."]
 margin_left = -27.0
@@ -112,20 +115,9 @@ margin_top = 166.0
 margin_right = 56.0
 margin_bottom = 197.0
 grow_horizontal = 2
-text = "Temp. Celsius"
+text = "Coolant
+Level"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label5" type="Label" parent="Label4"]
-margin_left = 68.5
-margin_top = -3.0
-margin_right = 151.5
-margin_bottom = 28.0
-rect_scale = Vector2( 0.6, 0.6 )
-text = "o
-"
 __meta__ = {
 "_edit_use_anchors_": false
 }
