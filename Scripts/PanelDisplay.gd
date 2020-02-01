@@ -6,7 +6,7 @@ onready var tween := $Tween as Tween
 onready var viewport := $MeshInstance/DisplayViewport as Viewport
 
 var focused := false
-var panel: Node2D
+var panel: CanvasItem
 
 export var size := Vector2(10, 5) setget set_size
 export var camera_distance := 5.0

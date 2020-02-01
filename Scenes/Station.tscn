@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://panels/SymbolPanel.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Resources/infopanel_font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://panels/GeneralSprites/panel_base.png" type="Texture" id=15]
+[ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=16]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 11 )
@@ -196,6 +197,10 @@ material = SubResource( 16 )
 [sub_resource type="ConvexPolygonShape" id=18]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
+[sub_resource type="DynamicFont" id=21]
+size = 100
+font_data = ExtResource( 16 )
+
 [sub_resource type="GIProbeData" id=19]
 bounds = AABB( -100, -100, -100, 200, 200, 200 )
 cell_size = 1.5625
@@ -364,27 +369,24 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 10 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
 transform = Transform( 0.97415, 0.225903, 0, -0.225903, 0.97415, 0, 0, 0, 1, 7.7097, -59.1625, 5.19206 )
 
 [node name="SymbolPanel" parent="StationPivot/PanelDisplay" instance=ExtResource( 13 )]
-visible = false
 
 [node name="PanelDisplay3" parent="StationPivot" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6286, -67.178, 5.19206 )
 
 [node name="CoveredPanel" parent="StationPivot/PanelDisplay3" instance=ExtResource( 4 )]
-visible = false
 underpanel = ExtResource( 3 )
 
 [node name="PanelDisplay2" parent="StationPivot" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.0728, -58.1683, 5.19206 )
 
 [node name="CoveredPanel" parent="StationPivot/PanelDisplay2" instance=ExtResource( 4 )]
-visible = false
 underpanel = ExtResource( 10 )
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
@@ -429,6 +431,31 @@ shape = SubResource( 18 )
 
 [node name="TargetPivot" type="Position3D" parent="StationPivot/ControlCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="Signs" type="Spatial" parent="StationPivot"]
+
+[node name="PanelDisplay" parent="StationPivot/Signs" instance=ExtResource( 5 )]
+transform = Transform( 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 0, 0, 1, -56.1759, -22.6728, 5.21336 )
+
+[node name="ColorRect" type="ColorRect" parent="StationPivot/Signs/PanelDisplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1024, 600 )
+color = Color( 0.298039, 0.188235, 0.188235, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StationPivot/Signs/PanelDisplay/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 21 )
+text = "Control Room"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GIProbe" type="GIProbe" parent="."]
 visible = false

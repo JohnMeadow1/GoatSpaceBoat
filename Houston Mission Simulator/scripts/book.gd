@@ -29,3 +29,4 @@ func loadPage() -> void:
 	page = load("res://Houston Mission Simulator/pages/page_" + str(currentPage).pad_zeros(2) + ".tscn").instance()
 	page.book = self
 	page_place.add_child(page)
+
