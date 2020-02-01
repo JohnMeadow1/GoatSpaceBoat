@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Nodes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
-[ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://panels/Panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://panels/Panel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://panels/CoveredPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Nodes/PanelDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Nodes/Passage.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Models/Pregi.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=8]
 
 [node name="Station" type="Spatial"]
 script = ExtResource( 2 )
@@ -24,7 +25,7 @@ transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.02
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = ExtResource( 3 )
+mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
 material/2 = null
@@ -34,7 +35,7 @@ material/5 = null
 
 [node name="Station2" type="MeshInstance" parent="StationPivot"]
 transform = Transform( -4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, -42.5 )
-mesh = ExtResource( 3 )
+mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
 material/2 = null
@@ -44,7 +45,7 @@ material/5 = null
 
 [node name="Station3" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -85 )
-mesh = ExtResource( 3 )
+mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
 material/2 = null
@@ -81,7 +82,8 @@ material/21 = null
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6286, -67.178, 5.19206 )
 
-[node name="Panel" parent="StationPivot/PanelDisplay" instance=ExtResource( 4 )]
+[node name="CoveredPanel" parent="StationPivot/PanelDisplay" instance=ExtResource( 4 )]
+underpanel = ExtResource( 3 )
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308463, -76.2884, 1.22882 )

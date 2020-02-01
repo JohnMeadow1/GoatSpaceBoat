@@ -3,7 +3,7 @@ extends StaticBody
 
 onready var camera_target := $Position3D as Spatial
 onready var tween := $Tween as Tween
-onready var viewport := $MeshInstance/Viewport as Viewport
+onready var viewport := $MeshInstance/DisplayViewport as Viewport
 
 var focused := false
 var panel: Node2D
@@ -38,7 +38,12 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			focused = true
 			Singleton.player_locked = true
 	elif focused:
-		panel.propagate_call("_gui_input", [event])
+		if event is InputEventMouse:
+			var norm_click := click_position - translation
+			var real_click := Vector2(norm_click.x, norm_click.y) + size / 2
+			real_click.y = size.y - real_click.y
+			event.position = real_click / size * viewport.size
+			viewport.input(event)
 
 func _input(event: InputEvent) -> void:
 	if focused and not tween.is_active():

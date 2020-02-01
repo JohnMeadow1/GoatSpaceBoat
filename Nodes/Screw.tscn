@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://panels/screw.png" type="Texture" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends ToolButton
+
+onready var tween := $Tween as Tween
+onready var sprite := $RigidBody2D/Sprite as Sprite
+
+var presss := 5
+var press_queued: bool
+
+signal finished()
+
+func _ready() -> void:
+	set_meta(\"screw\", true)
+	tween.connect(\"tween_all_completed\", self, \"continue_rotate\")
+
+func continue_rotate():
+	if presss == 0:
+		$RigidBody2D.mode = RigidBody2D.MODE_RIGID
+		yield(get_tree().create_timer(2), \"timeout\")
+		emit_signal(\"finished\")
+		queue_free()
+		return
+	
+	if press_queued:
+		press_queued = false
+		_on_Screw_pressed()
+
+func _on_Screw_pressed() -> void:
+	if tween.is_active():
+		press_queued = true
+	else:
+		presss -= 1
+		tween.interpolate_property(sprite, \"rotation_degrees\", sprite.rotation_degrees, sprite.rotation_degrees + 135, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.start()
+
+
+func _on_Screw_button_down() -> void:
+	pass # Replace with function body.
+
+func _on_Screw_button_up() -> void:
+	pass # Replace with function body.
+"
+
+[node name="Screw" type="ToolButton"]
+margin_left = 43.1949
+margin_top = 27.1538
+margin_right = 72.1949
+margin_bottom = 56.1538
+custom_styles/focus = SubResource( 1 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+mode = 1
+gravity_scale = 10.0
+
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
+position = Vector2( 14, 14 )
+texture = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="button_down" from="." to="." method="_on_Screw_button_down"]
+[connection signal="button_up" from="." to="." method="_on_Screw_button_up"]
+[connection signal="pressed" from="." to="." method="_on_Screw_pressed"]

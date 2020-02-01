@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://panels/pop-up cover.png" type="Texture" id=1]
+[ext_resource path="res://Nodes/Screw.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/CoveredPanel.gd" type="Script" id=3]
+
+[node name="CoveredPanel" type="Sprite"]
+texture = ExtResource( 1 )
+centered = false
+script = ExtResource( 3 )
+
+[node name="Screw" parent="." instance=ExtResource( 2 )]
+margin_left = 1233.23
+margin_top = 21.6143
+margin_right = 1262.23
+margin_bottom = 50.6143
+
+[node name="Screw2" parent="." instance=ExtResource( 2 )]
+margin_left = 35.7604
+margin_top = 659.203
+margin_right = 64.7604
+margin_bottom = 688.203
