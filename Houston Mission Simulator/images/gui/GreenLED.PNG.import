@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/piksel.jpg-049bb8c5975081cf34c2433f4351b114.stex"
+path="res://.import/GreenLED.PNG-e5880eb01948f61f8080d50a14529541.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/piksel.jpg"
-dest_files=[ "res://.import/piksel.jpg-049bb8c5975081cf34c2433f4351b114.stex" ]
+source_file="res://Houston Mission Simulator/images/gui/GreenLED.PNG"
+dest_files=[ "res://.import/GreenLED.PNG-e5880eb01948f61f8080d50a14529541.stex" ]
 
 [params]
 
