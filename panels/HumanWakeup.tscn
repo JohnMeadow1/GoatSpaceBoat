@@ -103,6 +103,7 @@ position = Vector2( 160, 176 )
 texture = ExtResource( 9 )
 
 [node name="TextureProgress3" parent="." instance=ExtResource( 3 )]
+anchor_top = 2.11928e-08
 margin_left = 664.0
 margin_top = 112.0
 margin_right = 686.0

@@ -1,17 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/coolfx.tres" type="Material" id=2]
 [ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=3]
 [ext_resource path="res://Panels/Elements/HealthScreen/goat.png" type="Texture" id=4]
-[ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=5]
-[ext_resource path="res://panels/Elements/Progress/FireProgressBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://panels/Elements/Switch/switch.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Panels/Elements/HealthScreen/health_screen.png" type="Texture" id=7]
 [ext_resource path="res://Resources/scroll.shader" type="Shader" id=8]
-[ext_resource path="res://panels/Elements/Progress/BloodProgressBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=10]
-[ext_resource path="res://Panels/Elements/Gauge/Gauge.tscn" type="PackedScene" id=11]
-[ext_resource path="res://panels/Elements/Progress/SulfurProgressBar.tscn" type="PackedScene" id=12]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
@@ -63,21 +59,6 @@ texture = ExtResource( 3 )
 centered = false
 script = SubResource( 1 )
 
-[node name="lamp2" parent="." instance=ExtResource( 1 )]
-modulate = Color( 0.7, 1, 0.7, 1 )
-position = Vector2( 105.5, 561.5 )
-frequency = 2.0
-color = 2
-
-[node name="lamp3" parent="." instance=ExtResource( 1 )]
-modulate = Color( 0.7, 0.7, 1, 1 )
-position = Vector2( 233.5, 561.5 )
-color = 3
-
-[node name="Knob" parent="." instance=ExtResource( 5 )]
-position = Vector2( 664, 512 )
-value = 50.0
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 317, 177 )
 texture = ExtResource( 7 )
@@ -100,36 +81,86 @@ texture = ExtResource( 4 )
 [node name="Bwaaa" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 
-[node name="Gauge" parent="." instance=ExtResource( 11 )]
-self_modulate = Color( 0.568627, 0.819608, 1, 1 )
-position = Vector2( 165.72, 424 )
-
-[node name="lamp4" parent="." instance=ExtResource( 1 )]
+[node name="lamp5" parent="." instance=ExtResource( 1 )]
 modulate = Color( 1, 0.7, 0.7, 1 )
-position = Vector2( 169.5, 561.5 )
+position = Vector2( 801.5, 225.5 )
 frequency = 2.0
 color = 1
 
-[node name="TextureProgress" parent="." instance=ExtResource( 9 )]
-margin_left = 832.0
-margin_top = 64.0
-margin_right = 854.0
-margin_bottom = 221.0
+[node name="lamp7" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 737.5, 161.5 )
+frequency = 2.0
+color = 1
 
-[node name="TextureProgress2" parent="." instance=ExtResource( 6 )]
-margin_left = 640.0
-margin_top = 64.0
-margin_right = 662.0
-margin_bottom = 221.0
+[node name="lamp6" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 673.5, 97.5 )
+frequency = 2.0
+color = 1
 
-[node name="TextureProgress3" parent="." instance=ExtResource( 12 )]
-margin_left = 1024.0
-margin_top = 64.0
-margin_right = 1046.0
-margin_bottom = 221.0
+[node name="lamp8" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 801.5, 97.5 )
+frequency = 2.0
+color = 1
 
-[node name="Knob2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 856, 512 )
+[node name="lamp9" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 673.5, 225.5 )
+frequency = 2.0
+color = 1
 
-[node name="Knob3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1048, 512 )
+[node name="lamp14" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 1121.5, 225.5 )
+frequency = 2.0
+color = 1
+
+[node name="lamp13" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 1057.5, 161.5 )
+frequency = 2.0
+color = 1
+
+[node name="lamp12" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 993.5, 97.5 )
+frequency = 2.0
+color = 1
+
+[node name="lamp11" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 1121.5, 97.5 )
+frequency = 2.0
+color = 1
+
+[node name="lamp10" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.7, 0.7, 1 )
+position = Vector2( 993.5, 225.5 )
+frequency = 2.0
+color = 1
+
+[node name="switch" parent="." instance=ExtResource( 5 )]
+margin_left = 104.0
+margin_top = 320.0
+margin_right = 167.0
+margin_bottom = 430.0
+
+[node name="switch2" parent="." instance=ExtResource( 5 )]
+margin_left = 104.0
+margin_top = 384.0
+margin_right = 167.0
+margin_bottom = 494.0
+
+[node name="switch3" parent="." instance=ExtResource( 5 )]
+margin_left = 104.0
+margin_top = 448.0
+margin_right = 167.0
+margin_bottom = 558.0
+
+[node name="switch4" parent="." instance=ExtResource( 5 )]
+margin_left = 104.0
+margin_top = 512.0
+margin_right = 167.0
+margin_bottom = 622.0
