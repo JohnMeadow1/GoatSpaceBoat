@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Panels/Elements/Switch/Button_down.png" type="Texture" id=1]
+[ext_resource path="res://Panels/Elements/Switch/Button_up.png" type="Texture" id=2]
+
+[node name="switch" type="CheckButton"]
+margin_left = -9.0
+margin_top = -18.0
+margin_right = 54.0
+margin_bottom = 92.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_icons/off = ExtResource( 1 )
+custom_icons/on = ExtResource( 2 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

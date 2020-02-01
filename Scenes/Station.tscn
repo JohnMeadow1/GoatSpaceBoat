@@ -369,7 +369,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 10 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]

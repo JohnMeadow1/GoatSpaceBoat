@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Houston Mission Simulator/images/gui/ConsolePeaceful.PNG" type="Texture" id=1]
-[ext_resource path="res://Houston Mission Simulator/images/gui/GreenLED.PNG" type="Texture" id=2]
-[ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://panels/Elements/Switch/switch.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Houston Mission Simulator/images/gui/TrissRight.PNG" type="Texture" id=4]
 [ext_resource path="res://Houston Mission Simulator/images/gui/TrissWrong.PNG" type="Texture" id=5]
 [ext_resource path="res://Houston Mission Simulator/images/gui/ChooseWisely.PNG" type="Texture" id=6]
@@ -11,6 +10,10 @@
 
 [sub_resource type="GDScript" id=7]
 script/source = "extends TextureRect
+
+func _ready() -> void:
+	VisualServer.set_debug_generate_wireframes(true)
+	$ViewportContainer/Viewport/Spatial.add_child(load(\"res://Houston Mission Simulator/Nodes/StationPreview.tscn\").instance())
 
 func dupotris() -> void:
 	get_tree().change_scene(\"res://Houston Mission Simulator/scenes/BSOD.tscn\")
@@ -37,6 +40,10 @@ func _gui_input(event: InputEvent) -> void:
 		if event.pressed:
 			$Book.hide()
 "
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = ExtResource( 7 )
 
 [sub_resource type="GDScript" id=9]
 script/source = "extends VBoxContainer
@@ -84,15 +91,6 @@ func inc(i: int):
 size = 30
 font_data = ExtResource( 7 )
 
-[sub_resource type="GDScript" id=5]
-script/source = "extends Spatial
-
-func _physics_process(delta: float) -> void:
-	rotate_y(PI/2 * delta)
-"
-
-[sub_resource type="SpatialMaterial" id=6]
-
 [sub_resource type="Environment" id=4]
 background_mode = 1
 ambient_light_color = Color( 0.47, 0.47, 0.47, 1 )
@@ -109,7 +107,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Leds" type="Control" parent="."]
+[node name="Switches" type="Control" parent="."]
+modulate = Color( 0, 4, 2, 1 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -118,82 +117,72 @@ margin_left = -5.0
 margin_top = -5.0
 margin_right = 5.0
 margin_bottom = 5.0
-
-[node name="LED" type="TextureRect" parent="Leds"]
-margin_left = 91.1342
-margin_top = 76.2846
-margin_right = 191.134
-margin_bottom = 176.285
-texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LED2" type="TextureRect" parent="Leds"]
-margin_left = 160.841
-margin_top = 76.2846
-margin_right = 260.841
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 129.632
+margin_top = 107.687
+margin_right = 192.632
+margin_bottom = 217.687
 
-[node name="LED3" type="TextureRect" parent="Leds"]
-margin_left = 227.305
-margin_top = 76.2846
-margin_right = 327.305
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch2" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 200.486
+margin_top = 107.687
+margin_right = 263.486
+margin_bottom = 217.687
 
-[node name="LED4" type="TextureRect" parent="Leds"]
-margin_left = 295.931
-margin_top = 76.2846
-margin_right = 395.931
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch3" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 267.458
+margin_top = 107.687
+margin_right = 330.458
+margin_bottom = 217.687
 
-[node name="LED5" type="TextureRect" parent="Leds"]
-margin_left = 356.452
-margin_top = 76.2846
-margin_right = 456.452
-margin_bottom = 176.285
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="switch4" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 335.076
+margin_top = 107.687
+margin_right = 398.076
+margin_bottom = 217.687
+
+[node name="switch5" parent="Switches" instance=ExtResource( 2 )]
+margin_left = 395.577
+margin_top = 107.687
+margin_right = 458.577
+margin_bottom = 217.687
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 margin_left = 77.0
 margin_top = 509.0
 margin_right = 561.0
 margin_bottom = 549.0
+custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="Buttons"]
-margin_right = 111.0
+margin_right = 191.0
 margin_bottom = 40.0
+custom_fonts/font = SubResource( 10 )
 text = "Documentation"
+flat = true
 
 [node name="Button2" type="Button" parent="Buttons"]
-margin_left = 115.0
-margin_right = 178.0
+margin_left = 211.0
+margin_right = 325.0
 margin_bottom = 40.0
+custom_fonts/font = SubResource( 10 )
 text = "Sponsor"
+flat = true
 
 [node name="Button3" type="Button" parent="Buttons"]
-margin_left = 182.0
-margin_right = 224.0
+margin_left = 345.0
+margin_right = 404.0
 margin_bottom = 40.0
+custom_fonts/font = SubResource( 10 )
 text = "Quiz"
+flat = true
 
 [node name="Sponsor" type="VideoPlayer" parent="."]
 margin_right = 40.0
@@ -321,46 +310,10 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1920, 1080 )
 handle_input_locally = false
-debug_draw = 2
+debug_draw = 3
 render_target_update_mode = 3
 
 [node name="Spatial" type="Spatial" parent="ViewportContainer/Viewport"]
-
-[node name="Spatial" type="Spatial" parent="ViewportContainer/Viewport/Spatial"]
-script = SubResource( 5 )
-
-[node name="Station" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-material_override = SubResource( 6 )
-mesh = ExtResource( 3 )
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
-material/4 = null
-material/5 = null
-
-[node name="Station2" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.72223e-06, -39.4 )
-material_override = SubResource( 6 )
-mesh = ExtResource( 3 )
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
-material/4 = null
-material/5 = null
-
-[node name="Station3" type="MeshInstance" parent="ViewportContainer/Viewport/Spatial/Spatial"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.33381e-06, -76.2687 )
-material_override = SubResource( 6 )
-mesh = ExtResource( 3 )
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
-material/4 = null
-material/5 = null
 
 [node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Spatial"]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 82, 161 )
