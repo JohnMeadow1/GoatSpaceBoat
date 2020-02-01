@@ -10,13 +10,13 @@ var grabbed: bool
 var grab_offset: float
 var prev_rotation: Vector2
 
-var value: float
+export var value: float
 
 func _process(delta: float) -> void:
 	if grabbed:
 		rotation = (real_mouse - position).angle() + grab_offset
 		value -= (real_mouse - position).angle_to(prev_rotation)
-	
+
 		prev_rotation = real_mouse - position
 
 func _input(event: InputEvent) -> void:
