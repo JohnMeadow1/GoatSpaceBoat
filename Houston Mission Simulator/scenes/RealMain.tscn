@@ -1,8 +1,26 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Houston Mission Simulator/images/gui/ConsolePeaceful.PNG" type="Texture" id=1]
 [ext_resource path="res://Houston Mission Simulator/images/gui/GreenLED.PNG" type="Texture" id=2]
 [ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Houston Mission Simulator/images/gui/TrissRight.PNG" type="Texture" id=4]
+[ext_resource path="res://Houston Mission Simulator/images/gui/TrissWrong.PNG" type="Texture" id=5]
+[ext_resource path="res://Houston Mission Simulator/images/gui/ChooseWisely.PNG" type="Texture" id=6]
+[ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends TextureRect
+
+func dupotris() -> void:
+	get_tree().change_scene(\"res://Houston Mission Simulator/scenes/BSOD.tscn\")
+
+func show_quiz() -> void:
+	$Quiz.show()
+
+func triss_good() -> void:
+	$Quiz.hide()
+	$Quiz2.show()
+"
 
 [sub_resource type="ButtonGroup" id=3]
 
@@ -19,11 +37,18 @@ func _physics_process(delta: float) -> void:
 background_mode = 1
 ambient_light_color = Color( 0.47, 0.47, 0.47, 1 )
 
+[sub_resource type="DynamicFont" id=8]
+size = 30
+font_data = ExtResource( 7 )
+
 [node name="Console" type="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -1.05261
+margin_bottom = -1.05261
 texture = ExtResource( 1 )
 expand = true
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -183,3 +208,111 @@ far = 300.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="ViewportContainer/Viewport/Spatial"]
 environment = SubResource( 4 )
+
+[node name="Quiz" type="Control" parent="."]
+visible = false
+margin_left = 87.0
+margin_top = 102.0
+margin_right = 529.0
+margin_bottom = 474.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="Quiz"]
+margin_left = 26.3158
+margin_top = 75.7896
+margin_right = 203.316
+margin_bottom = 252.79
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton2" type="TextureButton" parent="Quiz"]
+margin_left = 253.685
+margin_top = 75.7896
+margin_right = 430.685
+margin_bottom = 252.79
+texture_normal = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChooseWisely" type="TextureRect" parent="Quiz"]
+margin_left = 7.31577
+margin_top = 275.285
+margin_right = 420.316
+margin_bottom = 365.285
+texture = ExtResource( 6 )
+
+[node name="Quiz2" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 87.0
+margin_top = 102.0
+margin_right = 532.0
+margin_bottom = 477.0
+custom_constants/separation = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Quiz2"]
+margin_right = 445.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 8 )
+text = "What type of potate are you?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Quiz2"]
+margin_top = 157.0
+margin_right = 445.0
+margin_bottom = 375.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Quiz2/VBoxContainer"]
+margin_right = 445.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 8 )
+text = "Question 1
+Do you feel potato?"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Quiz2/VBoxContainer"]
+margin_top = 61.0
+margin_right = 445.0
+margin_bottom = 107.0
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Quiz2/VBoxContainer"]
+margin_top = 111.0
+margin_right = 445.0
+margin_bottom = 144.0
+custom_fonts/font = SubResource( 8 )
+text = "Yes"
+flat = true
+
+[node name="Button2" type="Button" parent="Quiz2/VBoxContainer"]
+margin_top = 148.0
+margin_right = 445.0
+margin_bottom = 181.0
+custom_fonts/font = SubResource( 8 )
+text = "No"
+flat = true
+
+[node name="Button3" type="Button" parent="Quiz2/VBoxContainer"]
+margin_top = 185.0
+margin_right = 445.0
+margin_bottom = 218.0
+custom_fonts/font = SubResource( 8 )
+text = "Perhabs"
+flat = true
+[connection signal="pressed" from="Buttons/Button3" to="." method="show_quiz"]
+[connection signal="pressed" from="Quiz/TextureButton" to="." method="triss_good"]
+[connection signal="pressed" from="Quiz/TextureButton2" to="." method="dupotris"]
