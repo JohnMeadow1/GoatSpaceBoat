@@ -1,6 +1,6 @@
 extends Area
 
-const MOVE := 42.5
+const MOVE := 40
 
 onready var tween := $Tween as Tween
 
