@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -18,11 +18,12 @@
 [ext_resource path="res://panels/HumanWakeup.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Models/CapsuleTexture.JPG" type="Texture" id=18]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 11 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Wywal"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -30,7 +31,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 1.5, 2.5 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 88.5005, 2.75197e-05, 2.75292e-05 ) ]
@@ -42,16 +43,42 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 1.5, 2.5 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ Vector3( 4.76837e-06, 4.82922, 0 ), Vector3( 1.26362e-05, 1.03014, 4.84322 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../Capsule:open")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 18 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="GDScript" id=4]
+script/source = "extends Node
+
+func _ready() -> void:
+	Singleton.connect(\"global_event\", self, \"on_event\")
+
+func on_event(event: String):
+	if event == \"wake_up\":
+		var seq := TweenSequence.new(get_tree())
+		seq.append($\"../../../Camera\", \"global_transform:origin\", $\"../Spatial/CameraPoint\".global_transform.origin, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.parallel().append($\"../../../Camera\", \"global_transform:basis\", $\"../Spatial/CameraPoint\".global_transform.basis, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		$\"../Spatial/Sprite3D/AnimationPlayer\".play(\"Wywal\")
+"
+
+[sub_resource type="SpatialMaterial" id=5]
 albedo_texture = ExtResource( 11 )
 
 [sub_resource type="GDScript" id=6]
@@ -250,7 +277,7 @@ transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.02
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 3 )
+material_override = SubResource( 1 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -261,7 +288,7 @@ material/5 = null
 
 [node name="Station2" type="MeshInstance" parent="StationPivot"]
 transform = Transform( -4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, -42.5 )
-material_override = SubResource( 3 )
+material_override = SubResource( 1 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -279,14 +306,17 @@ pixel_size = 0.02
 texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StationPivot/Station2/Spatial/Sprite3D"]
-anims/Wywal = SubResource( 4 )
+anims/Wywal = SubResource( 2 )
+
+[node name="CameraPoint" type="Position3D" parent="StationPivot/Station2/Spatial"]
+transform = Transform( 0.777146, 0.173464, -0.604942, 0, 0.961262, 0.275637, 0.62932, -0.21421, 0.747041, -6, 10, 10.414 )
 
 [node name="Capsule" parent="StationPivot/Station2" instance=ExtResource( 10 )]
 transform = Transform( 0.0518112, -0.721683, 0.690282, 0.996248, 0.0853344, 0.0144399, -0.0693259, 0.686944, 0.723396, 57.1344, 0.94434, -51.268 )
 
 [node name="Floor-C_content-1" type="MeshInstance" parent="StationPivot/Station2"]
 transform = Transform( 1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, 0, 38.406, 0 )
-material_override = SubResource( 5 )
+material_override = SubResource( 3 )
 mesh = ExtResource( 3 )
 material/0 = null
 material/1 = null
@@ -523,9 +553,12 @@ transform = Transform( -0.666627, -0.744698, -0.0321593, -0.0469246, -0.00113154
 [node name="CoveredPanel" parent="StationPivot/Station2/PanelDisplay" instance=ExtResource( 4 )]
 underpanel = ExtResource( 17 )
 
+[node name="CapsuleEvents" type="Node" parent="StationPivot/Station2"]
+script = SubResource( 4 )
+
 [node name="Station3" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -85 )
-material_override = SubResource( 3 )
+material_override = SubResource( 1 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -536,7 +569,7 @@ material/5 = null
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 2 )
+material_override = SubResource( 5 )
 mesh = ExtResource( 7 )
 material/0 = null
 material/1 = null
@@ -648,6 +681,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 13 )
+frame = 1
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
