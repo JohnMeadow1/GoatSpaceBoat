@@ -1,0 +1,168 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=1]
+[ext_resource path="res://Resources/asym.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+func _ready() -> void:
+	for button in $VBoxContainer/Buttons.get_children():
+		button.connect(\"pressed\", self, \"add_text\", [button.text])
+
+func add_text(text: String):
+	$VBoxContainer/ColorRect/CenterContainer/Label.text += text
+"
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[node name="SymbolPanel" type="Sprite"]
+position = Vector2( -0.463257, 0 )
+texture = ExtResource( 1 )
+centered = false
+script = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 541.791
+margin_top = 171.833
+margin_right = 729.791
+margin_bottom = 477.833
+theme = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+margin_right = 188.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 180 )
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="LineEdit" parent="VBoxContainer/ColorRect/CenterContainer"]
+margin_left = 29.0
+margin_top = 69.0
+margin_right = 159.0
+margin_bottom = 111.0
+custom_styles/read_only = SubResource( 4 )
+custom_colors/font_color_uneditable = Color( 0.219608, 1, 0, 1 )
+max_length = 12
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+
+[node name="Buttons" type="GridContainer" parent="VBoxContainer"]
+margin_top = 184.0
+margin_right = 188.0
+margin_bottom = 348.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="VBoxContainer/Buttons"]
+margin_right = 60.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 60, 30 )
+text = "A"
+
+[node name="Button7" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 64.0
+margin_right = 124.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 60, 30 )
+text = "Z\""
+
+[node name="Button8" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 128.0
+margin_right = 188.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 60, 30 )
+text = "Y~"
+
+[node name="Button9" type="Button" parent="VBoxContainer/Buttons"]
+margin_top = 42.0
+margin_right = 60.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 60, 30 )
+text = "W"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 64.0
+margin_top = 42.0
+margin_right = 124.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 60, 30 )
+text = "B"
+
+[node name="Button3" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 128.0
+margin_top = 42.0
+margin_right = 188.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 60, 30 )
+text = "C"
+
+[node name="Button4" type="Button" parent="VBoxContainer/Buttons"]
+margin_top = 84.0
+margin_right = 60.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 60, 30 )
+text = "D"
+
+[node name="Button5" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 64.0
+margin_top = 84.0
+margin_right = 124.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 60, 30 )
+text = "egf"
+
+[node name="Button6" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 128.0
+margin_top = 84.0
+margin_right = 188.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 60, 30 )
+text = ">o"
+
+[node name="Button10" type="Button" parent="VBoxContainer/Buttons"]
+margin_top = 126.0
+margin_right = 60.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 60, 30 )
+text = "cu"
+
+[node name="Button11" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 64.0
+margin_top = 126.0
+margin_right = 124.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 60, 30 )
+text = "11g"
+
+[node name="Button12" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 128.0
+margin_top = 126.0
+margin_right = 188.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 60, 30 )
+text = "><."
