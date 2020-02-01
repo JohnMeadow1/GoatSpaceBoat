@@ -5,6 +5,7 @@
 [ext_resource path="res://Scripts/CoveredPanel.gd" type="Script" id=3]
 
 [node name="CoveredPanel" type="Sprite"]
+z_index = 1
 texture = ExtResource( 1 )
 centered = false
 script = ExtResource( 3 )
