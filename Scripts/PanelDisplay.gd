@@ -1,22 +1,33 @@
+tool
 extends StaticBody
 
 onready var camera_target := $Position3D as Spatial
 onready var tween := $Tween as Tween
+onready var viewport := $MeshInstance/Viewport as Viewport
 
 var focused := false
 var panel: Node2D
+
+export var size := Vector2(10, 5) setget set_size
+export var camera_distance := 5.0
 
 var cam: Camera
 var camera_origin: Transform
 
 func _ready() -> void:
+	if Engine.editor_hint:
+		return
+	
 	panel = get_child(get_child_count() - 1)
 	remove_child(panel)
-	$MeshInstance/Viewport.add_child(panel)
-	$MeshInstance.mesh.surface_get_material(0).albedo_texture = $MeshInstance/Viewport.get_texture()
+	camera_target.translation.z = camera_distance
+	
+	viewport.add_child(panel)
+	viewport.size = panel.get_rect().size
+	$MeshInstance.mesh.surface_get_material(0).albedo_texture = viewport.get_texture()
 
 func _input_event(camera: Object, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
-	if not focused:
+	if not focused and not Singleton.player_locked:
 		if event is InputEventMouseButton and event.is_pressed():
 			cam = camera
 			camera_origin = cam.global_transform
@@ -25,6 +36,9 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			tween.interpolate_property(cam, "global_transform:basis", cam.global_transform.basis, camera_target.global_transform.basis, 1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			tween.start()
 			focused = true
+			Singleton.player_locked = true
+	elif focused:
+		panel.propagate_call("_gui_input", [event])
 
 func _input(event: InputEvent) -> void:
 	if focused and not tween.is_active():
@@ -34,3 +48,14 @@ func _input(event: InputEvent) -> void:
 				tween.interpolate_property(cam, "global_transform:basis", camera_target.global_transform.basis, camera_origin.basis, 1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 				tween.start()
 				focused = false
+				Singleton.player_locked = false
+
+func set_size(s: Vector2):
+	size = s
+	
+	if not is_inside_tree():
+		yield(self, "ready")
+	
+	$MeshInstance.mesh.size = size
+	$CollisionShape.shape.extents.x = size.x / 2
+	$CollisionShape.shape.extents.y = size.y / 2
