@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/watermark.png-ba6902e2b71c5e350b33e9047b58bb81.stex"
+path="res://.import/progress.png-3c6f5399b79352ae5d2cc2e10c8a0a24.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Houston Mission Simulator/images/watermark.png"
-dest_files=[ "res://.import/watermark.png-ba6902e2b71c5e350b33e9047b58bb81.stex" ]
+source_file="res://panels/Elements/Temperature/progress.png"
+dest_files=[ "res://.import/progress.png-3c6f5399b79352ae5d2cc2e10c8a0a24.stex" ]
 
 [params]
 

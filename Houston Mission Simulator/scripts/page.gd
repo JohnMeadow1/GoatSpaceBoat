@@ -1,24 +1,19 @@
-extends Node2D
+extends Control
 class_name Page
 
+var book: Control
 
-var indexPage:int = 1
-
+func _ready() -> void:
+	$Navigation/CurrentPageLabel.text = str(book.currentPage).pad_zeros(2)
 
 func _goto_page(page:int) -> void:
-	Singleton.Book.changePage(page)
-
+	book.changePage(page)
 
 func _on_NextPage_pressed():
-	Singleton.Book.nextPage()
-	pass # Replace with function body.
-
+	book.nextPage()
 
 func _on_PrevPage_pressed():
-	Singleton.Book.prevPage()
-	pass # Replace with function body.
-
+	book.prevPage()
 
 func _on_Index_pressed():
-	Singleton.Book.changePage(indexPage)
-	pass # Replace with function body.
+	book.changePage(1)

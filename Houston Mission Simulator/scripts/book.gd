@@ -1,39 +1,31 @@
-extends Node2D
-class_name BookClass
+extends Control
 
-onready var PageInstance: = $PagePlace/Page
+onready var page_place := $PagePlace
+var page: Control
 
 export(int) var currentPage:int = 1
 export(int) var maxPage:int = 3
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	Singleton.Book = self
-	loadPage(currentPage)
-	pass # Replace with function body.
-
+	loadPage()
 
 func changePage(page:int) -> void:
 	if page > maxPage || page < 1:
 		return
 	
 	currentPage = page
-	$CurrentPageLabel.text = str(currentPage).pad_zeros(2)
-	loadPage(page)
-	pass
-
+	loadPage()
 
 func nextPage() -> void:
 	changePage(currentPage + 1)
 
-
 func prevPage() -> void:
 	changePage(currentPage - 1)
 
-
-func loadPage(page:int) -> void:
-	var pagePath:String = "res://Houston Mission Simulator/pages/page_" + str(page).pad_zeros(2) + ".tscn"
-	var new_node:PackedScene = load(pagePath) as PackedScene
-	PageInstance.queue_free()
-	PageInstance = new_node.instance()
-	$PagePlace.add_child(PageInstance)
+func loadPage() -> void:
+	if page:
+		page.queue_free()
+	
+	page = load("res://Houston Mission Simulator/pages/page_" + str(currentPage).pad_zeros(2) + ".tscn").instance()
+	page.book = self
+	page_place.add_child(page)
