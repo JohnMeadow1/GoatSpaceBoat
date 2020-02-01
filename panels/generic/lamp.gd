@@ -9,12 +9,15 @@ export(COLORS) var color setget set_color
 func _ready():
 	$AnimationPlayer.play("blink")
 	$Light2D.color = colors_array[color]
+	modulate = Color.white *0.70 + colors_array[color]*0.3
 	$AnimationPlayer.playback_speed = frequency
+	
 	
 func set_color(value):
 	color = value
 	if is_inside_tree():
 		$Light2D.color = colors_array[color]
+		modulate = Color.white *0.70 + colors_array[color]*0.3
 
 func set_frequency(value:float):
 	frequency = value

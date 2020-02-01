@@ -25,7 +25,7 @@ script = ExtResource( 3 )
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 2 )
 texture_scale = 2.0
-color = Color( 1, 1, 1, 0.00231293 )
+color = Color( 1, 1, 1, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "blink"
