@@ -55,7 +55,8 @@ const PROBLEMS = [
 	\"Oxygen - correct \\n Temperature - correct \\n !!! MONEY - DANGEROUS LEAK\",
 	\"Main Engineer is gone. \\n !!! MONEY LEAK !!! \\n Reduce expenses\",
 	\"Engine power too low \\n Course deviation 0,3%/h\",
-	\"!!! HEAVY RADIATION !!! \\n Find the source\"
+	\"!!! HEAVY RADIATION !!! \\n Find the source\",
+	\"Engine power - correct \\n !!! MONEY LEAK !!! \\n Reduce expenses\"
 ]
 
 onready var label := $MarginContainer/Label as Label
