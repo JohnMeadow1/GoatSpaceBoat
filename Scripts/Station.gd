@@ -8,6 +8,7 @@ onready var pivot := $StationPivot as Spatial
 
 func _ready() -> void:
 	Singleton.player_node = player
+	pivot.rotate_z(PI/8)
 
 func _physics_process(delta: float) -> void:
 	if Singleton.player_locked:

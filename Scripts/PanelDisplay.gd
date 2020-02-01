@@ -25,6 +25,8 @@ func _ready() -> void:
 	viewport.add_child(panel)
 	viewport.size = panel.get_rect().size
 	$MeshInstance.mesh.surface_get_material(0).albedo_texture = viewport.get_texture()
+	
+	tween.connect("tween_all_completed", self, "anim_end")
 
 func _input_event(camera: Object, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
 	if not focused and not Singleton.player_locked:
@@ -64,3 +66,9 @@ func set_size(s: Vector2):
 	$MeshInstance.mesh.size = size
 	$CollisionShape.shape.extents.x = size.x / 2
 	$CollisionShape.shape.extents.y = size.y / 2
+
+func anim_end():
+	if focused:
+		panel.propagate_call("panel_focus")
+	else:
+		panel.propagate_call("panel_unfocus")
