@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Nodes/Passage.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Models/Pregi.obj" type="ArrayMesh" id=7]
 [ext_resource path="res://Models/Walls_and_floor.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://panels/GeneralSprites/Connecting.png" type="Texture" id=9]
 [ext_resource path="res://panels/CablePanel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Station/Walls_and_floor.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Station/Pregi.jpg" type="Texture" id=12]
@@ -40,6 +41,113 @@ func _process(delta: float) -> void:
 		label.visible_characters += 1
 "
 
+[sub_resource type="GDScript" id=12]
+script/source = "extends Sprite
+
+const TEXT1 = \"Checking subsystems...\"
+const TEXT2 = \"Problems found.\"
+const TEXT3 = \"Connecting to Houston...\"
+const TEXT4 = \"\\\"Houston we have a problem\\\" sent successfully.\"
+const TEXT5 = \"Displaying list of problems. Consult Houston to fix them.\"
+
+const PROBLEMS = [
+	\"This is a problem.\",
+	\"This is a new problem.\"
+]
+
+onready var label := $MarginContainer/Label as Label
+
+var current_problem := -1
+var resolved: bool setget set_resolved
+
+func _on_ControlCube_connected() -> void:
+	label.text = \"Cube inserted\"
+	
+	var seq := TweenSequence.new(get_tree())
+	seq.append_interval(1)
+	set_text(seq, TEXT1)
+	loading(seq)
+	set_text(seq, TEXT2)
+	seq.append_interval(0.5)
+	set_text(seq, TEXT3)
+	seq.append_callback($AnimatedSprite, \"show\")
+	loading(seq)
+	seq.append_callback($AnimatedSprite, \"hide\")
+	set_text(seq, TEXT4)
+	seq.append_interval(0.5)
+	set_text(seq, TEXT5)
+	seq.append_interval(2)
+	seq.append_callback(self, \"next_problem\")
+	
+func set_text(seq: TweenSequence, text: String):
+	seq.append_callback(label, \"set_visible_characters\", [0])
+	seq.append_callback(label, \"set_text\", [text])
+	seq.append(label, \"percent_visible\", 1, 1)
+
+func loading(seq: TweenSequence):
+	seq.append_method(self, \"animate_text\", 0, 4, 0.5)
+	seq.append_method(self, \"animate_text\", 0, 4, 0.5)
+	seq.append_method(self, \"animate_text\", 0, 4, 0.5)
+	seq.append_method(self, \"animate_text\", 0, 4, 0.5)
+	seq.append_method(self, \"animate_text\", 0, 4, 0.5)
+
+func animate_text(value: float):
+	label.visible_characters = label.text.length() - 4 + int(value)
+
+func next_problem():
+	current_problem += 1
+	var seq := TweenSequence.new(get_tree())
+	set_text(seq, problem_text())
+	seq.append_callback(self, \"set_resolved\", [false])
+
+func problem_text():
+	return str(\"Problem \", current_problem + 1, \" of \", PROBLEMS.size(), \"\\n\\n\", PROBLEMS[current_problem])
+
+func set_resolved(r: bool):
+	resolved = r
+	if resolved:
+		label.text = problem_text() + \"\\n\\nStatus: Resolved\"
+	else:
+		label.text = problem_text() + \"\\n\\nStatus: Unresolved\"
+
+func panel_focus():
+	if resolved:
+		next_problem()
+"
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 200, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 400, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 600, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 800, 0, 200, 200 )
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
 [sub_resource type="GDScript" id=9]
 script/source = "extends Carryable
 
@@ -67,12 +175,15 @@ points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1
 [sub_resource type="GDScript" id=3]
 script/source = "extends StaticBody
 
+signal connected()
+
 func _input_event(camera: Object, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		var carry: Spatial = Singleton.player_node.carried
 		if event.pressed and carry:
 			Singleton.player_node.remove_carry()
 			$TargetPivot.add_child(carry)
+			emit_signal(\"connected\")
 "
 
 [sub_resource type="SpatialMaterial" id=4]
@@ -203,6 +314,55 @@ margin_top = 32.0
 margin_right = 1248.0
 margin_bottom = 672.0
 
+[node name="ControlRoom" parent="StationPivot" instance=ExtResource( 5 )]
+transform = Transform( 0.412596, 0.910914, 0, -0.910914, 0.412596, 0, 0, 0, 1, -61.1136, -25.3218, 5.19206 )
+
+[node name="Panel" type="Sprite" parent="StationPivot/ControlRoom"]
+texture = ExtResource( 15 )
+centered = false
+script = SubResource( 12 )
+
+[node name="MarginContainer" type="MarginContainer" parent="StationPivot/ControlRoom/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 48
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StationPivot/ControlRoom/Panel/MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1248.0
+margin_bottom = 672.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color = Color( 0.14902, 1, 0, 1 )
+text = "Please insert Connection Cube"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReferenceRect" type="ReferenceRect" parent="StationPivot/ControlRoom/Panel/MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1248.0
+margin_bottom = 672.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="StationPivot/ControlRoom/Panel"]
+visible = false
+position = Vector2( 619.647, 178.999 )
+z_index = 2
+frames = SubResource( 18 )
+frame = 2
+playing = true
+
 [node name="PanelDisplay" parent="StationPivot" instance=ExtResource( 5 )]
 transform = Transform( 0.97415, 0.225903, 0, -0.225903, 0.97415, 0, 0, 0, 1, 7.7097, -59.1625, 5.19206 )
 
@@ -269,3 +429,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 visible = false
 extents = Vector3( 100, 100, 100 )
 data = SubResource( 7 )
+[connection signal="connected" from="StationPivot/ControlCube" to="StationPivot/ControlRoom/Panel" method="_on_ControlCube_connected"]

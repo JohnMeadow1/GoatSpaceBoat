@@ -9,12 +9,9 @@
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
-var progress_value = 50
 
 func _process(delta: float) -> void:
-	$Knob.value = clamp ($Knob.value, $TextureProgress.min_value , $TextureProgress.max_value)
-	progress_value = lerp(progress_value, $Knob.value, 0.01)
-	$TextureProgress.value = progress_value
+	$TextureProgress.value = 50 + $Knob.value
 "
 
 [node name="Panel" type="Sprite"]
@@ -37,7 +34,6 @@ color = 2
 [node name="lamp3" parent="." instance=ExtResource( 1 )]
 modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 1156.46, 583.078 )
-frequency = 1.0
 color = 3
 
 [node name="cover" type="Sprite" parent="."]
@@ -59,11 +55,7 @@ __meta__ = {
 position = Vector2( 333.707, 497.789 )
 
 [node name="TextureProgress" parent="." instance=ExtResource( 6 )]
-margin_left = 436.0
-margin_top = 430.0
-margin_right = 454.0
-margin_bottom = 587.0
-rect_rotation = 0.102932
-max_value = 157.0
-step = 0.01
-rounded = true
+margin_left = 435.803
+margin_top = 430.587
+margin_right = 453.803
+margin_bottom = 587.587

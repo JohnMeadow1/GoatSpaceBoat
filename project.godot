@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Carryable",
 "language": "GDScript",
 "path": "res://Scripts/Carryable.gd"
+}, {
+"base": "Reference",
+"class": "TweenSequence",
+"language": "GDScript",
+"path": "res://Scripts/tween_sequence.gd"
 } ]
 _global_script_class_icons={
-"Carryable": ""
+"Carryable": "",
+"TweenSequence": ""
 }
 
 [application]
