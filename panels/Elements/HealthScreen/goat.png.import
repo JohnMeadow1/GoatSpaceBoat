@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/goat.png-7840b7cdc85d55062355bd92684484b8.stex"
+path="res://.import/goat.png-97540c9de10d526d5208728af55e3425.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/Elements/HealthScreen/goat.png"
-dest_files=[ "res://.import/goat.png-7840b7cdc85d55062355bd92684484b8.stex" ]
+source_file="res://Panels/Elements/HealthScreen/goat.png"
+dest_files=[ "res://.import/goat.png-97540c9de10d526d5208728af55e3425.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/goat_meeeh_-003.wav-28eea4e8c5c5c4b5ce2ba5be8be37945.sample"
+path="res://.import/goat_meeeh_-003.wav-9baa88f82f3493276eae92542b560dd9.sample"
 
 [deps]
 
-source_file="res://goat/audio/goat_meeeh_-003.wav"
-dest_files=[ "res://.import/goat_meeeh_-003.wav-28eea4e8c5c5c4b5ce2ba5be8be37945.sample" ]
+source_file="res://Goat/audio/goat_meeeh_-003.wav"
+dest_files=[ "res://.import/goat_meeeh_-003.wav-9baa88f82f3493276eae92542b560dd9.sample" ]
 
 [params]
 

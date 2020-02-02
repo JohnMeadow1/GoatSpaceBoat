@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/clock1(1).png-b15b091c788a5b71ca441ffbdba6bf53.stex"
+path="res://.import/clock1(1).png-57ee685b1a143c57d5a5791377b653b7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/Elements/Knob/clock1(1).png"
-dest_files=[ "res://.import/clock1(1).png-b15b091c788a5b71ca441ffbdba6bf53.stex" ]
+source_file="res://Panels/Elements/Knob/clock1(1).png"
+dest_files=[ "res://.import/clock1(1).png-57ee685b1a143c57d5a5791377b653b7.stex" ]
 
 [params]
 

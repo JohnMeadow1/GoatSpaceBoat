@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/skala.png-c177529449832fee62b19b35303dbafe.stex"
+path="res://.import/skala.png-93eba5967f3028c2b9e17b0c5c58793f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/Elements/Knob/skala.png"
-dest_files=[ "res://.import/skala.png-c177529449832fee62b19b35303dbafe.stex" ]
+source_file="res://Panels/Elements/Knob/skala.png"
+dest_files=[ "res://.import/skala.png-93eba5967f3028c2b9e17b0c5c58793f.stex" ]
 
 [params]
 

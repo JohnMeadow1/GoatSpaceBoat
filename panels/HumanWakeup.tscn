@@ -88,6 +88,7 @@ value = -100.0
 [node name="Knob2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 904, 584 )
 value = 600.0
+speed_scale = 3.0
 
 [node name="Knob3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1088, 584 )

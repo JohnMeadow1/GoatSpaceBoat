@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/under.png-f74247d393dcfa75a4b80951f3c33247.stex"
+path="res://.import/under.png-cc9d127e0dad696845a6193cfc6e6b00.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/Elements/Temperature/under.png"
-dest_files=[ "res://.import/under.png-f74247d393dcfa75a4b80951f3c33247.stex" ]
+source_file="res://Panels/Elements/Temperature/under.png"
+dest_files=[ "res://.import/under.png-cc9d127e0dad696845a6193cfc6e6b00.stex" ]
 
 [params]
 
