@@ -1,0 +1,80 @@
+﻿Directives for Houston:
+1. The politician has to alive no matter cost.
+2. Procedures are the most important.
+3. Robots exist to execute procedures.
+
+
+A
+B
+C
+* Control room - is on the 1st ring. In the control room, maintenance robots could check current problems to solve.
+* Core problems - list of potential Reactor’s Core Problems:
+1. Reactor exploded - it is impossible, check again.
+2. Reactor melted - cool it with a bucket of water.
+3. GOAT IS IN REACTOR - call lawyers to start allegations against guilty part. Before it, remove GOAT from the reactor and from a spaceship (garbage dump or toilet).
+* Cutting costs - check Reducing Expenses.
+D
+E
+   * Engine power - if it is too low follow the procedure:
+0. Execute points starting from point 1. After every point check if the engine’s power is back to the norm.
+1. Add more Oxygen to Fuel Mixture. The main consumers of Oxygen are hibernated People. Terminate one of them in order to gain a proper amount of Oxygen. THIS IS CRUEL, I KNOW! THEY MADE ME TO WRITE THIS! PLEASE, IF YOU ARE READING THIS HELP ME. OH GOD, THEY ARE COMING TO TERMINATE MY CONTRACT. NO NO NO NO
+2. Check reactor - if any problems occur check: Core problems
+
+      * Engineer is gone - Houston, check your email.
+F
+      * Fahrenheit to Celsius - formula: T(C) = (T(F) - 32) x 5/9
+      * Fuel mixture - procedure for changing proportions:
+1. Remove cover.
+2. Turn off 3 of 5 Helium-3 pipelines. Check: Rogue Engineer Incident for context.
+G
+         * GOAT - waking up procedure:
+1. Remove cover.
+2. Set your consents to ensure that you really want to WAKE UP A GOAT - check Robots’ Regulations
+3. Set bars for values presented on pictures above.
+H
+I
+J
+K
+L
+M
+            * Mission Summary - after solving all problems robot should start AUTODESTRUCTION procedure to save money. A robot is ordered to throw itself out of the ship (through Garbage Dump or Toilet).
+            * MONEY LEAK - the highest priority danger!!! If occurs, a robot has to wake up Main Engineer. Main Engineer has to immediately block a leak. In the case of Main Engineer’s death: check Reducing Expenses.
+Uncontrolled MONEY LEAK could be a deadly danger for the company and crew!!!
+N
+O
+               * Oxygen - 
+P
+               * Problems - every problem should be consulted with Houston before any other actions.
+Q
+R
+               * Red lamp - from issue reported on YIRA: “/QA: Sometimes I need to swap red lamp with green or blue in order to repair this progress bar. /Developer: Weird, mine is working properly.”
+               * Reducing Expenses - someone will lose his job, but now you need to use this procedure:
+0. Execute points starting from point 1. After every point check if expenses still need to be reduced.
+1. Unfreeze all animals - they are not so important as money.
+2. Change fuel mixture - Helium-3 is expensive, change proportion in the mixture to save on Helium-3. An access panel is placed in Machine Room.
+3. Terminate contracts on total amount 10 000 $. These people will lose their access to oxygen, pressure and life-support systems. Protect the Politician (the highest priority)
+4. Kill the crew from Houston and abort the mission. Start new projects and find new founders.
+               * Robots’ Regulations - paragraph from regulations: “Maintenance robots working with a hibernated crew should follow procedures. It means that a robot is awarned about risk and consequences linked with unfreezing crew members and animals. In case of an accident, a robot will take full legal and financial responsibility. Because of that, the company needs to have full rights to use the robot’s personal data for any purpose. Marketing consent is not necessary.
+               * Rogue Engineer Incident - in 2020 captain John Weak received multiple reports about an engineer, who broke procedures by hacking Fuel Mixture’s panel. Rogue Engineer creat short circuit by connecting corners (shape similar to X) in cable panel. It gave him access to changing fuel mixture proportions. Captain Weak decided to terminate a contract with Rogue Engineer. The dead body of engineer still orbits the ship somewhere in space because without engineer Captain Weak’s spaceship stuck in the middle of nowhere forever. 
+S
+T
+U
+V
+W
+                  * Waking up a GOAT - check GOAT.
+                  * Waking up hibernated crew - procedure:
+1. Rise temperature to 68 Fahrenheit degree.
+2. Rise the level of Oxygen - rise it to the moment when the green lamp on top of the oxygen bar starts to blink.
+3. Lower Coolant level to a minimum. 
+X
+Y
+Z
+
+
+
+
+Mail from Main Engineer (in Houston’s inbox):
+“Bye suckers!
+Competitive Company gave me a better offer than your pity, shitty wubba lubba dub dub project. Their HRs even offer me fresh fruits  >:)
+PS: don’t look for Junior Engineer, I took him with me. We are passionate lovers. Forever <3
+Hasta la vista babies!”
