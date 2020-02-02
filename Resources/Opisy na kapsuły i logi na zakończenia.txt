@@ -1,0 +1,35 @@
+﻿Opisy na kapsuły:
+Tych dwóch musi być:
+* 2k$, Main Engineer, Contract. Special attributes: tricky one
+* 15k$, Politician, Public Service. Special attributes: useless
+
+
+Reszta dowolnie:
+* 200$, Janitor, Internship. Special attributes: medicine student.
+* 100$, Cook, Contract. Special attributes: accepts food as salary.
+* 800$, Barista, Contract. Special attributes: never sleeps.
+* 1.5k$, Secretary, Part-time. Special attributes: needs Wi-Fi.
+* 2k$, Physician, Part-time. Special attributes: messy hair.
+* 3k$, Senior Specialist, Full-time. Special attributes: CEO’s nephew.
+* 1k$, Navigator, Voluntary. Special attributes: dead for two courses.
+* 2k$, Geisha, Part-time. Special attributes: serial killer.
+* 1.5k$, Nun, Full-time. Special attributes: alcoholic.
+* 500$, Captain, Commission. Special attributes: cheap and replaceable.
+* 1k$, Child, Part-time. Special attributes: Looks sweet and gives hope.
+* 1k$, Security, Internship. Special attributes: pregnant.
+* 800$, Goat-shepherd, Full-time. Special attributes: a man of steel.
+* 2k$, Scientist, Contract. Special attributes: loves cosmic space.
+* 3k$, Cyberspace Cowboy, Contract. Special attributes: faster than light.
+* 0$, Millionaire, Passenger. Special attributes: loves jam.
+
+
+Logs for end:
+
+
+Politician died
+“Houston lost. They were fired and accused of politician’s death and financial abuses.
+Robot won. Together with the crew, the robot built a colony on Alpha Centauri. They lived happily until they died because of radiation caused by the robot .”
+
+
+People and robot died
+“Robot lost. Houston won. They get a massive salary raise, promotion - CEO of Company and Politician also. Politician built a colony on Alpha Centauri, where he lived and ruled many happy years.”
