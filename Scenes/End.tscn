@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Label
+
+func _ready() -> void:
+	if Singleton.bad_ending:
+		text = \"Houston lost. They were fired and accused of politician’s death and financial abuses. Robot won. Together with the crew, the robot built a colony on Alpha Centauri. They lived happily until they died because of radiation caused by the robot .\"
+	else:
+		text = \"Robot lost. Houston won. They get a massive salary raise, promotion - CEO of Company and Politician also. Politician built a colony on Alpha Centauri, where he lived and ruled many happy years.\"
+"
+
+[node name="Control" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 100
+custom_constants/margin_top = 100
+custom_constants/margin_left = 100
+custom_constants/margin_bottom = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer"]
+margin_left = 100.0
+margin_top = 293.0
+margin_right = 924.0
+margin_bottom = 307.0
+align = 1
+valign = 1
+autowrap = true
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
