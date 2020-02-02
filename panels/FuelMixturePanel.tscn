@@ -1,0 +1,323 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=1]
+[ext_resource path="res://panels/Elements/Socket.png" type="Texture" id=2]
+[ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://panels/Elements/Switch/switch.tscn" type="PackedScene" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+var target: Control
+var real_mouse: Vector2
+
+func _process(delta: float) -> void:
+	update()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		real_mouse = event.position
+	
+	if event is InputEventMouseButton:
+		if not event.pressed:
+			Singleton.set_deferred(\"cable_button\", null)
+		
+		if not get_rect().has_point(event.position):
+			return
+		
+		if event.pressed:
+			Singleton.cable_button = self
+			target = null
+		elif not event.pressed and Singleton.cable_button:
+			Singleton.cable_button.target = self
+
+func _draw() -> void:
+	if target:
+		draw_line(rect_size / 2, target.rect_position - rect_position + target.rect_size / 2, Color.white, 3)
+		return
+	
+	if Singleton.cable_button == self:
+		draw_line(rect_size / 2, real_mouse - rect_position, Color.white, 3)
+"
+
+[node name="CablePanel" type="Sprite"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="TextureButton" type="TextureRect" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 946.49
+margin_top = 200.0
+margin_right = 978.49
+margin_bottom = 232.0
+texture = ExtResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton2" type="TextureRect" parent="."]
+modulate = Color( 0.054902, 1, 0, 1 )
+margin_left = 945.891
+margin_top = 256.281
+margin_right = 977.891
+margin_bottom = 288.281
+texture = ExtResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton3" type="TextureRect" parent="."]
+modulate = Color( 1, 0, 0.960784, 1 )
+margin_left = 944.0
+margin_top = 321.827
+margin_right = 976.0
+margin_bottom = 353.827
+texture = ExtResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton6" type="TextureRect" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 1179.05
+margin_top = 263.025
+margin_right = 1211.05
+margin_bottom = 295.025
+texture = ExtResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton5" type="TextureRect" parent="."]
+modulate = Color( 0.054902, 1, 0, 1 )
+margin_left = 1178.45
+margin_top = 319.306
+margin_right = 1210.45
+margin_bottom = 351.306
+texture = ExtResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton4" type="TextureRect" parent="."]
+modulate = Color( 1, 0, 0.960784, 1 )
+margin_left = 1176.56
+margin_top = 384.852
+margin_right = 1208.56
+margin_bottom = 416.852
+texture = ExtResource( 2 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="switch" parent="." instance=ExtResource( 4 )]
+margin_left = 152.0
+margin_top = 211.0
+margin_right = 215.0
+margin_bottom = 321.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 251.0
+margin_right = 200.0
+margin_bottom = 265.0
+text = "Helium-3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 160, 161.5 )
+
+[node name="switch2" parent="." instance=ExtResource( 4 )]
+margin_left = 280.0
+margin_top = 211.0
+margin_right = 343.0
+margin_bottom = 321.0
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 251.0
+margin_right = 328.0
+margin_bottom = 265.0
+text = "Helium-3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp2" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 288, 163 )
+
+[node name="switch3" parent="." instance=ExtResource( 4 )]
+margin_left = 408.0
+margin_top = 211.0
+margin_right = 471.0
+margin_bottom = 321.0
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 384.0
+margin_top = 251.0
+margin_right = 456.0
+margin_bottom = 265.0
+text = "Helium-3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp3" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 416, 161.5 )
+
+[node name="switch4" parent="." instance=ExtResource( 4 )]
+margin_left = 536.0
+margin_top = 211.0
+margin_right = 599.0
+margin_bottom = 321.0
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 512.0
+margin_top = 251.0
+margin_right = 584.0
+margin_bottom = 265.0
+text = "Helium-3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp4" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 544, 163 )
+
+[node name="switch5" parent="." instance=ExtResource( 4 )]
+margin_left = 664.0
+margin_top = 211.0
+margin_right = 727.0
+margin_bottom = 321.0
+
+[node name="Label5" type="Label" parent="."]
+margin_left = 640.0
+margin_top = 251.0
+margin_right = 712.0
+margin_bottom = 265.0
+text = "Helium-3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp5" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 672, 161.5 )
+
+[node name="switch10" parent="." instance=ExtResource( 4 )]
+margin_left = 152.0
+margin_top = 404.5
+margin_right = 215.0
+margin_bottom = 514.5
+
+[node name="Label10" type="Label" parent="."]
+margin_left = 128.0
+margin_top = 444.5
+margin_right = 200.0
+margin_bottom = 458.5
+text = "Oxygen"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp10" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 160, 355 )
+
+[node name="switch9" parent="." instance=ExtResource( 4 )]
+margin_left = 280.0
+margin_top = 404.5
+margin_right = 343.0
+margin_bottom = 514.5
+
+[node name="Label9" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 444.5
+margin_right = 328.0
+margin_bottom = 458.5
+text = "Oxygen"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp9" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 288, 356.5 )
+
+[node name="switch8" parent="." instance=ExtResource( 4 )]
+margin_left = 408.0
+margin_top = 404.5
+margin_right = 471.0
+margin_bottom = 514.5
+
+[node name="Label8" type="Label" parent="."]
+margin_left = 384.0
+margin_top = 444.5
+margin_right = 456.0
+margin_bottom = 458.5
+text = "Uranium"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp8" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 416, 355 )
+
+[node name="switch7" parent="." instance=ExtResource( 4 )]
+margin_left = 536.0
+margin_top = 404.5
+margin_right = 599.0
+margin_bottom = 514.5
+
+[node name="Label7" type="Label" parent="."]
+margin_left = 512.0
+margin_top = 444.5
+margin_right = 584.0
+margin_bottom = 458.5
+text = "Nitrogen"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp7" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 544, 356.5 )
+
+[node name="switch6" parent="." instance=ExtResource( 4 )]
+margin_left = 664.0
+margin_top = 404.5
+margin_right = 727.0
+margin_bottom = 514.5
+
+[node name="Label6" type="Label" parent="."]
+margin_left = 640.0
+margin_top = 444.5
+margin_right = 716.0
+margin_bottom = 475.5
+text = "Matricaria 
+Chamomilla"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lamp6" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.486275, 1, 0.301961, 1 )
+position = Vector2( 672, 355 )
