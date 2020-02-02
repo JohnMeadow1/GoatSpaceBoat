@@ -7,6 +7,7 @@
 A
 B
 C
+* Code to the Reactor’s Door - code is presented in the picture above. Robot has to delete code from memory right after using it.
 * Control room - is on the 1st ring. In the control room, maintenance robots could check current problems to solve.
 * Core problems - list of potential Reactor’s Core Problems:
 1. Reactor exploded - it is impossible, check again.
