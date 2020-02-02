@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/clock1(1).png-b15b091c788a5b71ca441ffbdba6bf53.stex"
+path="res://.import/TerminateContract_fin.png-5d5a826e121ff5fa3346c30a42c0fe8c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/Elements/Knob/clock1(1).png"
-dest_files=[ "res://.import/clock1(1).png-b15b091c788a5b71ca441ffbdba6bf53.stex" ]
+source_file="res://panels/Elements/Button/TerminateContract_fin.png"
+dest_files=[ "res://.import/TerminateContract_fin.png-5d5a826e121ff5fa3346c30a42c0fe8c.stex" ]
 
 [params]
 

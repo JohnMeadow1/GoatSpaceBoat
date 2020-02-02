@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/clock2.png-36a0525a9bf29e0fd7b535a993e96d64.stex"
+path="res://.import/clock2.png-06a48cb780a2527da1298e944b882056.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/Elements/Gauge/clock2.png"
-dest_files=[ "res://.import/clock2.png-36a0525a9bf29e0fd7b535a993e96d64.stex" ]
+source_file="res://panels/Elements/Gauge/clock2.png"
+dest_files=[ "res://.import/clock2.png-06a48cb780a2527da1298e944b882056.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/over.png-8892443f4890d200ed621030359d9122.stex"
+path="res://.import/over.png-910d1d322fd205e6920899cedf1ec5ef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/Elements/Temperature/over.png"
-dest_files=[ "res://.import/over.png-8892443f4890d200ed621030359d9122.stex" ]
+source_file="res://panels/Elements/Temperature/over.png"
+dest_files=[ "res://.import/over.png-910d1d322fd205e6920899cedf1ec5ef.stex" ]
 
 [params]
 

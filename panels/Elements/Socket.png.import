@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Socket.png-c8e96e32751209c510a3ac6950644a4f.stex"
+path="res://.import/Socket.png-42a29820f796e4626c2688ba911c742f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/Elements/Socket.png"
-dest_files=[ "res://.import/Socket.png-c8e96e32751209c510a3ac6950644a4f.stex" ]
+source_file="res://panels/Elements/Socket.png"
+dest_files=[ "res://.import/Socket.png-42a29820f796e4626c2688ba911c742f.stex" ]
 
 [params]
 

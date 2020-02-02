@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/eye_texture.jpg-953382162b57c5cb55e6aad2716099e9.s3tc.stex"
-path.etc2="res://.import/eye_texture.jpg-953382162b57c5cb55e6aad2716099e9.etc2.stex"
+path.s3tc="res://.import/eye_texture.jpg-24a27d2c944594479bf73b5427f4f504.s3tc.stex"
+path.etc2="res://.import/eye_texture.jpg-24a27d2c944594479bf73b5427f4f504.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Goat/eye/eye_texture.jpg"
-dest_files=[ "res://.import/eye_texture.jpg-953382162b57c5cb55e6aad2716099e9.s3tc.stex", "res://.import/eye_texture.jpg-953382162b57c5cb55e6aad2716099e9.etc2.stex" ]
+source_file="res://goat/eye/eye_texture.jpg"
+dest_files=[ "res://.import/eye_texture.jpg-24a27d2c944594479bf73b5427f4f504.s3tc.stex", "res://.import/eye_texture.jpg-24a27d2c944594479bf73b5427f4f504.etc2.stex" ]
 
 [params]
 

@@ -10,7 +10,7 @@
 [ext_resource path="res://Resources/scroll.shader" type="Shader" id=8]
 [ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=10]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
 
 var fall: float
@@ -51,7 +51,7 @@ light_mask = 3073
 z_index = 1
 texture = ExtResource( 3 )
 centered = false
-script = SubResource( 4 )
+script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 317, 177 )
@@ -148,45 +148,45 @@ frequency = 2.0
 color = 1
 
 [node name="Label" type="Label" parent="."]
-margin_left = 133.46
-margin_top = 325.674
-margin_right = 210.46
-margin_bottom = 343.674
+margin_left = 133.0
+margin_top = 326.0
+margin_right = 1200.0
+margin_bottom = 344.0
 custom_fonts/font = SubResource( 3 )
-text = "Zgoda1"
+text = "I am fully awarned about deadly danger caused by unfreezing the GOAT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 133.46
-margin_top = 396.089
-margin_right = 210.46
-margin_bottom = 414.089
+margin_left = 133.0
+margin_top = 396.0
+margin_right = 1224.0
+margin_bottom = 414.0
 custom_fonts/font = SubResource( 3 )
-text = "Zgoda2"
+text = "I agree to handle full legal and financial responsibility for any damage caused by GOAT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="."]
-margin_left = 134.234
-margin_top = 454.896
-margin_right = 211.234
-margin_bottom = 472.896
+margin_left = 134.0
+margin_top = 455.0
+margin_right = 1192.0
+margin_bottom = 473.0
 custom_fonts/font = SubResource( 3 )
-text = "Zgoda3"
+text = "I agree for sending me marketing and advertisement messages"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label4" type="Label" parent="."]
-margin_left = 140.424
-margin_top = 518.346
-margin_right = 217.424
-margin_bottom = 536.346
+margin_left = 140.0
+margin_top = 518.0
+margin_right = 1208.0
+margin_bottom = 536.0
 custom_fonts/font = SubResource( 3 )
-text = "Zgoda4"
+text = "I consent for transfer all right to use my personal data onto Company"
 __meta__ = {
 "_edit_use_anchors_": false
 }

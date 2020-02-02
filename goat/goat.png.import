@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/goat.png-e0439a7be32fba5c538d574d0c3a9b07.s3tc.stex"
-path.etc2="res://.import/goat.png-e0439a7be32fba5c538d574d0c3a9b07.etc2.stex"
+path.s3tc="res://.import/goat.png-593ad113a3b27609cfc997db03cbeed8.s3tc.stex"
+path.etc2="res://.import/goat.png-593ad113a3b27609cfc997db03cbeed8.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Goat/goat.png"
-dest_files=[ "res://.import/goat.png-e0439a7be32fba5c538d574d0c3a9b07.s3tc.stex", "res://.import/goat.png-e0439a7be32fba5c538d574d0c3a9b07.etc2.stex" ]
+source_file="res://goat/goat.png"
+dest_files=[ "res://.import/goat.png-593ad113a3b27609cfc997db03cbeed8.s3tc.stex", "res://.import/goat.png-593ad113a3b27609cfc997db03cbeed8.etc2.stex" ]
 
 [params]
 

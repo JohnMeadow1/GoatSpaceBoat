@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pop-up base.png-ba6aaa6305a451e09f537f184d8c0552.stex"
+path="res://.import/pop-up base.png-af1225194dbf7a5e9f8e6827eea3111d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/GeneralSprites/pop-up base.png"
-dest_files=[ "res://.import/pop-up base.png-ba6aaa6305a451e09f537f184d8c0552.stex" ]
+source_file="res://panels/GeneralSprites/pop-up base.png"
+dest_files=[ "res://.import/pop-up base.png-af1225194dbf7a5e9f8e6827eea3111d.stex" ]
 
 [params]
 
