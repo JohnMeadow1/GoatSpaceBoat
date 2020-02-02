@@ -3,14 +3,14 @@ extends Control
 onready var page_place := $PagePlace
 var page: Control
 
-export(int) var currentPage:int = 1
-export(int) var maxPage:int = 3
+export(int) var currentPage:int = 0
+export(int) var maxPage:int = 19
 
 func _ready():
 	loadPage()
 
 func changePage(page:int) -> void:
-	if page > maxPage || page < 1:
+	if page > maxPage || page < 0:
 		return
 	
 	currentPage = page
