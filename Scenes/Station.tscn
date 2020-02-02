@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -11,14 +11,16 @@
 [ext_resource path="res://Sprites/Connecting.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/Capsule.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Station/Walls_and_floor.png" type="Texture" id=11]
+[ext_resource path="res://goat/goat.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Models/InżynierNaKiju.PNG" type="Texture" id=13]
 [ext_resource path="res://Resources/infopanel_font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://panels/GeneralSprites/panel_base.png" type="Texture" id=15]
 [ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://panels/HumanWakeup.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Models/CapsuleTexture.JPG" type="Texture" id=18]
+[ext_resource path="res://panels/GoatPanel02.tscn" type="PackedScene" id=19]
 
-[sub_resource type="GDScript" id=23]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Camera
 
 onready var initialt: Transform
@@ -27,11 +29,10 @@ func _ready() -> void:
 	initialt = global_transform
 "
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 11 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Wywal"
+[sub_resource type="Animation" id=3]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -70,10 +71,10 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 18 )
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Node
 
 func _ready() -> void:
@@ -91,12 +92,27 @@ func on_event(event: String):
 		seq.append(camera, \"global_transform:origin\", camera.initialt.origin, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		seq.parallel().append(camera, \"global_transform:basis\", camera.initialt.basis, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		seq.append_callback(Singleton, \"set\", [\"player_locked\", false])
+	
+	elif event == \"goat_up\":
+		var camera := $\"../../../Camera\" as Camera
+		
+		var seq := TweenSequence.new(get_tree())
+		seq.append(camera, \"global_transform:origin\", $\"../Capsule2/CameraPoint2\".global_transform.origin, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.parallel().append(camera, \"global_transform:basis\", $\"../Capsule2/CameraPoint2\".global_transform.basis, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append_interval(1)
+		seq.append_callback($\"../Goat\", \"set\", [\"visible\", true])
+		seq.append_callback($\"../Goat\", \"set\", [\"timer\", 0.5])
+		seq.append_callback($\"../Capsule2\", \"set\", [\"open\", true])
+		seq.append_interval(2)
+		seq.append(camera, \"global_transform:origin\", camera.initialt.origin, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.parallel().append(camera, \"global_transform:basis\", camera.initialt.basis, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append_callback(Singleton, \"set\", [\"player_locked\", false])
 "
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_texture = ExtResource( 11 )
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Sprite
 
 onready var label := $MarginContainer/Label as Label
@@ -115,7 +131,8 @@ func _process(delta: float) -> void:
 		label.visible_characters += 1
 "
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=8]
+resource_name = "Problems"
 script/source = "extends Sprite
 
 const TEXT1 = \"Checking subsystems...\"
@@ -197,42 +214,44 @@ func panel_focus():
 func on_event(event: String):
 	if event == \"wake_up\":
 		self.resolved = true
+	elif event == \"goat_up\":
+		self.resolved = true
 "
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 9 )
-region = Rect2( 200, 0, 200, 200 )
+region = Rect2( 0, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 9 )
-region = Rect2( 400, 0, 200, 200 )
+region = Rect2( 200, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 9 )
-region = Rect2( 600, 0, 200, 200 )
+region = Rect2( 400, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 9 )
+region = Rect2( 600, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 9 )
 region = Rect2( 800, 0, 200, 200 )
 
-[sub_resource type="SpriteFrames" id=13]
+[sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="GDScript" id=14]
+[sub_resource type="GDScript" id=15]
 script/source = "extends Carryable
 
 func _physics_process(delta: float) -> void:
@@ -243,7 +262,7 @@ func on_carry():
 	can_carry = false
 "
 
-[sub_resource type="SpatialMaterial" id=15]
+[sub_resource type="SpatialMaterial" id=16]
 albedo_color = Color( 0.968627, 1, 0, 1 )
 emission_enabled = true
 emission = Color( 0.992157, 1, 0, 1 )
@@ -251,13 +270,13 @@ emission_energy = 0.5
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=16]
-material = SubResource( 15 )
+[sub_resource type="CubeMesh" id=17]
+material = SubResource( 16 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="BoxShape" id=17]
+[sub_resource type="BoxShape" id=18]
 
-[sub_resource type="GDScript" id=18]
+[sub_resource type="GDScript" id=19]
 script/source = "extends StaticBody
 
 signal connected()
@@ -271,18 +290,28 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			emit_signal(\"connected\")
 "
 
-[sub_resource type="SpatialMaterial" id=19]
+[sub_resource type="SpatialMaterial" id=20]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=20]
-material = SubResource( 19 )
+[sub_resource type="CubeMesh" id=21]
+material = SubResource( 20 )
 
-[sub_resource type="ConvexPolygonShape" id=21]
+[sub_resource type="ConvexPolygonShape" id=22]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=22]
+[sub_resource type="DynamicFont" id=23]
 size = 100
 font_data = ExtResource( 16 )
+
+[sub_resource type="GIProbeData" id=24]
+bounds = AABB( -100, -100, -100, 200, 200, 200 )
+cell_size = 1.5625
+to_cell_xform = Transform( 0.64, 0, 0, 0, 0.64, 0, 0, 0, 0.64, 64, 64, 64 )
+dynamic_data = PoolIntArray( 0, 8, 128, 128, 128, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 8355711, 0 )
+dynamic_range = 4
+bias = 1.5
+normal_bias = 0.0
+propagation = 0.7
 
 [node name="Station" type="Spatial"]
 script = ExtResource( 2 )
@@ -294,13 +323,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -75.8038, 19.8004 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.99963, 0.0095973, -0.02546, 0, 0.935726, 0.352727, 0.0272088, -0.352597, 0.93538, -0.902785, -65.246, 36.7471 )
-script = SubResource( 23 )
+script = SubResource( 1 )
 
 [node name="StationPivot" type="Spatial" parent="."]
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 1 )
+material_override = SubResource( 2 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -311,7 +340,7 @@ material/5 = null
 
 [node name="Station2" type="MeshInstance" parent="StationPivot"]
 transform = Transform( -4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, -42.5 )
-material_override = SubResource( 1 )
+material_override = SubResource( 2 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -329,7 +358,7 @@ pixel_size = 0.02
 texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StationPivot/Station2/Spatial/Sprite3D"]
-anims/Wywal = SubResource( 2 )
+anims/Wywal = SubResource( 3 )
 
 [node name="CameraPoint" type="Position3D" parent="StationPivot/Station2/Spatial"]
 transform = Transform( 0.777146, 0.173464, -0.604942, 0, 0.961262, 0.275637, 0.62932, -0.21421, 0.747041, -6, 10, 10.414 )
@@ -339,7 +368,7 @@ transform = Transform( 0.0518112, -0.721683, 0.690282, 0.996248, 0.0853344, 0.01
 
 [node name="Floor-C_content-1" type="MeshInstance" parent="StationPivot/Station2"]
 transform = Transform( 1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, 0, 38.406, 0 )
-material_override = SubResource( 3 )
+material_override = SubResource( 4 )
 mesh = ExtResource( 3 )
 material/0 = null
 material/1 = null
@@ -576,12 +605,28 @@ transform = Transform( -0.666627, -0.744698, -0.0321593, -0.0469246, -0.00113154
 [node name="CoveredPanel" parent="StationPivot/Station2/PanelDisplay" instance=ExtResource( 4 )]
 underpanel = ExtResource( 17 )
 
+[node name="PanelDisplay2" parent="StationPivot/Station2" instance=ExtResource( 5 )]
+transform = Transform( -0.026151, 0.999141, -0.0321576, 0.0333536, 0.0330228, 0.998898, 0.999102, 0.0250496, -0.0341886, -62.4433, 0.864895, -4.42019 )
+
+[node name="CoveredPanel" parent="StationPivot/Station2/PanelDisplay2" instance=ExtResource( 4 )]
+underpanel = ExtResource( 19 )
+
 [node name="CapsuleEvents" type="Node" parent="StationPivot/Station2"]
-script = SubResource( 4 )
+script = SubResource( 5 )
+
+[node name="Capsule2" parent="StationPivot/Station2" instance=ExtResource( 10 )]
+transform = Transform( 3.12215e-06, 0.993238, 0.116099, 1, -3.14315e-06, -2.16227e-09, 3.6277e-07, 0.116099, -0.993238, -75.878, 1.76682, -4.0053 )
+
+[node name="CameraPoint2" type="Camera" parent="StationPivot/Station2/Capsule2"]
+transform = Transform( -0.0497506, 0.186171, 0.981257, -0.0175518, 0.982159, -0.187232, -0.998607, -0.0265378, -0.0455954, 3.04742, 1.46324, -0.0242639 )
+
+[node name="Goat" parent="StationPivot/Station2" instance=ExtResource( 12 )]
+transform = Transform( 0.09901, 0.973702, -0.205187, -0.0501395, -0.201057, -0.978296, -0.993822, 0.107149, 0.0289143, -76.077, 1.29265, -3.85943 )
+visible = false
 
 [node name="Station3" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -85 )
-material_override = SubResource( 1 )
+material_override = SubResource( 2 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
@@ -592,7 +637,7 @@ material/5 = null
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 5 )
+material_override = SubResource( 6 )
 mesh = ExtResource( 7 )
 material/0 = null
 material/1 = null
@@ -623,7 +668,7 @@ transform = Transform( 0.936164, 0.351564, 0, -0.351564, 0.936164, 0, 0, 0, 1, -
 [node name="Panel" type="Sprite" parent="StationPivot/Intro"]
 texture = ExtResource( 15 )
 centered = false
-script = SubResource( 6 )
+script = SubResource( 7 )
 
 [node name="MarginContainer" type="MarginContainer" parent="StationPivot/Intro/Panel"]
 anchor_right = 1.0
@@ -664,7 +709,7 @@ transform = Transform( 0.412596, 0.910914, 0, -0.910914, 0.412596, 0, 0, 0, 1, -
 [node name="Panel" type="Sprite" parent="StationPivot/ControlRoom"]
 texture = ExtResource( 15 )
 centered = false
-script = SubResource( 7 )
+script = SubResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="StationPivot/ControlRoom/Panel"]
 anchor_right = 1.0
@@ -703,7 +748,8 @@ margin_bottom = 672.0
 visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
-frames = SubResource( 13 )
+frames = SubResource( 14 )
+frame = 4
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
@@ -720,16 +766,16 @@ transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 77.7107
 
 [node name="ComCube" type="StaticBody" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2416, -76.0216, 9.41644 )
-script = SubResource( 14 )
+script = SubResource( 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-mesh = SubResource( 16 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-shape = SubResource( 17 )
+shape = SubResource( 18 )
 
 [node name="OmniLight" type="OmniLight" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
@@ -737,14 +783,14 @@ light_color = Color( 1, 0.913725, 0, 1 )
 
 [node name="ControlCube" type="StaticBody" parent="StationPivot"]
 transform = Transform( 0.309863, 0.950781, 0, -0.950781, 0.309863, 0, 0, 0, 1, -70.0118, -29.3606, 7.61171 )
-script = SubResource( 18 )
+script = SubResource( 19 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/ControlCube"]
-mesh = SubResource( 20 )
+mesh = SubResource( 21 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/ControlCube"]
-shape = SubResource( 21 )
+shape = SubResource( 22 )
 
 [node name="TargetPivot" type="Position3D" parent="StationPivot/ControlCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
@@ -766,7 +812,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StationPivot/Signs/PanelDisplay/ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 22 )
+custom_fonts/font = SubResource( 23 )
 text = "Control Room"
 align = 1
 valign = 1
@@ -775,6 +821,6 @@ __meta__ = {
 }
 
 [node name="GIProbe" type="GIProbe" parent="."]
-visible = false
 extents = Vector3( 100, 100, 100 )
+data = SubResource( 24 )
 [connection signal="connected" from="StationPivot/ControlCube" to="StationPivot/ControlRoom/Panel" method="_on_ControlCube_connected"]

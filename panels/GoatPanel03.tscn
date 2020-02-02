@@ -1,60 +1,61 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/coolfx.tres" type="Material" id=2]
 [ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=3]
 [ext_resource path="res://Panels/Elements/HealthScreen/goat.png" type="Texture" id=4]
 [ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=5]
-[ext_resource path="res://panels/Elements/Progress/FireProgressBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://panels/Elements/Progress/OxygenProgressBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Panels/Elements/HealthScreen/health_screen.png" type="Texture" id=7]
 [ext_resource path="res://Resources/scroll.shader" type="Shader" id=8]
-[ext_resource path="res://panels/Elements/Progress/BloodProgressBar.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Resources/asym.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=10]
 [ext_resource path="res://Panels/Elements/Gauge/Gauge.tscn" type="PackedScene" id=11]
-[ext_resource path="res://panels/Elements/Progress/SulfurProgressBar.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/DebugButton.gd" type="Script" id=12]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
-var progress_setting = 0.0
-var progress_value = 50
-export var delay_setting = 2.0
-var delay = 0.0
-var previous_knob = 0.0
-var modified_value = 0.0
 
-var sound_played = 0
+var ok := [false, false, false]
+
+var coolant: bool
+var done: bool
+
+signal finished()
+
+func _ready():
+	$Knob1.connect(\"value_changed\", self, \"knob1_changed\")
+	$Knob2.connect(\"value_changed\", self, \"knob2_changed\")
+	$Knob3.connect(\"value_changed\", self, \"knob3_changed\")
 
 func _process(delta: float) -> void:
-	$Knob.value = clamp ($Knob.value, $TextureProgress.min_value , $TextureProgress.max_value)
-	if $Knob.value != previous_knob:
-		previous_knob = $Knob.value
-		delay = delay_setting
-	else:
-		delay -= delta
-		if delay <= 0:
-			progress_value = lerp(progress_value, $Knob.value, 0.01)
-			$TextureProgress.value = progress_value
-			$TextureProgress.tint_progress = Color(progress_value/$TextureProgress.max_value,0,1-progress_value/$TextureProgress.max_value)
-			delay = 0
-	progress_setting = lerp(progress_setting, $Knob.value, 0.1)
-	$TextureProgress/overlay.value = progress_setting
+	if not done and ok.find(false) == -1:
+		done = true
+		get_meta(\"display\").focused = false
+		Singleton.emit_signal(\"global_event\", \"goat_up\")
 	
-	if progress_value/$TextureProgress.max_value > 0.75:
-		modified_value = lerp(modified_value, rand_range(0, max(progress_value/$TextureProgress.max_value - 0.75, 0) * 5) , 0.1)
-		
-	if !sound_played && progress_value/$TextureProgress.max_value > 0.80:
-		sound_played = 1
-		$Bwaaa.play()
-		
-	$ColorRect.material.set(\"shader_param/magnitude\", progress_value/$TextureProgress.max_value + modified_value)
-	$Gauge.value = progress_value/$TextureProgress.max_value * $Gauge.value_range
-	$Gauge.random_offset_range = lerp($Gauge.random_offset_range, rand_range(0, max(progress_value/$TextureProgress.max_value - 0.65, 0) * 200) , 0.1)
-func _ready():
-	$TextureProgress.tint_progress = Color(progress_value/$TextureProgress.max_value,0,1-progress_value/$TextureProgress.max_value)
+	ok[0] = $Fire.value >= -60 and $Fire.value <= -40
+	ok[1] = $Blood.value >= 40 and $Blood.value <= 60
+	ok[2] = $Sulfur.value >= -10 and $Sulfur.value <= 10
+
+func knob1_changed():
+	$Fire.target_value = $Knob1.value
+
+func knob2_changed():
+	$Blood.target_value = $Knob2.value
+
+func knob3_changed():
+	$Sulfur.target_value = $Knob3.value
+
+func _on_Button_pressed() -> void:
+	ok = [true, true, true]
 "
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 9 )
 
 [node name="Panel" type="Sprite"]
 self_modulate = Color( 1, 0.4, 0.4, 1 )
@@ -64,17 +65,17 @@ centered = false
 script = SubResource( 1 )
 
 [node name="lamp2" parent="." instance=ExtResource( 1 )]
-modulate = Color( 1, 0.109804, 0, 1 )
+modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 105.5, 561.5 )
 frequency = 2.0
 color = 2
 
 [node name="lamp3" parent="." instance=ExtResource( 1 )]
-modulate = Color( 0.819608, 0.376471, 0.282353, 1 )
+modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 233.5, 561.5 )
 color = 3
 
-[node name="Knob" parent="." instance=ExtResource( 5 )]
+[node name="Knob1" parent="." instance=ExtResource( 5 )]
 position = Vector2( 664, 512 )
 value = 50.0
 
@@ -110,26 +111,129 @@ position = Vector2( 169.5, 561.5 )
 frequency = 2.0
 color = 1
 
-[node name="TextureProgress" parent="." instance=ExtResource( 9 )]
-margin_left = 832.0
-margin_top = 64.0
-margin_right = 854.0
-margin_bottom = 221.0
-
-[node name="TextureProgress2" parent="." instance=ExtResource( 6 )]
-margin_left = 640.0
-margin_top = 64.0
-margin_right = 662.0
-margin_bottom = 221.0
-
-[node name="TextureProgress3" parent="." instance=ExtResource( 12 )]
-margin_left = 1024.0
-margin_top = 64.0
-margin_right = 1046.0
-margin_bottom = 221.0
-
 [node name="Knob2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 856, 512 )
 
 [node name="Knob3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1048, 512 )
+
+[node name="Fire" parent="." instance=ExtResource( 6 )]
+margin_left = 640.0
+margin_top = 64.0
+margin_right = 662.0
+margin_bottom = 221.0
+min_value = -150.0
+max_value = 50.0
+value = -125.0
+
+[node name="Label" parent="Fire" index="2"]
+margin_top = -4.4607
+margin_bottom = 11.5393
+custom_fonts/font = SubResource( 3 )
+text = "A"
+
+[node name="Label5" parent="Fire" index="3"]
+custom_fonts/font = SubResource( 3 )
+text = "W"
+
+[node name="Label2" parent="Fire" index="4"]
+custom_fonts/font = SubResource( 3 )
+text = "R"
+
+[node name="Label6" parent="Fire" index="5"]
+margin_left = 37.4091
+margin_right = 77.4091
+margin_bottom = 123.0
+custom_fonts/font = SubResource( 3 )
+text = "C"
+
+[node name="Label3" parent="Fire" index="6"]
+custom_fonts/font = SubResource( 3 )
+text = "X"
+
+[node name="Label4" parent="Fire" index="7"]
+margin_left = -26.5909
+margin_right = 56.4091
+text = "FIRE"
+
+[node name="Blood" parent="." instance=ExtResource( 6 )]
+margin_left = 832.0
+margin_top = 64.0
+margin_right = 854.0
+margin_bottom = 221.0
+min_value = -150.0
+max_value = 50.0
+value = -125.0
+
+[node name="Label" parent="Blood" index="2"]
+custom_fonts/font = SubResource( 3 )
+text = "H"
+
+[node name="Label5" parent="Blood" index="3"]
+custom_fonts/font = SubResource( 3 )
+text = "O"
+
+[node name="Label2" parent="Blood" index="4"]
+custom_fonts/font = SubResource( 3 )
+text = "S"
+
+[node name="Label6" parent="Blood" index="5"]
+custom_fonts/font = SubResource( 3 )
+text = "P"
+
+[node name="Label3" parent="Blood" index="6"]
+custom_fonts/font = SubResource( 3 )
+text = "L"
+
+[node name="Label4" parent="Blood" index="7"]
+text = "BLOOD"
+
+[node name="Sulfur" parent="." instance=ExtResource( 6 )]
+margin_left = 1024.0
+margin_top = 64.0
+margin_right = 1046.0
+margin_bottom = 221.0
+min_value = -150.0
+max_value = 50.0
+value = -125.0
+
+[node name="Label" parent="Sulfur" index="2"]
+custom_fonts/font = SubResource( 3 )
+text = "E"
+
+[node name="Label5" parent="Sulfur" index="3"]
+custom_fonts/font = SubResource( 3 )
+text = "F"
+
+[node name="Label2" parent="Sulfur" index="4"]
+custom_fonts/font = SubResource( 3 )
+text = "N"
+
+[node name="Label6" parent="Sulfur" index="5"]
+custom_fonts/font = SubResource( 3 )
+text = "M"
+
+[node name="Label3" parent="Sulfur" index="6"]
+custom_fonts/font = SubResource( 3 )
+text = "J"
+
+[node name="Label4" parent="Sulfur" index="7"]
+text = "SULFUR"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 416.427
+margin_top = 549.269
+margin_right = 469.427
+margin_bottom = 569.269
+text = "Debug"
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+
+[editable path="Fire"]
+
+[editable path="Blood"]
+
+[editable path="Sulfur"]

@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/DebugButton.gd" type="Script" id=4]
 
 [node name="CoveredPanel" type="Sprite"]
-z_index = 1
+z_index = 2
 texture = ExtResource( 1 )
 centered = false
 script = ExtResource( 3 )

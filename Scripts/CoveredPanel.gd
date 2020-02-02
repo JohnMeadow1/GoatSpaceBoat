@@ -29,3 +29,4 @@ func fall():
 	get_parent().add_child(underiinstance)
 	underiinstance.set_meta("display", get_meta("display"))
 	fall = 1
+	get_tree().create_timer(2).connect("timeout", self, "queue_free")
