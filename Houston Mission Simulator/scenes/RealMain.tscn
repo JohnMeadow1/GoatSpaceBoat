@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Houston Mission Simulator/images/gui/ConsolePeaceful.PNG" type="Texture" id=1]
 [ext_resource path="res://panels/Elements/Switch/switch.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Houston Mission Simulator/images/gui/PotatoQ1.PNG" type="Texture" id=9]
 [ext_resource path="res://Houston Mission Simulator/images/gui/PotatoQ3.PNG" type="Texture" id=10]
 [ext_resource path="res://Houston Mission Simulator/images/gui/PotatoQ4.PNG" type="Texture" id=11]
+[ext_resource path="res://Houston Mission Simulator/images/gui/email-512new.png" type="Texture" id=12]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends TextureRect
@@ -91,10 +92,20 @@ func next_q():
 background_mode = 1
 ambient_light_color = Color( 0.47, 0.47, 0.47, 1 )
 
+[sub_resource type="GDScript" id=7]
+script/source = "extends TextureButton
+
+func _on_Email_pressed() -> void:
+	$WindowDialog.popup()
+	texture_normal = preload(\"res://Houston Mission Simulator/images/gui/email-512.png\")
+"
+
 [node name="Console" type="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -9.51306
 margin_top = -1.05261
+margin_right = -9.51306
 margin_bottom = -1.05261
 texture = ExtResource( 1 )
 expand = true
@@ -313,6 +324,39 @@ rect_scale = Vector2( 0.9, 0.9 )
 [node name="AlertDoom" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Email" type="TextureButton" parent="."]
+margin_left = 526.426
+margin_top = 94.5705
+margin_right = 542.426
+margin_bottom = 105.57
+texture_normal = ExtResource( 12 )
+expand = true
+stretch_mode = 4
+script = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WindowDialog" type="WindowDialog" parent="Email"]
+margin_left = -406.0
+margin_top = 64.0
+margin_right = -47.0
+margin_bottom = 216.0
+
+[node name="Label" type="Label" parent="Email/WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "From: Main Engineer
+Subject: Bye suckers!
+
+Competitive Company gave me a better offer than your pity, shitty wubba lubba dub dub project. Their HRs even offer me fresh fruits  >:)
+PS: don’t look for Junior Engineer, I took him with me. We are passionate lovers. Forever <3
+Hasta la vista babies!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Buttons/Button" to="." method="show_doc"]
 [connection signal="pressed" from="Buttons/Button2" to="." method="sponsor"]
 [connection signal="pressed" from="Buttons/Button3" to="." method="show_quiz"]
@@ -323,3 +367,4 @@ one_shot = true
 [connection signal="pressed" from="Quiz/Final/TextureButton" to="." method="triss_good"]
 [connection signal="pressed" from="Quiz/Final/TextureButton2" to="." method="dupotris"]
 [connection signal="timeout" from="AlertDoom" to="." method="alert"]
+[connection signal="pressed" from="Email" to="Email" method="_on_Email_pressed"]

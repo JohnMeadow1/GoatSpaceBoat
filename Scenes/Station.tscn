@@ -1072,7 +1072,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 19 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
