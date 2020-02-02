@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wskazowka.png-4e284acc389be89e39c9da4eeb87c61d.stex"
+path="res://.import/wskazowka.png-daaec5c4a4a816185b42af8cd52760a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/Elements/Gauge/wskazowka.png"
-dest_files=[ "res://.import/wskazowka.png-4e284acc389be89e39c9da4eeb87c61d.stex" ]
+source_file="res://Panels/Elements/Gauge/wskazowka.png"
+dest_files=[ "res://.import/wskazowka.png-daaec5c4a4a816185b42af8cd52760a8.stex" ]
 
 [params]
 

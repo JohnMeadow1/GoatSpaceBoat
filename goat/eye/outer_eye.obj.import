@@ -2,14 +2,14 @@
 
 importer="wavefront_obj"
 type="Mesh"
-path="res://.import/outer_eye.obj-05af5c1ff18b9f1f3ed2eae47d010735.mesh"
+path="res://.import/outer_eye.obj-9a21f04df4c6ab3f4890921cfe914a24.mesh"
 
 [deps]
 
-files=[ "res://.import/outer_eye.obj-05af5c1ff18b9f1f3ed2eae47d010735.mesh" ]
+files=[ "res://.import/outer_eye.obj-9a21f04df4c6ab3f4890921cfe914a24.mesh" ]
 
-source_file="res://goat/eye/outer_eye.obj"
-dest_files=[ "res://.import/outer_eye.obj-05af5c1ff18b9f1f3ed2eae47d010735.mesh", "res://.import/outer_eye.obj-05af5c1ff18b9f1f3ed2eae47d010735.mesh" ]
+source_file="res://Goat/eye/outer_eye.obj"
+dest_files=[ "res://.import/outer_eye.obj-9a21f04df4c6ab3f4890921cfe914a24.mesh", "res://.import/outer_eye.obj-9a21f04df4c6ab3f4890921cfe914a24.mesh" ]
 
 [params]
 

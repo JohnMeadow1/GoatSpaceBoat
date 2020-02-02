@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/human.png-1bef38519ef6c9f47589dd2bceea0f57.stex"
+path="res://.import/human.png-da1ff6a601aa05fa4fb5426eda9166c0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panels/Elements/HealthScreen/human.png"
-dest_files=[ "res://.import/human.png-1bef38519ef6c9f47589dd2bceea0f57.stex" ]
+source_file="res://Panels/Elements/HealthScreen/human.png"
+dest_files=[ "res://.import/human.png-da1ff6a601aa05fa4fb5426eda9166c0.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/inceptionbutton.wav-4db3f255b68560e1981536bee584cdde.sample"
+path="res://.import/inceptionbutton.wav-f5ce3f99b915912262779b4116d911a5.sample"
 
 [deps]
 
-source_file="res://panels/Elements/inceptionbutton.wav"
-dest_files=[ "res://.import/inceptionbutton.wav-4db3f255b68560e1981536bee584cdde.sample" ]
+source_file="res://Panels/Elements/inceptionbutton.wav"
+dest_files=[ "res://.import/inceptionbutton.wav-f5ce3f99b915912262779b4116d911a5.sample" ]
 
 [params]
 

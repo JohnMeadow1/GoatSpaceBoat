@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/exclamation.png-5d11cedbcf4d43aa975a60bacaa4e3fc.s3tc.stex"
-path.etc2="res://.import/exclamation.png-5d11cedbcf4d43aa975a60bacaa4e3fc.etc2.stex"
+path.s3tc="res://.import/exclamation.png-d3a7a213776c20ef07d48b6037794470.s3tc.stex"
+path.etc2="res://.import/exclamation.png-d3a7a213776c20ef07d48b6037794470.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://goat/exclamation.png"
-dest_files=[ "res://.import/exclamation.png-5d11cedbcf4d43aa975a60bacaa4e3fc.s3tc.stex", "res://.import/exclamation.png-5d11cedbcf4d43aa975a60bacaa4e3fc.etc2.stex" ]
+source_file="res://Goat/exclamation.png"
+dest_files=[ "res://.import/exclamation.png-d3a7a213776c20ef07d48b6037794470.s3tc.stex", "res://.import/exclamation.png-d3a7a213776c20ef07d48b6037794470.etc2.stex" ]
 
 [params]
 
