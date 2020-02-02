@@ -28,6 +28,7 @@ func _ready() -> void:
 	$MeshInstance.mesh.surface_get_material(0).albedo_texture = viewport.get_texture()
 	
 	tween.connect("tween_all_completed", self, "anim_end")
+	self.size = size
 
 func _input_event(camera: Object, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
 	if not focused and not Singleton.player_locked:
@@ -58,7 +59,7 @@ func set_size(s: Vector2):
 	size = s
 	
 	if not is_inside_tree():
-		yield(self, "ready")
+		return
 	
 	$MeshInstance.mesh.size = size
 	$CollisionShape.shape.extents.x = size.x / 2
