@@ -653,6 +653,7 @@ material/0 = null
 
 [node name="Goat" parent="StationPivot/Station3" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, -0.0290879, 0.999577, 0, -0.999577, -0.0290879, 0, 7.28203, 76.912 )
+visible = false
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
@@ -768,6 +769,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 14 )
+frame = 2
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
