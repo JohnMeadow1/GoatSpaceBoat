@@ -573,7 +573,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 19 )
-frame = 1
+frame = 4
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot/Station/ControlRoom2" instance=ExtResource( 5 )]
@@ -1180,6 +1180,7 @@ unit_db = 80.0
 
 [node name="Toilet2" type="StaticBody" parent="StationPivot/Station3/WC"]
 transform = Transform( 0.937974, 0.346706, 0, -0.346706, 0.937974, 0, 0, 0, 1, -67.3891, 27.479, -151.38 )
+script = SubResource( 31 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/Station3/WC/Toilet2"]
 shape = SubResource( 30 )
@@ -1190,6 +1191,7 @@ unit_db = 80.0
 
 [node name="Toilet3" type="StaticBody" parent="StationPivot/Station3/WC"]
 transform = Transform( 0.598548, 0.801087, 0, -0.801087, 0.598548, 0, 0, 0, 1, 67.2969, 28.049, -151.38 )
+script = SubResource( 31 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/Station3/WC/Toilet3"]
 shape = SubResource( 30 )
@@ -1200,6 +1202,7 @@ unit_db = 80.0
 
 [node name="Toilet4" type="StaticBody" parent="StationPivot/Station3/WC"]
 transform = Transform( 0.917192, 0.398445, 0, -0.398445, 0.917192, 0, 0, 0, 1, 68.2514, -26.4483, -151.38 )
+script = SubResource( 31 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/Station3/WC/Toilet4"]
 shape = SubResource( 30 )
