@@ -26,6 +26,7 @@ func _on_DebugButton_pressed() -> void:
 
 func fall():
 	var underiinstance = underpanel.instance()
+	get_meta("display").panel = underiinstance
 	get_parent().add_child(underiinstance)
 	underiinstance.set_meta("display", get_meta("display"))
 	fall = 1

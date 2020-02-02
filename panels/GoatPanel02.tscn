@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 		get_tree().create_timer(2).connect(\"timeout\", self, \"queue_free\")
 		var scene = preload(\"res://panels/GoatPanel03.tscn\").instance()
 		scene.set_meta(\"display\", get_meta(\"display\"))
+		get_meta(\"display\").panel = scene
 		get_parent().add_child(scene)
 
 func _physics_process(delta: float) -> void:
