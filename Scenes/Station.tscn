@@ -33,17 +33,17 @@ func _ready() -> void:
 	initialt = global_transform
 "
 
-[sub_resource type="SpatialMaterial" id=26]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 21 )
 metallic = 0.1
 metallic_specular = 0.0
 
-[sub_resource type="SpatialMaterial" id=27]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 22 )
 metallic = 0.1
 metallic_specular = 0.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -82,12 +82,12 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_texture = ExtResource( 18 )
 metallic = 0.1
 metallic_specular = 0.0
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=6]
 script/source = "extends Node
 
 func _ready() -> void:
@@ -122,20 +122,20 @@ func on_event(event: String):
 		seq.append_callback(Singleton, \"set\", [\"player_locked\", false])
 "
 
-[sub_resource type="SpatialMaterial" id=28]
+[sub_resource type="SpatialMaterial" id=7]
 albedo_texture = ExtResource( 23 )
 metallic = 0.1
 metallic_specular = 0.0
 
-[sub_resource type="QuadMesh" id=6]
+[sub_resource type="QuadMesh" id=8]
 size = Vector2( 20, 20 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=9]
 albedo_texture = ExtResource( 11 )
 metallic = 0.1
 metallic_specular = 0.0
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=10]
 script/source = "extends Sprite
 
 onready var label := $MarginContainer/Label as Label
@@ -154,7 +154,7 @@ func _process(delta: float) -> void:
 		label.visible_characters += 1
 "
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=11]
 script/source = "extends Sprite
 
 const TEXT1 = \"Checking subsystems...\"
@@ -233,47 +233,52 @@ func panel_focus():
 	if resolved:
 		next_problem()
 
+var leak: bool
+
 func on_event(event: String):
 	if event == \"wake_up\":
 		self.resolved = true
-	elif event == \"goat_up\":
-		self.resolved = true
+	elif event == \"goat_up\" or event == \"engine_down\":
+		if leak:
+			self.resolved = true
+		else:
+			leak = true
 "
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 200, 200 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 200, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 9 )
-region = Rect2( 400, 0, 200, 200 )
+region = Rect2( 0, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 9 )
-region = Rect2( 600, 0, 200, 200 )
+region = Rect2( 200, 0, 200, 200 )
 
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 9 )
+region = Rect2( 400, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 600, 0, 200, 200 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 9 )
 region = Rect2( 800, 0, 200, 200 )
 
-[sub_resource type="SpriteFrames" id=15]
+[sub_resource type="SpriteFrames" id=17]
 animations = [ {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="GDScript" id=16]
+[sub_resource type="GDScript" id=18]
 script/source = "extends Carryable
 
 func _physics_process(delta: float) -> void:
@@ -284,7 +289,7 @@ func on_carry():
 	can_carry = false
 "
 
-[sub_resource type="SpatialMaterial" id=17]
+[sub_resource type="SpatialMaterial" id=19]
 albedo_color = Color( 0.968627, 1, 0, 1 )
 emission_enabled = true
 emission = Color( 0.992157, 1, 0, 1 )
@@ -292,13 +297,13 @@ emission_energy = 0.5
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="CubeMesh" id=18]
-material = SubResource( 17 )
+[sub_resource type="CubeMesh" id=20]
+material = SubResource( 19 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="BoxShape" id=19]
+[sub_resource type="BoxShape" id=21]
 
-[sub_resource type="GDScript" id=20]
+[sub_resource type="GDScript" id=22]
 script/source = "extends StaticBody
 
 signal connected()
@@ -312,20 +317,20 @@ func _input_event(camera: Object, event: InputEvent, click_position: Vector3, cl
 			emit_signal(\"connected\")
 "
 
-[sub_resource type="SpatialMaterial" id=21]
+[sub_resource type="SpatialMaterial" id=23]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=22]
-material = SubResource( 21 )
+[sub_resource type="CubeMesh" id=24]
+material = SubResource( 23 )
 
-[sub_resource type="ConvexPolygonShape" id=23]
+[sub_resource type="ConvexPolygonShape" id=25]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=24]
+[sub_resource type="DynamicFont" id=26]
 size = 100
 font_data = ExtResource( 16 )
 
-[sub_resource type="GIProbeData" id=25]
+[sub_resource type="GIProbeData" id=27]
 bounds = AABB( -100, -94.8906, -76.9052, 200, 189.781, 153.81 )
 cell_size = 3.125
 to_cell_xform = Transform( 0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 32, 30.365, 24.6097 )
@@ -351,7 +356,7 @@ script = SubResource( 1 )
 
 [node name="Station" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 26 )
+material_override = SubResource( 2 )
 use_in_baked_light = true
 mesh = ExtResource( 8 )
 material/0 = null
@@ -363,7 +368,7 @@ material/5 = null
 
 [node name="Station2" type="MeshInstance" parent="StationPivot"]
 transform = Transform( -4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, -42.5 )
-material_override = SubResource( 27 )
+material_override = SubResource( 3 )
 use_in_baked_light = true
 mesh = ExtResource( 8 )
 material/0 = null
@@ -382,18 +387,17 @@ pixel_size = 0.02
 texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StationPivot/Station2/Spatial/Sprite3D"]
-anims/Wywal = SubResource( 3 )
+anims/Wywal = SubResource( 4 )
 
 [node name="CameraPoint" type="Position3D" parent="StationPivot/Station2/Spatial"]
 transform = Transform( 0.777146, 0.173464, -0.604942, 0, 0.961262, 0.275637, 0.62932, -0.21421, 0.747041, -6, 10, 10.414 )
 
 [node name="Capsule" parent="StationPivot/Station2" instance=ExtResource( 10 )]
 transform = Transform( 0.0518112, -0.721683, 0.690282, 0.996248, 0.0853344, 0.0144399, -0.0693259, 0.686944, 0.723396, 57.1344, 0.94434, -51.268 )
-open = false
 
 [node name="Floor-C_content-1" type="MeshInstance" parent="StationPivot/Station2"]
 transform = Transform( 1, 0, -1.57356e-28, 0, 1, 0, 0, 0, 1, 0, 38.406, 0 )
-material_override = SubResource( 4 )
+material_override = SubResource( 5 )
 use_in_baked_light = true
 mesh = ExtResource( 3 )
 material/0 = null
@@ -638,11 +642,10 @@ transform = Transform( -0.026151, 0.999141, -0.0321576, 0.0333536, 0.0330228, 0.
 underpanel = ExtResource( 19 )
 
 [node name="CapsuleEvents" type="Node" parent="StationPivot/Station2"]
-script = SubResource( 5 )
+script = SubResource( 6 )
 
 [node name="Capsule2" parent="StationPivot/Station2" instance=ExtResource( 10 )]
 transform = Transform( 3.12215e-06, 0.993238, 0.116099, 1, -3.14315e-06, -2.16227e-09, 3.6277e-07, 0.116099, -0.993238, -75.878, 1.76682, -4.0053 )
-open = false
 
 [node name="CameraPoint2" type="Camera" parent="StationPivot/Station2/Capsule2"]
 transform = Transform( -0.0497506, 0.186171, 0.981257, -0.0175518, 0.982159, -0.187232, -0.998607, -0.0265378, -0.0455954, 3.04742, 1.46324, -0.0242639 )
@@ -653,7 +656,7 @@ visible = false
 
 [node name="Station3" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -85 )
-material_override = SubResource( 28 )
+material_override = SubResource( 7 )
 use_in_baked_light = true
 mesh = ExtResource( 8 )
 material/0 = null
@@ -666,13 +669,13 @@ material/5 = null
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/Station3"]
 transform = Transform( 1, 0, 0, 0, -0.0290879, 0.999577, 0, -0.999577, -0.0290879, 0, -9.82011, 70.2773 )
 use_in_baked_light = true
-mesh = SubResource( 6 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="StationPivot/Station3"]
 transform = Transform( 1, 0, 0, 0, -0.0290879, 0.999577, 0, -0.999577, -0.0290879, 0, -13.9327, -71.0485 )
 use_in_baked_light = true
-mesh = SubResource( 6 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="Goat" parent="StationPivot/Station3" instance=ExtResource( 20 )]
@@ -681,7 +684,7 @@ visible = false
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = SubResource( 7 )
+material_override = SubResource( 9 )
 use_in_baked_light = true
 mesh = ExtResource( 7 )
 material/0 = null
@@ -713,7 +716,7 @@ transform = Transform( 0.936164, 0.351564, 0, -0.351564, 0.936164, 0, 0, 0, 1, -
 [node name="Panel" type="Sprite" parent="StationPivot/Intro"]
 texture = ExtResource( 15 )
 centered = false
-script = SubResource( 8 )
+script = SubResource( 10 )
 
 [node name="MarginContainer" type="MarginContainer" parent="StationPivot/Intro/Panel"]
 anchor_right = 1.0
@@ -754,7 +757,7 @@ transform = Transform( 0.412596, 0.910914, 0, -0.910914, 0.412596, 0, 0, 0, 1, -
 [node name="Panel" type="Sprite" parent="StationPivot/ControlRoom"]
 texture = ExtResource( 15 )
 centered = false
-script = SubResource( 9 )
+script = SubResource( 11 )
 
 [node name="MarginContainer" type="MarginContainer" parent="StationPivot/ControlRoom/Panel"]
 anchor_right = 1.0
@@ -793,7 +796,7 @@ margin_bottom = 672.0
 visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
-frames = SubResource( 15 )
+frames = SubResource( 17 )
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
@@ -810,16 +813,16 @@ transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 77.7107
 
 [node name="ComCube" type="StaticBody" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2416, -76.0216, 9.41644 )
-script = SubResource( 16 )
+script = SubResource( 18 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-mesh = SubResource( 18 )
+mesh = SubResource( 20 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-shape = SubResource( 19 )
+shape = SubResource( 21 )
 
 [node name="OmniLight" type="OmniLight" parent="StationPivot/ComCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
@@ -827,14 +830,14 @@ light_color = Color( 1, 0.913725, 0, 1 )
 
 [node name="ControlCube" type="StaticBody" parent="StationPivot"]
 transform = Transform( 0.309863, 0.950781, 0, -0.950781, 0.309863, 0, 0, 0, 1, -70.0118, -29.3606, 7.61171 )
-script = SubResource( 20 )
+script = SubResource( 22 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StationPivot/ControlCube"]
-mesh = SubResource( 22 )
+mesh = SubResource( 24 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StationPivot/ControlCube"]
-shape = SubResource( 23 )
+shape = SubResource( 25 )
 
 [node name="TargetPivot" type="Position3D" parent="StationPivot/ControlCube"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
@@ -856,7 +859,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StationPivot/Signs/PanelDisplay/ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 24 )
+custom_fonts/font = SubResource( 26 )
 text = "Control Room"
 align = 1
 valign = 1
@@ -868,5 +871,5 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32.8539 )
 subdiv = 0
 extents = Vector3( 100, 94.8906, 76.9052 )
-data = SubResource( 25 )
+data = SubResource( 27 )
 [connection signal="connected" from="StationPivot/ControlCube" to="StationPivot/ControlRoom/Panel" method="_on_ControlCube_connected"]

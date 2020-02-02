@@ -10,7 +10,9 @@ margin_right = 54.0
 margin_bottom = 92.0
 rect_scale = Vector2( 0.3, 0.3 )
 custom_icons/off = ExtResource( 1 )
+custom_icons/on_disabled = ExtResource( 2 )
 custom_icons/on = ExtResource( 2 )
+custom_icons/off_disabled = ExtResource( 1 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
