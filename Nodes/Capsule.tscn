@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/Capsule.gd" type="Script" id=5]
 [ext_resource path="res://Resources/Capsule.tres" type="Material" id=6]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
 albedo_color = Color( 1, 1, 1, 0.290196 )
 albedo_texture = ExtResource( 4 )
@@ -20,11 +20,12 @@ script = ExtResource( 5 )
 
 [node name="Capsule_closed" type="MeshInstance" parent="."]
 transform = Transform( 1, 7.45058e-09, 8.14907e-10, -1.49012e-08, 1, -4.08327e-08, 4.36557e-09, 1.82408e-08, 1, 0, 0, 0 )
+use_in_baked_light = true
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 6 )
 material/1 = ExtResource( 6 )
 material/2 = ExtResource( 6 )
-material/3 = SubResource( 3 )
+material/3 = SubResource( 1 )
 material/4 = ExtResource( 6 )
 material/5 = ExtResource( 6 )
 
@@ -32,6 +33,7 @@ material/5 = ExtResource( 6 )
 transform = Transform( 1, 7.45058e-09, 1.80444e-09, -7.45058e-09, 1, 1.89757e-08, 6.40284e-10, -1.15615e-08, 1, 0, 0, 0 )
 visible = false
 material_override = SubResource( 2 )
+use_in_baked_light = true
 mesh = ExtResource( 3 )
 material/0 = null
 material/1 = null

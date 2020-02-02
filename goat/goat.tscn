@@ -59,11 +59,13 @@ texture = ExtResource( 2 )
 
 [node name="helmet" type="MeshInstance" parent="Spatial"]
 transform = Transform( -7, 0, -1.05697e-06, 0, 7, 0, 1.05697e-06, 0, -7, 0, 1.50429, -1.41796 )
+use_in_baked_light = true
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Spatial"]
 transform = Transform( -7, 0, -1.05697e-06, 0, 7, 0, 1.05697e-06, 0, -7, 0, 0, -0.422902 )
+use_in_baked_light = true
 mesh = ExtResource( 3 )
 material/0 = ExtResource( 4 )
 
