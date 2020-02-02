@@ -173,9 +173,20 @@ func animate_text(value: float):
 
 func next_problem():
 	current_problem += 1
+	
+	if current_problem == 3:
+		get_node(\"../../../../../../Station3/Goat\").visible = true
+		get_node(\"../../../../../../Station3/Goat\").connect(\"tree_exited\", self, \"goat_problem\")
+	
 	var seq := TweenSequence.new(get_tree())
 	set_text(seq, problem_text())
 	seq.append_callback(self, \"set_resolved\", [false])
+
+func goat_problem():
+	if not goat:
+		goat = true
+	else:
+		resolved = true
 
 func problem_text():
 	return str(\"Problem \", current_problem + 1, \" of \", PROBLEMS.size(), \"\\n\\n\", PROBLEMS[current_problem])
@@ -192,6 +203,7 @@ func panel_focus():
 		next_problem()
 
 var leak: bool
+var goat: bool
 
 func on_event(event: String):
 	if event == \"wake_up\":
@@ -561,7 +573,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 19 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot/Station/ControlRoom2" instance=ExtResource( 5 )]
@@ -1118,7 +1130,7 @@ mesh = SubResource( 10 )
 material/0 = null
 
 [node name="Goat" parent="StationPivot/Station3" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, -0.0290879, 0.999577, 0, -0.999577, -0.0290879, 0, 7.28203, 76.912 )
+transform = Transform( -0.998101, -1.49012e-07, -0.061605, 0.0615789, -0.0290876, -0.997678, -0.00179178, -0.999577, 0.0290323, -0.663639, -3.46544, 77.2248 )
 visible = false
 
 [node name="FuelPanel" parent="StationPivot/Station3" instance=ExtResource( 5 )]

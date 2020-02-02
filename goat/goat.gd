@@ -15,6 +15,6 @@ func _physics_process(delta):
 		timer = rand_range(5.0, 10)
 
 func _input_event(camera: Object, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
-	if can_carry and event is InputEventMouseButton:
+	if can_carry and visible and event is InputEventMouseButton:
 		if event.pressed:
 			Singleton.player_node.carry(self)
