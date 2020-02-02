@@ -1,0 +1,192 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends ColorRect
+
+export(int, \"male\", \"female\") var gender
+export var occupation: String
+export(String, \"Internship\", \"Contract\", \"Part-time\", \"Specialist\", \"Full-time\", \"Commission\", \"Passenger\", \"Public Service\", \"Voluntary\") var contract
+export var salary: String
+export var special_attributes: String
+
+func _ready() -> void:
+	$MarginContainer/VBoxContainer/HBoxContainer/Name.text = str(male_names[randi() % male_names.size()] if gender == 0 else female_names[randi() % female_names.size()], \" \", surnames[randi() % surnames.size()])
+	$MarginContainer/VBoxContainer/HBoxContainer2/Name.text = occupation
+	$MarginContainer/VBoxContainer/HBoxContainer3/Name.text = contract
+	$MarginContainer/VBoxContainer/HBoxContainer4/Name.text = str(\"$\", salary)
+	$MarginContainer/VBoxContainer/HBoxContainer5/Name.text = special_attributes
+
+const male_names = [\"Liam\", \"Noah\", \"William\", \"James\", \"Logan\", \"Benjamin\", \"Mason\", \"Elijah\", \"Oliver\", \"Jacob\", \"Lucas\", \"Michael\", \"Alexander\", \"Ethan\", \"Daniel\", \"Matthew\", \"Aiden\", \"Henry\", \"Joseph\", \"Jackson\", \"Samuel\", \"Sebastian\", \"David\", \"Carter\", \"Wyatt\", \"Jayden\", \"John\", \"Owen\", \"Dylan\", \"Luke\", \"Gabriel\", \"Anthony\", \"Isaac\", \"Grayson\", \"Jack\", \"Julian\", \"Levi\", \"Christopher\", \"Joshua\", \"Andrew\", \"Lincoln\", \"Mateo\", \"Ryan\", \"Jaxon\", \"Nathan\", \"Aaron\", \"Isaiah\", \"Thomas\", \"Charles\", \"Caleb\", \"Josiah\", \"Christian\", \"Hunter\", \"Eli\", \"Jonathan\", \"Connor\", \"Landon\", \"Adrian\", \"Asher\", \"Cameron\", \"Leo\", \"Theodore\", \"Jeremiah\", \"Hudson\", \"Robert\", \"Easton\", \"Nolan\", \"Nicholas\", \"Ezra\", \"Colton\", \"Angel\", \"Brayden\", \"Jordan\", \"Dominic\", \"Austin\", \"Ian\", \"Adam\", \"Elias\", \"Jaxson\", \"Greyson\", \"Jose\", \"Ezekiel\", \"Carson\", \"Evan\", \"Maverick\", \"Bryson\", \"Jace\", \"Cooper\", \"Xavier\", \"Parker\", \"Roman\", \"Jason\", \"Santiago\", \"Chase\", \"Sawyer\", \"Gavin\", \"Leonardo\", \"Kayden\", \"Ayden\", \"Jameson\"]
+const female_names = [\"Emma\", \"Olivia\", \"Ava\", \"Isabella\", \"Sophia\", \"Mia\", \"Charlotte\", \"Amelia\", \"Evelyn\", \"Abigail\", \"Harper\", \"Emily\", \"Elizabeth\", \"Avery\", \"Sofia\", \"Ella\", \"Madison\", \"Scarlett\", \"Victoria\", \"Aria\", \"Grace\", \"Chloe\", \"Camila\", \"Penelope\", \"Riley\", \"Layla\", \"Lillian\", \"Nora\", \"Zoey\", \"Mila\", \"Aubrey\", \"Hannah\", \"Lily\", \"Addison\", \"Eleanor\", \"Natalie\", \"Luna\", \"Savannah\", \"Brooklyn\", \"Leah\", \"Zoe\", \"Stella\", \"Hazel\", \"Ellie\", \"Paisley\", \"Audrey\", \"Skylar\", \"Violet\", \"Claire\", \"Bella\", \"Aurora\", \"Lucy\", \"Anna\", \"Samantha\", \"Caroline\", \"Genesis\", \"Aaliyah\", \"Kennedy\", \"Kinsley\", \"Allison\", \"Maya\", \"Sarah\", \"Madelyn\", \"Adeline\", \"Alexa\", \"Ariana\", \"Elena\", \"Gabriella\", \"Naomi\", \"Alice\", \"Sadie\", \"Hailey\", \"Eva\", \"Emilia\", \"Autumn\", \"Quinn\", \"Nevaeh\", \"Piper\", \"Ruby\", \"Serenity\", \"Willow\", \"Everly\", \"Cora\", \"Kaylee\", \"Lydia\", \"Aubree\", \"Arianna\", \"Eliana\", \"Peyton\", \"Melanie\", \"Gianna\", \"Isabelle\", \"Julia\", \"Valentina\", \"Nova\", \"Clara\", \"Vivian\", \"Reagan\", \"Mackenzie\", \"Madeline\"]
+const surnames = [\"Best\", \"Trollope\", \"Edge\", \"Johnson\", \"Kendrick\", \"Reddy\", \"Heneghan\", \"Knutt\", \"Lawal\", \"Blake\", \"Fairley\", \"Leary\", \"Olley\", \"Parsons\", \"Rickett\", \"Chapman\", \"Peel\", \"Dillon\", \"Kinsey\", \"Fraser\", \"Greenhill\", \"Charnock\", \"Shanks\", \"Mohammed\", \"Larkin\", \"Pickford\", \"Patton\", \"Ennos\", \"Ilsley\", \"Bainbridge\", \"Christie\", \"Holding\", \"Rawsthorne\", \"Ewin\", \"John\", \"Normington\", \"Phipps\", \"Vernon\", \"Ballantyne\", \"Pinnock\", \"Milward\", \"O neal\", \"Travis\", \"O kane\", \"Cox\", \"Jopson\", \"Butler\", \"Ayres\", \"Ould\", \"Akram\", \"Bithell\", \"Addinall\", \"Darcy\", \"Rushton\", \"Lovell\", \"Kilnan\", \"Scott\", \"Woodward\", \"Cotter\", \"Watkins\", \"Fahy\", \"Bellamy\", \"Ahmad\", \"Nicholson\", \"Hobson\", \"Goring\", \"Kenneth\", \"Costa\", \"Leeson\", \"Allam\", \"Number\", \"Thurbon\", \"Mundy\", \"Merritt\", \"Goldberg\", \"Armitage\", \"Richman\", \"Chambers\", \"Holloway\", \"Oman\", \"Gibson\", \"Duck\", \"Allsop\", \"Ashby\", \"Swift\", \"Embleton\", \"Moffat\", \"Frey\", \"Healey\", \"Johannson\", \"Pitchford\", \"Wootton\", \"Barrett\", \"Kempson\", \"Ledger\", \"Tyrrell\", \"Dolcy\", \"Pascoe\", \"Coulter\", \"Nutman\"]
+"
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+contract = "Test"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 100
+custom_constants/margin_top = 100
+custom_constants/margin_left = 100
+custom_constants/margin_bottom = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 924.0
+margin_bottom = 500.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 824.0
+margin_bottom = 36.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 295.0
+margin_right = 415.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 425.0
+margin_right = 528.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 824.0
+margin_bottom = 76.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 227.0
+margin_right = 484.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "Occupation:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 494.0
+margin_right = 597.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 824.0
+margin_bottom = 116.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 246.0
+margin_right = 465.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "Contract:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 475.0
+margin_right = 578.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 824.0
+margin_bottom = 156.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 270.0
+margin_right = 440.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "Salary:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 450.0
+margin_right = 553.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 160.0
+margin_right = 824.0
+margin_bottom = 196.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 138.0
+margin_right = 573.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "Special attributes:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 583.0
+margin_right = 686.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 1 )
+text = "text"
+__meta__ = {
+"_edit_use_anchors_": false
+}

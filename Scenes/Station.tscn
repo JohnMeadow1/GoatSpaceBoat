@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Models/Walls_and_floor_B.png" type="Texture" id=22]
 [ext_resource path="res://Models/Walls_and_floor_C.png" type="Texture" id=23]
 [ext_resource path="res://panels/FuelMixturePanel.tscn" type="PackedScene" id=24]
+[ext_resource path="res://panels/person.tscn" type="PackedScene" id=25]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera
@@ -655,6 +656,213 @@ transform = Transform( -0.0497506, 0.186171, 0.981257, -0.0175518, 0.982159, -0.
 transform = Transform( 0.09901, 0.973702, -0.205187, -0.0501395, -0.201057, -0.978296, -0.993822, 0.107149, 0.0289143, -76.077, 1.29265, -3.85943 )
 visible = false
 
+[node name="Ppl" type="Spatial" parent="StationPivot/Station2"]
+
+[node name="PanelDisplay" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( -0.703804, -0.710394, -3.01715e-06, -0.0413097, 0.0409223, 0.998308, -0.709192, 0.702614, -0.0581475, 53.9004, 0.358131, -43.0902 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay" instance=ExtResource( 25 )]
+occupation = "Main Engineer"
+contract = "Contract"
+salary = "2k"
+special_attributes = "tricky one"
+
+[node name="PanelDisplay2" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.313711, -0.949519, -3.01715e-06, -0.0552112, -0.0182444, 0.998308, -0.947912, -0.31318, -0.0581475, 61.877, 1.09806, 20.9243 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay2" instance=ExtResource( 25 )]
+occupation = "Politician"
+contract = "Public Service"
+salary = "15k"
+special_attributes = "useless"
+
+[node name="PanelDisplay11" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.313711, -0.949519, -3.01715e-06, -0.0552112, -0.0182444, 0.998308, -0.947912, -0.31318, -0.0581475, 57.495, 0.445454, 27.1455 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay11" instance=ExtResource( 25 )]
+gender = 1
+occupation = "Nun"
+contract = "Full-time"
+salary = "1.5k"
+special_attributes = "alcoholic"
+
+[node name="PanelDisplay3" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.220442, -0.9754, -3.01715e-06, -0.0567164, -0.0128211, 0.998308, -0.97375, -0.220069, -0.0581475, 63.673, 0.582966, 12.0806 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay3" instance=ExtResource( 25 )]
+occupation = "Janitor"
+contract = "Internship"
+salary = "200"
+special_attributes = "medicine student"
+
+[node name="PanelDisplay4" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.0831562, -0.996536, -3.01715e-06, -0.0579458, -0.00483832, 0.998308, -0.99485, -0.0830153, -0.0581475, 64.7272, 0.782341, 5.38535 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay4" instance=ExtResource( 25 )]
+occupation = "Cook"
+contract = "Contract"
+salary = "100"
+special_attributes = "accepts food as salary"
+
+[node name="PanelDisplay5" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( -0.110081, -0.993923, -3.01715e-06, -0.0577944, 0.00639795, 0.998308, -0.992241, 0.109895, -0.0581475, 65.2186, 0.595318, -6.36022 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay5" instance=ExtResource( 25 )]
+gender = 1
+occupation = "Barista"
+contract = "Contract"
+salary = "800"
+special_attributes = "never sleeps"
+
+[node name="PanelDisplay6" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( -0.144218, -0.989546, -3.01715e-06, -0.05754, 0.00838293, 0.998308, -0.987871, 0.143974, -0.0581475, 63.6815, 0.593884, -12.602 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay6" instance=ExtResource( 25 )]
+gender = 1
+occupation = "Secretary"
+contract = "Part-time"
+salary = "1.5k"
+special_attributes = "needs Wi-Fi"
+
+[node name="PanelDisplay7" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( -0.283446, -0.958988, -3.01715e-06, -0.0557636, 0.0164788, 0.998308, -0.957365, 0.282967, -0.0581475, 60.9742, 0.369247, -22.6655 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay7" instance=ExtResource( 25 )]
+occupation = "Physician"
+contract = "Part-time"
+salary = "2k"
+special_attributes = "messy hair"
+
+[node name="PanelDisplay8" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( -0.283446, -0.958988, -3.01715e-06, -0.0557636, 0.0164788, 0.998308, -0.957365, 0.282967, -0.0581475, 58.9773, 1.14886, -28.4978 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay8" instance=ExtResource( 25 )]
+occupation = "Senior Specialist"
+contract = "Full-time"
+salary = "3k"
+special_attributes = "CEO’s nephew"
+
+[node name="PanelDisplay9" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( -0.496964, -0.867771, -3.01715e-06, -0.0504602, 0.0288946, 0.998308, -0.866302, 0.496124, -0.0581475, 54.0414, 0.41909, -36.0999 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay9" instance=ExtResource( 25 )]
+occupation = "Navigator"
+contract = "Voluntary"
+salary = "1k"
+special_attributes = "dead for two courses"
+
+[node name="PanelDisplay10" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( -0.496964, -0.867771, -3.01715e-06, -0.0504602, 0.0288946, 0.998308, -0.866302, 0.496124, -0.0581475, 40.537, 0.693775, -50.8799 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay10" instance=ExtResource( 25 )]
+gender = 1
+occupation = "Geisha"
+contract = "Part-time"
+salary = "2k"
+special_attributes = "serial killer"
+
+[node name="PanelDisplay12" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.313711, -0.949519, -3.01715e-06, -0.0552112, -0.0182444, 0.998308, -0.947912, -0.31318, -0.0581475, 53.5092, 0.391796, 37.5373 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay12" instance=ExtResource( 25 )]
+occupation = "Captain"
+contract = "Commission"
+salary = "500"
+special_attributes = "cheap and replaceable"
+
+[node name="PanelDisplay13" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.524229, -0.851577, -3.01715e-06, -0.0495155, -0.0304852, 0.998308, -0.850136, -0.523342, -0.0581475, 49.2135, 0.686089, 42.5901 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay13" instance=ExtResource( 25 )]
+gender = 1
+occupation = "Child"
+contract = "Part-time"
+salary = "1k"
+special_attributes = "Looks sweet and gives hope"
+
+[node name="PanelDisplay14" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.524229, -0.851577, -3.01715e-06, -0.0495155, -0.0304852, 0.998308, -0.850136, -0.523342, -0.0581475, 42.0146, 0.505836, 49.2437 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay14" instance=ExtResource( 25 )]
+gender = 1
+occupation = "Security"
+contract = "Internship"
+salary = "1k"
+special_attributes = "pregnant"
+
+[node name="PanelDisplay15" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.818648, -0.574295, -3.01715e-06, -0.0333913, -0.0476041, 0.998308, -0.573323, -0.817263, -0.0581475, 36.6498, 0.611359, 53.2385 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay15" instance=ExtResource( 25 )]
+occupation = "Goat-shepherd"
+contract = "Full-time"
+salary = "800"
+special_attributes = "a man of steel"
+
+[node name="PanelDisplay16" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.818648, -0.574295, -3.01715e-06, -0.0333913, -0.0476041, 0.998308, -0.573323, -0.817263, -0.0581475, 26.9374, 2.55613, 56.7282 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay16" instance=ExtResource( 25 )]
+occupation = "Scientist"
+contract = "Contract"
+salary = "2k"
+special_attributes = "loves cosmic space"
+
+[node name="PanelDisplay17" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.91571, -0.40184, -3.01715e-06, -0.0233632, -0.0532474, 0.998308, -0.40116, -0.91416, -0.0581475, 20.1284, 1.06491, 60.4605 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay17" instance=ExtResource( 25 )]
+occupation = "Cyberspace Cowboy"
+contract = "Contract"
+salary = "3k"
+special_attributes = "faster than light"
+
+[node name="PanelDisplay18" parent="StationPivot/Station2/Ppl" instance=ExtResource( 5 )]
+transform = Transform( 0.990999, -0.13387, -3.01715e-06, -0.0077812, -0.0576245, 0.998308, -0.133643, -0.989322, -0.0581475, -23.5347, 0.366455, 60.8139 )
+size = Vector2( 2, 1 )
+camera_distance = 1.0
+
+[node name="ColorRect" parent="StationPivot/Station2/Ppl/PanelDisplay18" instance=ExtResource( 25 )]
+gender = 1
+occupation = "Millionaire"
+contract = "Passenger"
+salary = "0"
+special_attributes = "loves jam"
+
 [node name="Station3" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -85 )
 material_override = SubResource( 7 )
@@ -803,6 +1011,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 17 )
+frame = 4
 playing = true
 
 [node name="Passage" parent="StationPivot" instance=ExtResource( 6 )]
