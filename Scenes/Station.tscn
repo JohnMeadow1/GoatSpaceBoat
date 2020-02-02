@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Station.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Models/Walls_and_floor_A.png" type="Texture" id=21]
 [ext_resource path="res://Models/Walls_and_floor_B.png" type="Texture" id=22]
 [ext_resource path="res://Models/Walls_and_floor_C.png" type="Texture" id=23]
+[ext_resource path="res://panels/FuelMixturePanel.tscn" type="PackedScene" id=24]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera
@@ -681,6 +682,11 @@ material/0 = null
 [node name="Goat" parent="StationPivot/Station3" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, -0.0290879, 0.999577, 0, -0.999577, -0.0290879, 0, 7.28203, 76.912 )
 visible = false
+
+[node name="PanelDisplay" parent="StationPivot/Station3" instance=ExtResource( 5 )]
+transform = Transform( 0.999087, 0.0403941, 0.0138794, -0.0136125, -0.00687486, 0.999884, 0.0404848, -0.99916, -0.00631872, 15.8613, 0.841881, 57.4744 )
+
+[node name="CablePanel" parent="StationPivot/Station3/PanelDisplay" instance=ExtResource( 24 )]
 
 [node name="Pregi" type="MeshInstance" parent="StationPivot"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
