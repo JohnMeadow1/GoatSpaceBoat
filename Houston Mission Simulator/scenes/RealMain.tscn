@@ -1,14 +1,18 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Houston Mission Simulator/images/gui/ConsolePeaceful.PNG" type="Texture" id=1]
 [ext_resource path="res://panels/Elements/Switch/switch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Houston Mission Simulator/images/gui/PotatoQ2.PNG" type="Texture" id=3]
 [ext_resource path="res://Houston Mission Simulator/images/gui/TrissRight.PNG" type="Texture" id=4]
 [ext_resource path="res://Houston Mission Simulator/images/gui/TrissWrong.PNG" type="Texture" id=5]
 [ext_resource path="res://Houston Mission Simulator/images/gui/ChooseWisely.PNG" type="Texture" id=6]
 [ext_resource path="res://Resources/spaceranger.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Houston Mission Simulator/scenes/book.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Houston Mission Simulator/images/gui/PotatoQ1.PNG" type="Texture" id=9]
+[ext_resource path="res://Houston Mission Simulator/images/gui/PotatoQ3.PNG" type="Texture" id=10]
+[ext_resource path="res://Houston Mission Simulator/images/gui/PotatoQ4.PNG" type="Texture" id=11]
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=1]
 script/source = "extends TextureRect
 
 func _ready() -> void:
@@ -19,16 +23,14 @@ func dupotris() -> void:
 	get_tree().change_scene(\"res://Houston Mission Simulator/scenes/BSOD.tscn\")
 
 func show_quiz() -> void:
-	$Quiz2.hide()
 	$Quiz.show()
 
 func triss_good() -> void:
 	$Quiz.hide()
-	$Quiz2.show()
+	$AlertDoom.start()
 
 func sponsor() -> void:
 	$Quiz.hide()
-	$Quiz2.hide()
 	$Sponsor.show()
 	$Sponsor.play()
 
@@ -39,59 +41,77 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
 			$Book.hide()
+
+const WARNING_T := 0.04
+
+func alert() -> void:
+	var tr := TextureRect.new()
+	tr.expand = true
+	tr.texture = preload(\"res://Houston Mission Simulator/images/gui/Warning screen.png\")
+	tr.rect_size = rect_size
+	add_child(tr)
+	
+	var seq := TweenSequence.new(get_tree())
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"hide\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"show\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"hide\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"show\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"hide\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"show\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"hide\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"show\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"hide\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"show\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"hide\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"show\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"hide\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"show\")
+	seq.append_interval(WARNING_T)
+	seq.append_callback(tr, \"queue_free\")
+	
+	texture = preload(\"res://Houston Mission Simulator/images/gui/ConsoleALERT.PNG\")
 "
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 7 )
 
-[sub_resource type="GDScript" id=9]
-script/source = "extends VBoxContainer
+[sub_resource type="GDScript" id=6]
+script/source = "extends MarginContainer
 
-const QUESTIONS = [
-	[\"Do you feel potato?\", \"Yes\", \"No\", \"Perhabs\"],
-	[\"How to potato?\", \"Yes\", \"Absolutely\", \"Just do it\"],
-	[\"Fries?\", \"Potatoes\", \"Chips\", \"Perhabs\"]
-]
-
-var current_question: int
-var clicks: Array
-
-func _ready() -> void:
-	for i in 3:
-		$VBoxContainer.get_child(2 + i).connect(\"pressed\", self, \"inc\", [i])
+var currq: int
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_VISIBILITY_CHANGED:
 		if is_visible_in_tree():
-			start()
+			currq = -1
+			next_q()
 
-func start():
-	current_question = 0
-	clicks = [0, 0, 0]
-	update_text()
-
-func update_text():
-	if current_question == QUESTIONS.size():
-		hide()
-		return
+func next_q():
+	currq += 1
 	
-	$VBoxContainer/Label.text = str(\"Question \", current_question + 1, \"\\n\", QUESTIONS[current_question][0])
-	$VBoxContainer/Button1.text = QUESTIONS[current_question][1]
-	$VBoxContainer/Button2.text = QUESTIONS[current_question][2]
-	$VBoxContainer/Button3.text = QUESTIONS[current_question][3]
-
-func inc(i: int):
-	clicks[i] += 1
-	current_question += 1
-	update_text()
+	for i in get_child_count():
+		if i == currq:
+			get_child(i).show()
+		else:
+			get_child(i).hide()
 "
 
-[sub_resource type="DynamicFont" id=8]
-size = 30
-font_data = ExtResource( 7 )
-
-[sub_resource type="Environment" id=4]
+[sub_resource type="Environment" id=5]
 background_mode = 1
 ambient_light_color = Color( 0.47, 0.47, 0.47, 1 )
 
@@ -102,7 +122,7 @@ margin_top = -1.05261
 margin_bottom = -1.05261
 texture = ExtResource( 1 )
 expand = true
-script = SubResource( 7 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -164,7 +184,7 @@ __meta__ = {
 [node name="Button" type="Button" parent="Buttons"]
 margin_right = 191.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 2 )
 text = "Documentation"
 flat = true
 
@@ -172,7 +192,7 @@ flat = true
 margin_left = 211.0
 margin_right = 325.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 2 )
 text = "Sponsor"
 flat = true
 
@@ -180,7 +200,7 @@ flat = true
 margin_left = 345.0
 margin_right = 404.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 2 )
 text = "Quiz"
 flat = true
 
@@ -191,17 +211,66 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quiz" type="Control" parent="."]
+[node name="Quiz" type="MarginContainer" parent="."]
 visible = false
 margin_left = 87.0
 margin_top = 102.0
-margin_right = 529.0
-margin_bottom = 474.0
+margin_right = 532.0
+margin_bottom = 477.0
+script = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureButton" type="TextureButton" parent="Quiz"]
+visible = false
+margin_right = 445.0
+margin_bottom = 375.0
+texture_normal = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton2" type="TextureButton" parent="Quiz"]
+visible = false
+margin_right = 445.0
+margin_bottom = 375.0
+texture_normal = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton3" type="TextureButton" parent="Quiz"]
+visible = false
+margin_right = 445.0
+margin_bottom = 375.0
+texture_normal = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton4" type="TextureButton" parent="Quiz"]
+visible = false
+margin_right = 445.0
+margin_bottom = 375.0
+texture_normal = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Final" type="Control" parent="Quiz"]
+visible = false
+margin_right = 445.0
+margin_bottom = 375.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="Quiz/Final"]
 margin_left = 26.3158
 margin_top = 75.7896
 margin_right = 203.316
@@ -212,7 +281,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton2" type="TextureButton" parent="Quiz"]
+[node name="TextureButton2" type="TextureButton" parent="Quiz/Final"]
 margin_left = 253.685
 margin_top = 75.7896
 margin_right = 430.685
@@ -223,79 +292,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChooseWisely" type="TextureRect" parent="Quiz"]
+[node name="ChooseWisely" type="TextureRect" parent="Quiz/Final"]
 margin_left = 7.31577
 margin_top = 275.285
 margin_right = 420.316
 margin_bottom = 365.285
 texture = ExtResource( 6 )
-
-[node name="Quiz2" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 87.0
-margin_top = 102.0
-margin_right = 532.0
-margin_bottom = 477.0
-custom_constants/separation = 100
-script = SubResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Quiz2"]
-margin_right = 445.0
-margin_bottom = 57.0
-custom_fonts/font = SubResource( 8 )
-text = "What type of potate are you?"
-align = 1
-valign = 1
-autowrap = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Quiz2"]
-margin_top = 157.0
-margin_right = 445.0
-margin_bottom = 375.0
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="Quiz2/VBoxContainer"]
-margin_right = 445.0
-margin_bottom = 57.0
-custom_fonts/font = SubResource( 8 )
-text = "Question 1
-Do you feel potato?"
-align = 1
-valign = 1
-autowrap = true
-
-[node name="HSeparator" type="HSeparator" parent="Quiz2/VBoxContainer"]
-margin_top = 61.0
-margin_right = 445.0
-margin_bottom = 107.0
-size_flags_vertical = 3
-
-[node name="Button1" type="Button" parent="Quiz2/VBoxContainer"]
-margin_top = 111.0
-margin_right = 445.0
-margin_bottom = 144.0
-custom_fonts/font = SubResource( 8 )
-text = "Yes"
-flat = true
-
-[node name="Button2" type="Button" parent="Quiz2/VBoxContainer"]
-margin_top = 148.0
-margin_right = 445.0
-margin_bottom = 181.0
-custom_fonts/font = SubResource( 8 )
-text = "No"
-flat = true
-
-[node name="Button3" type="Button" parent="Quiz2/VBoxContainer"]
-margin_top = 185.0
-margin_right = 445.0
-margin_bottom = 218.0
-custom_fonts/font = SubResource( 8 )
-text = "Perhabs"
-flat = true
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 margin_left = 626.0
@@ -322,7 +324,7 @@ size = 150.0
 far = 300.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="ViewportContainer/Viewport/Spatial"]
-environment = SubResource( 4 )
+environment = SubResource( 5 )
 
 [node name="Book" parent="." instance=ExtResource( 8 )]
 visible = false
@@ -331,8 +333,17 @@ margin_top = 25.2632
 margin_right = 534.527
 margin_bottom = 25.2632
 rect_scale = Vector2( 0.9, 0.9 )
+
+[node name="AlertDoom" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 [connection signal="pressed" from="Buttons/Button" to="." method="show_doc"]
 [connection signal="pressed" from="Buttons/Button2" to="." method="sponsor"]
 [connection signal="pressed" from="Buttons/Button3" to="." method="show_quiz"]
-[connection signal="pressed" from="Quiz/TextureButton" to="." method="triss_good"]
-[connection signal="pressed" from="Quiz/TextureButton2" to="." method="dupotris"]
+[connection signal="pressed" from="Quiz/TextureButton" to="Quiz" method="next_q"]
+[connection signal="pressed" from="Quiz/TextureButton2" to="Quiz" method="next_q"]
+[connection signal="pressed" from="Quiz/TextureButton3" to="Quiz" method="next_q"]
+[connection signal="pressed" from="Quiz/TextureButton4" to="Quiz" method="next_q"]
+[connection signal="pressed" from="Quiz/Final/TextureButton" to="." method="triss_good"]
+[connection signal="pressed" from="Quiz/Final/TextureButton2" to="." method="dupotris"]
+[connection signal="timeout" from="AlertDoom" to="." method="alert"]
