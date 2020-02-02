@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://panels/GeneralSprites/pop-up base.png" type="Texture" id=1]
 [ext_resource path="res://panels/Elements/Socket.png" type="Texture" id=2]
 [ext_resource path="res://panels/Elements/Lamp/lamp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://panels/Elements/Switch/switch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/DebugButton.gd" type="Script" id=5]
+[ext_resource path="res://sfx/powerdown.wav" type="AudioStream" id=6]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Sprite
@@ -31,12 +33,19 @@ func _process(delta: float) -> void:
 						node.disabled = false
 	elif not finished:
 		if buttons.count(true) == 3 and buttons.slice(0, buttons.size() / 2).count(true) == 3:
+			$AudioStreamPlayer.play()
 			finished = true
 			get_meta(\"display\").exit()
 			Singleton.emit_signal(\"global_event\", \"engine_down\")
 
 func button_toggled(v: bool, idx: int):
 	buttons[idx] = v
+
+func _on_Button_pressed() -> void:
+	$AudioStreamPlayer.play()
+	finished = true
+	get_meta(\"display\").exit()
+	Singleton.emit_signal(\"global_event\", \"engine_down\")
 "
 
 [sub_resource type="GDScript" id=1]
@@ -366,3 +375,18 @@ __meta__ = {
 modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 672, 355 )
 color = 2
+
+[node name="Button" type="Button" parent="."]
+margin_left = 416.427
+margin_top = 549.269
+margin_right = 469.427
+margin_bottom = 569.269
+text = "Debug"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

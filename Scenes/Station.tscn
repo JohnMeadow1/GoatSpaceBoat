@@ -246,6 +246,9 @@ animations = [ {
 size = 100
 font_data = ExtResource( 16 )
 
+[sub_resource type="SpatialMaterial" id=34]
+albedo_texture = ExtResource( 34 )
+
 [sub_resource type="SpatialMaterial" id=5]
 albedo_texture = ExtResource( 22 )
 metallic = 0.1
@@ -337,9 +340,6 @@ metallic_specular = 0.0
 
 [sub_resource type="QuadMesh" id=10]
 size = Vector2( 20, 20 )
-
-[sub_resource type="SpatialMaterial" id=34]
-albedo_texture = ExtResource( 34 )
 
 [sub_resource type="GDScript" id=31]
 script/source = "extends StaticBody
@@ -561,7 +561,7 @@ visible = false
 position = Vector2( 619.647, 178.999 )
 z_index = 2
 frames = SubResource( 19 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="PanelDisplay" parent="StationPivot/Station/ControlRoom2" instance=ExtResource( 5 )]
@@ -586,6 +586,15 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Console+servers" type="MeshInstance" parent="StationPivot/Station/ControlRoom2"]
+transform = Transform( -0.735885, -1.10315e-07, -0.677107, -0.677107, 1.19891e-07, 0.735885, 0, 1, -1.62921e-07, -9.29559e-06, 1.01025e-05, -0.735863 )
+material_override = SubResource( 34 )
+use_in_baked_light = true
+mesh = ExtResource( 28 )
+material/0 = null
+material/1 = null
+material/2 = null
 
 [node name="Station2" type="MeshInstance" parent="StationPivot"]
 transform = Transform( -4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, -42.5 )
@@ -1112,19 +1121,11 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, -0.0290879, 0.999577, 0, -0.999577, -0.0290879, 0, 7.28203, 76.912 )
 visible = false
 
-[node name="PanelDisplay" parent="StationPivot/Station3" instance=ExtResource( 5 )]
-transform = Transform( 0.999087, 0.0403941, 0.0138794, -0.0136125, -0.00687486, 0.999884, 0.0404848, -0.99916, -0.00631872, 15.8613, 0.841881, 57.4744 )
+[node name="FuelPanel" parent="StationPivot/Station3" instance=ExtResource( 5 )]
+transform = Transform( -0.974349, -0.224611, 0.0138758, 0.0121018, 0.00927314, 0.999884, -0.224714, 0.974404, -0.00631709, 12.2158, 0.849228, -58.1862 )
 
-[node name="CablePanel" parent="StationPivot/Station3/PanelDisplay" instance=ExtResource( 24 )]
-
-[node name="Console+servers" type="MeshInstance" parent="StationPivot/Station3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 84.2641, 9.09495e-13 )
-material_override = SubResource( 34 )
-use_in_baked_light = true
-mesh = ExtResource( 28 )
-material/0 = null
-material/1 = null
-material/2 = null
+[node name="CoveredPanel" parent="StationPivot/Station3/FuelPanel" instance=ExtResource( 4 )]
+underpanel = ExtResource( 24 )
 
 [node name="WC" type="Spatial" parent="StationPivot/Station3"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 156, -2.54157e-05 )
