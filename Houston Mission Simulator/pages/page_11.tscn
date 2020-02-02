@@ -10,7 +10,8 @@ margin_top = 18.892
 margin_right = 340.0
 margin_bottom = 498.892
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Control room - is on the 1st ring. In the control room, maintenance robots could check current problems to solve."
+text = "MONEY LEAK - the highest priority danger!!! If occurs, a robot has to wake up Main Engineer. Main Engineer has to immediately block a leak. In the case of Main Engineer’s death: check Reducing Expenses.
+Uncontrolled MONEY LEAK could be a deadly danger for the company and crew!!!"
 align = 3
 autowrap = true
 __meta__ = {

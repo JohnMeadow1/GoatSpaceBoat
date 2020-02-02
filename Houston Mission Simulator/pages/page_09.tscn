@@ -10,7 +10,10 @@ margin_top = 18.892
 margin_right = 340.0
 margin_bottom = 498.892
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Control room - is on the 1st ring. In the control room, maintenance robots could check current problems to solve."
+text = "GOAT - waking up procedure:
+1. Remove cover.
+2. Set your consents to ensure that you really want to WAKE UP A GOAT - check Robots’ Regulations
+3. Set bars for values presented on pictures above."
 align = 3
 autowrap = true
 __meta__ = {

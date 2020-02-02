@@ -2,7 +2,6 @@
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
-uniform float magnitude = 1.0;
 
 void fragment() {
 	vec4 color;
@@ -11,10 +10,10 @@ void fragment() {
 	float y = UV.y * 48.0;
 	float height = 48.0;
 	
-	float f1 = 14.0*sin((x+TIME*12.0-magnitude*10.0 )/24.0*magnitude)*magnitude;
-	float f2 = 14.0*sin((x+TIME*12.0-magnitude*10.0 )/24.0*magnitude)*magnitude;
+	float f1 = 14.0*sin((x+TIME*12.0)/24.0);
+	float f2 = 14.0*sin((x+TIME*12.0)/24.0);
 	
-	float gain = 0.6+abs(clamp(tan(x/130.0-TIME-magnitude*10.0),-5.0,5.0)) * magnitude;
+	float gain = 0.6+abs(clamp(tan(x/130.0-TIME),-5.0,5.0));
 	
 	color.r = -abs(y-(height/2.0)-sin(f1/6.0)*12.0)+gain;
 	color.g = -abs(y-(height/2.0)-tan(f1/12.0)*7.5)+gain;
@@ -31,4 +30,3 @@ void fragment() {
 [resource]
 render_priority = 1
 shader = SubResource( 1 )
-shader_param/magnitude = 1.0

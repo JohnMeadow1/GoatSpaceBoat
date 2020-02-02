@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TerminateContract_fin.png-d575a3088fa9a0792266f7c95965a266.stex"
+path="res://.import/TerminateContract_fin.png-d96c2207869a397c6cdf5b37ddc4b700.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/Elements/TerminateContract_fin.png"
-dest_files=[ "res://.import/TerminateContract_fin.png-d575a3088fa9a0792266f7c95965a266.stex" ]
+source_file="res://panels/Elements/TerminateContract_fin.png"
+dest_files=[ "res://.import/TerminateContract_fin.png-d96c2207869a397c6cdf5b37ddc4b700.stex" ]
 
 [params]
 

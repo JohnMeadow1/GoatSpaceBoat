@@ -16,4 +16,4 @@ func _on_PrevPage_pressed():
 	book.prevPage()
 
 func _on_Index_pressed():
-	book.changePage(1)
+	book.changePage(0)

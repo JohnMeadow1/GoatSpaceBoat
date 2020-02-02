@@ -10,7 +10,9 @@ margin_top = 18.892
 margin_right = 340.0
 margin_bottom = 498.892
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Control room - is on the 1st ring. In the control room, maintenance robots could check current problems to solve."
+text = "Fuel mixture - procedure for changing proportions:
+1. Remove cover.
+2. Turn off 3 of 5 Helium-3 pipelines. Check: Rogue Engineer Incident for context."
 align = 3
 autowrap = true
 __meta__ = {

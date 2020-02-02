@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dziurampka.png-35eafc00e4abe5e21ae0c7bce0b3c196.stex"
+path="res://.import/dziurampka.png-ecb7de79bf9d18be16620e381eefca2e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/Elements/Lamp/dziurampka.png"
-dest_files=[ "res://.import/dziurampka.png-35eafc00e4abe5e21ae0c7bce0b3c196.stex" ]
+source_file="res://panels/Elements/Lamp/dziurampka.png"
+dest_files=[ "res://.import/dziurampka.png-ecb7de79bf9d18be16620e381eefca2e.stex" ]
 
 [params]
 

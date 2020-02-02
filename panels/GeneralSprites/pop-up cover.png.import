@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pop-up cover.png-9dab3cd06c4a333bb6f845a9647b13af.stex"
+path="res://.import/pop-up cover.png-6d9c56d3e57eb6f2c6666b6c84701c08.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Panels/GeneralSprites/pop-up cover.png"
-dest_files=[ "res://.import/pop-up cover.png-9dab3cd06c4a333bb6f845a9647b13af.stex" ]
+source_file="res://panels/GeneralSprites/pop-up cover.png"
+dest_files=[ "res://.import/pop-up cover.png-6d9c56d3e57eb6f2c6666b6c84701c08.stex" ]
 
 [params]
 

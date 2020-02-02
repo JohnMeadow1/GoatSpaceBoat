@@ -10,7 +10,10 @@ margin_top = 18.892
 margin_right = 340.0
 margin_bottom = 498.892
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Control room - is on the 1st ring. In the control room, maintenance robots could check current problems to solve."
+text = "Waking up hibernated crew - procedure:
+1. Rise temperature to 68 Fahrenheit degree.
+2. Rise the level of Oxygen - rise it to the moment when the green lamp on top of the oxygen bar starts to blink.
+3. Lower Coolant level to a minimum. "
 align = 3
 autowrap = true
 __meta__ = {
