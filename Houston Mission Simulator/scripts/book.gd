@@ -4,7 +4,7 @@ onready var page_place := $PagePlace
 var page: Control
 
 export(int) var currentPage:int = 0
-export(int) var maxPage:int = 19
+export(int) var maxPage:int = 20
 
 func _ready():
 	loadPage()
