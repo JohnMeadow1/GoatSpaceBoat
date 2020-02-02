@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://panels/Elements/Progress/OxygenProgressBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://panels/Elements/Lamp/MovableLamp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/DebugButton.gd" type="Script" id=3]
-[ext_resource path="res://panels/Elements/Button/TerminateContract_fin.png" type="Texture" id=4]
 [ext_resource path="res://panels/Elements/Knob/Knob.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Panels/Elements/inceptionbutton.wav" type="AudioStream" id=6]
 [ext_resource path="res://Panels/Elements/HealthScreen/health_screen.png" type="Texture" id=7]
@@ -210,10 +209,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="TerminateContract_fin" type="Sprite" parent="."]
-position = Vector2( 320, 503 )
-texture = ExtResource( 4 )
 [connection signal="timeout" from="Coolant/Timer" to="." method="coolant_run"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

@@ -14,14 +14,14 @@ func _input(event: InputEvent) -> void:
 		Singleton.player_locked = true
 		var seq := TweenSequence.new(get_tree())
 		seq.append(player_in.mc, "rotation:y", PI/2, 0.5)
-		seq.append(get_parent(), "translation:z", get_parent().translation.z + MOVE, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append(get_parent().get_parent(), "translation:z", get_parent().get_parent().translation.z + MOVE, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		seq.append(player_in.mc, "rotation:y", player_in.mc.rotation.y, 0.5)
 		seq.append_callback(Singleton, "set", ["player_locked", false])
 	elif Input.is_action_just_pressed("backward") and player_in.global_transform.origin.z < global_transform.origin.z:
 		Singleton.player_locked = true
 		var seq := TweenSequence.new(get_tree())
 		seq.append(player_in.mc, "rotation:y", -PI/2, 0.5)
-		seq.append(get_parent(), "translation:z", get_parent().translation.z - MOVE, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		seq.append(get_parent().get_parent(), "translation:z", get_parent().get_parent().translation.z - MOVE, 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		seq.append(player_in.mc, "rotation:y", player_in.mc.rotation.y, 0.5)
 		seq.append_callback(Singleton, "set", ["player_locked", false])
 
