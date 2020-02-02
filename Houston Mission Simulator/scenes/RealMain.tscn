@@ -42,7 +42,7 @@ func _gui_input(event: InputEvent) -> void:
 		if event.pressed:
 			$Book.hide()
 
-const WARNING_T := 0.04
+const WARNING_T := 0.2
 
 func alert() -> void:
 	var tr := TextureRect.new()
@@ -52,35 +52,11 @@ func alert() -> void:
 	add_child(tr)
 	
 	var seq := TweenSequence.new(get_tree())
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"hide\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"show\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"hide\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"show\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"hide\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"show\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"hide\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"show\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"hide\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"show\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"hide\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"show\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"hide\")
-	seq.append_interval(WARNING_T)
-	seq.append_callback(tr, \"show\")
-	seq.append_interval(WARNING_T)
+	for i in 10:
+		seq.append_interval(WARNING_T)
+		seq.append_callback(tr, \"hide\")
+		seq.append_interval(WARNING_T * 0.025)
+		seq.append_callback(tr, \"show\")
 	seq.append_callback(tr, \"queue_free\")
 	
 	texture = preload(\"res://Houston Mission Simulator/images/gui/ConsoleALERT.PNG\")
